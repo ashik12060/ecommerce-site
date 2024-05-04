@@ -1,0 +1,64 @@
+
+.nav-color{
+
+    color:#db001b;
+}
+.link-nav{
+    text-decoration: none;
+    
+}
+.custom-red{
+    color:#F22929;
+}
+
+.header-icon{
+    color:white;
+    background-color: #F22929;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav.ml-auto {
+      margin-left: 5px; 
+    }
+  }
+
+
+
+   .image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 10s linear infinite;
+  
+    
+  }
+  
+  
+  .rotate-image  {
+    position: relative;
+    z-index: 2;
+    height: 70px;
+    width: 80px;
+    margin-left: 15px;
+    border-radius: 20px;
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+          transform-origin: center;
+
+    }
+    to {
+      transform: rotate(-360deg);
+          transform-origin: center;
+
+    }
+  }
+  
+.headers-nav:hover{
+  color:#db001b;
+}

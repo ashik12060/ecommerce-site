@@ -1,0 +1,31 @@
+.leader-img{
+    width: 300px;
+    height: 300px;
+    margin:10px;
+    background-color: whitesmoke;
+    box-shadow: 1px 2px 3px 1px gray;
+    border-radius: 10px;
+}
+.advisor-header{
+    border: 1px solid black;
+}
+.advisors-info{
+    background-color: white;
+    margin-top:10px;
+    margin-bottom: 15px;
+}
+
+.team-icon{
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    padding: 10px;
+    color:rgb(30,48,80);
+}
+.team-icon:hover{
+    background-color:none;
+}
+.custom-font{
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 2px;
+}
