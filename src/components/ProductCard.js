@@ -18,11 +18,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 // import axiosInstance from "../pages/axiosInstance";
-import img1 from '../assets/air-bud.jpg'
 
 const ProductCard = ({
   id,
   title,
+  feature1,
   subheader,
   image,
   content,
@@ -73,43 +73,33 @@ const ProductCard = ({
 
   return (
     <div className="overflow-hidden ">
-      
-  
-
-
       <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6  ">
-        <div id="productInfo" className=" advisors-info  w-100 shadow">
-          <div className="">
+        <div id="productInfo" className="   w-100  shadow">
+          <div className="mb-2 pb-3 rounded px-2 py-2 border border-1 ">
             <Link to={`/product/${id}`}>
-              <img className="advisor-img w-100  border " src={image} alt="advisor_team" />
+              <img className="advisor-img w-100 img-height border rounded" src={image} alt="advisor_team" />
             </Link>
+            <p className="pt-2 px-1 fw-bold">{title}</p>
+            <p>{feature1}</p>
+            {truncatedContent}
+            <br />
+                <span>
+                <FontAwesomeIcon icon={faStar} className='text-warning ' />
+                <FontAwesomeIcon icon={faStar} className='text-warning ' />
+                <FontAwesomeIcon icon={faStar} className='text-warning ' />
+                <FontAwesomeIcon icon={faStar} className='text-warning ' />
+                <FontAwesomeIcon icon={faStar} className='text-warning ' />
+                </span>
+                <br />
+                <span className='fw-bold font-color'>$19</span>
+                <br/>
+                <Link to=''>
+                <button className='bg-color  text-white border-0 px-2 py-1'>Buy Now</button>
+                </Link>
           </div>
-          {/* <h3 className="py-5">{title}</h3> */}
-
-          <div className="mt-2  mb-3 card-styles ps-2 pt-2">
-
-            <h3 className="pt-2">{title}</h3>
-            
-
-            <div className="me-4 ms-1 me-1" style={{ marginTop: "auto" }}>
-              <div style={{ maxHeight: "7em", overflow: "hidden" }}>
-                {truncatedContent}
-                
-              </div>
-              
-              <div className="pb-2">
-              <Link className=" fw-bold fs-6 link-to" to={`/product/${id}`}>
-                 
-                 Find More <FontAwesomeIcon icon={faAnglesRight} />
-               
-             </Link>
-               
-              </div>
-            </div>
-          </div>
+          
 
         </div>
-        <h3 className="py-5">{title}</h3>
       </div>
 
     </div>

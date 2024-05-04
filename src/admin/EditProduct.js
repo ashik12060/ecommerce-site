@@ -15,13 +15,13 @@ import axiosInstance from "../pages/axiosInstance";
 const validationSchema = yup.object({
   title: yup
     .string("Add a product title")
-    .min(4)
+    .min(1)
     .required("Product title is required"),
   content: yup
     .string("Add text content")
-    .min(10)
+    .min(1)
     .required("Text content is required"),
-  feature1: yup.string("Add text content"),
+  feature1: yup.number("Add text content"),
   feature2: yup.string("Add text content"),
   feature3: yup.string("Add text content"),
   feature4: yup.string("Add text content"),
