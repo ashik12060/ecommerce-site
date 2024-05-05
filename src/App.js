@@ -58,6 +58,7 @@ import ProductCart from './components/Products/ProductCart';
 import Header from './components/Shared/Header/Header';
 import { getAuth,signOut  } from "firebase/auth";
 import AdminLogin from './pages/AdminLogin';
+import LoginUser from './pages/LoginUser';
 //HOC
 const AdminDashboardHOC = Layout(AdminDashboard);
 
@@ -101,6 +102,8 @@ const handleSignOut = () =>{
         <Route path='/companyprofile' element={<CompanyProfile/>}></Route>
         <Route path='/sisterconcerns' element={<SisterConcerns/>}></Route>
         <Route path='/leadership' element={<Leadership/>}></Route>
+        <Route path='/user-login' element={<LoginUser/>}></Route>
+
         {/* <Route path='/policy' element={<QualityPolicy/>}></Route> */}
         {/* <Route path='/values' element={<Values/>}></Route> */}
         <Route path='/mission' element={<Mission/>}></Route>
