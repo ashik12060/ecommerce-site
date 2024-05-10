@@ -7,7 +7,7 @@ import Footer from '../Shared/Footer/Footer'
 const ProductCart = () => {
   return (
     <div >
-        <Header />
+        
         <div className='d-flex  container '>
         <div className='w-75'>
         <ProductSample />

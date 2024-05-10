@@ -15,7 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogoutAction } from "../../../redux/actions/userAction";
 
-const Header = ({ name, logout }) => {
+const Header = ({ totalServices,name }) => {
+  // const { user, handleSignOut } = useAuth()
+  const history = useNavigate()
+  const linkHandler = link => history(link)
+
   const [isCompanyOpen, setCompanyOpen] = useState(false);
   const [isProductsOpen, setProductsOpen] = useState(false);
   const [isPartnersOpen, setPartnersOpen] = useState(false);
@@ -43,6 +47,8 @@ const Header = ({ name, logout }) => {
   const closePartnersDropdown = () => {
     setPartnersOpen(false);
   };
+
+  
 
   // for new login header
   const dispatch = useDispatch();
@@ -76,16 +82,16 @@ const Header = ({ name, logout }) => {
   };
   return (
     <>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div
-          class="collapse navbar-collapse d-flex justify-content-around"
+          className="collapse navbar-collapse d-flex justify-content-around"
           id="navbarSupportedContent"
         >
           <div>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
                 <Link to="/">
-                  <h2 class="fs-1 fw-bold text-black" aria-current="page">
+                  <h2 className="fs-1 fw-bold text-black" aria-current="page">
                     Helper<span className="font-color">Hub</span>
                   </h2>
                 </Link>
@@ -94,9 +100,9 @@ const Header = ({ name, logout }) => {
           </div>
 
           <div>
-            <form class="d-flex w-100" role="search">
+            <form className="d-flex w-100" role="search">
               <input
-                class="form-control me-2 w-100"
+                className="form-control me-2 w-100"
                 type="search"
                 placeholder="Search for products"
                 aria-label="Search"
@@ -105,12 +111,16 @@ const Header = ({ name, logout }) => {
           </div>
 
           <div>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  {/* <FontAwesomeIcon className='fs-5 font-color' icon={faUser} /> */}
-                  {/* Login logo */}
-
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+                <Link to="/seller-login">
+                  <p className=" fw-bold text-black" aria-current="page">
+                    Become a Seller
+                  </p>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">
                   <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Open settings">
                       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -148,6 +158,7 @@ const Header = ({ name, logout }) => {
                       <MenuItem onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">
                           <Link
+                          className="text-black"
                             style={{ textDecoration: "none" }}
                             to="/admin/dashboard"
                           >
@@ -158,6 +169,7 @@ const Header = ({ name, logout }) => {
                       <MenuItem onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">
                           <Link
+                          className="text-black"
                             style={{ textDecoration: "none" }}
                             to="/register"
                           >
@@ -174,7 +186,8 @@ const Header = ({ name, logout }) => {
                       ) : (
                         <MenuItem onClick={handleCloseUserMenu}>
                           <Typography textAlign="center">
-                            <Link
+                            <Link 
+                            className="text-black"
                               style={{ textDecoration: "none" }}
                               to="/login"
                             >
@@ -184,7 +197,7 @@ const Header = ({ name, logout }) => {
                         </MenuItem>
                       )}
 
-                      {userInfo ? (
+                      {/* {userInfo ? (
                         <MenuItem onClick={logOutUser}>
                           <Typography textAlign="center" color="#8e67b2">
                             Log Out{" "}
@@ -201,18 +214,32 @@ const Header = ({ name, logout }) => {
                             </Link>
                           </Typography>
                         </MenuItem>
-                      )}
+                      )} */}
                     </Menu>
                   </Box>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+              <li className="nav-item">
+                <a className="nav-link" href="#">
                   <FontAwesomeIcon className="fs-5 font-color" icon={faHeart} />
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+              {/* <button
+            className='li md:mx-4 md:px-5 px-0 mx-2 px-3 flex items-center'
+            // onClick={() => linkHandler('/cart')}
+            onClick={() => linkHandler('/cart')}
+          >
+            Cart{' '}
+            {totalServices > 0 ? (
+              <span className='bg-purple-600 rounded-full px-1 text-white ml-1'>
+                {totalServices}
+              </span>
+            ) : (
+              <span></span>
+            )}
+          </button> */}
+              <li className="nav-item">
+                <a className="nav-link" href="#">
                   <FontAwesomeIcon
                     className="fs-5 font-color"
                     icon={faCartShopping}
@@ -221,8 +248,8 @@ const Header = ({ name, logout }) => {
                 </a>
               </li>
 
-              <li class="nav-item">
-                <div class="nav-link" href="#">
+              <li className="nav-item">
+                <div className="nav-link" href="#">
                   {name && (
                     <Typography
                       variant="body1"
@@ -234,7 +261,28 @@ const Header = ({ name, logout }) => {
                   )}
                 </div>
               </li>
+              {userInfo ? (
+                        <MenuItem onClick={logOutUser}>
+                          <Typography textAlign="center" color="#8e67b2">
+                            Log Out{" "}
+                          </Typography>
+                        </MenuItem>
+                      ) : (
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          <Typography textAlign="center">
+                            <Link
+                            className="text-black bg-danger text-white p-2"
+                              style={{ textDecoration: "none" }}
+                              to="/admin-login"
+                            >
+                              Admin Login
+                            </Link>
+                          </Typography>
+                        </MenuItem>
+                      )}
+
             </ul>
+            
           </div>
         </div>
       </nav>

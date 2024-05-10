@@ -18,7 +18,7 @@ const Footer = () => {
     <div className="text-black card2-bg">
       <div className=" d-flex justify-content-around py-5">
         <div>
-          <h2 class="fs-1 fw-bold" aria-current="page">
+          <h2 className="fs-1 fw-bold" aria-current="page">
           Helper<span className="font-color">Hub</span>
           </h2>
           <br />

@@ -58,7 +58,9 @@ import ProductCart from './components/Products/ProductCart';
 import Header from './components/Shared/Header/Header';
 import { getAuth,signOut  } from "firebase/auth";
 import AdminLogin from './pages/AdminLogin';
-import LoginUser from './pages/LoginUser';
+import LoginUser from './pages/LoginSeller';
+import CheckOut from './pages/CheckOut';
+import Bkash from './pages/Bkash';
 //HOC
 const AdminDashboardHOC = Layout(AdminDashboard);
 
@@ -75,17 +77,8 @@ const UserDashboardHOC = Layout(UserDashboard);
 
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  
-// sign out google
-const handleSignOut = () =>{
-  setIsAuthenticated(false);
-  const auth = getAuth();
-    signOut(auth).then(() => {
-      setIsAuthenticated({});
-      })
-}
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 
   return (
@@ -94,6 +87,7 @@ const handleSignOut = () =>{
     <Provider store={store}>
     <ProSidebarProvider>
       <BrowserRouter>
+      <Header  />
       {/* <ScrollButton /> */}
       <Routes>
         <Route path='/' element={<Home />}></Route>
@@ -102,21 +96,18 @@ const handleSignOut = () =>{
         <Route path='/companyprofile' element={<CompanyProfile/>}></Route>
         <Route path='/sisterconcerns' element={<SisterConcerns/>}></Route>
         <Route path='/leadership' element={<Leadership/>}></Route>
-        <Route path='/user-login' element={<LoginUser/>}></Route>
+        <Route path='/seller-login' element={<LoginUser/>}></Route>
+        <Route path='/bkash-payment' element={<Bkash/>}></Route>
 
-        {/* <Route path='/policy' element={<QualityPolicy/>}></Route> */}
-        {/* <Route path='/values' element={<Values/>}></Route> */}
         <Route path='/mission' element={<Mission/>}></Route>
         <Route path='/companystructure' element={<CompanyStructure/>}></Route>
         <Route path='/admin-login' element={<AdminLogin/>}></Route>
 
-        <Route path="/*" element={<Header isAuthenticated={isAuthenticated} handleSignOut={handleSignOut} />} />
+        <Route path="/*" element={<Header />} />
         
 
         {/* blog  */}
         <Route path="members" element={<Members />} />
-        {/* have to open the comment as it will show the single Members information */}
-        {/* <Route path="/members/:id" element={<MemberDetail members={members} />} /> */}
 
 
 
@@ -124,6 +115,7 @@ const handleSignOut = () =>{
               <Route path="/bloghome" element={<BlogHome />} />
               <Route path="/buycontact" element={<BuyContact />} />
               <Route path="/product-sample" element={<ProductCart />} />
+              <Route path="/checkout" element={<CheckOut />} />
               
               
               <Route path="/login" element={<LogIn  element={<LogIn setIsAuthenticated={setIsAuthenticated} />} />} />
@@ -131,17 +123,13 @@ const handleSignOut = () =>{
               
               <Route path="/post/:id" element={<SinglePost />} />
 
-               {/* product route */}
-               {/* <Route path="/products" element={<BlogPro />} /> */}
                <Route path="/medicine" element = {<Products />} />
               <Route path="/product/:id" element={<SinglePro />} />
 
-              {/* <Route path='/surgicalitems' element={<ItemsHome />}/> */}
               <Route path='/items' element={<SurgicalItems />}/>
               <Route path="/item/:id" element={<SingleItem />} />
               <Route path="/partners" element={<Partners />} />
               <Route path="/gallery" element={<GalleryHome />} />
-              {/* <Route path="/gallery/:id" element={<SingleGallery />} /> */}
 
 
               <Route
@@ -235,6 +223,7 @@ const handleSignOut = () =>{
               <Route path='*' element={<NotFound />}></Route>
 
       </Routes>
+
       </BrowserRouter>
       </ProSidebarProvider>
       </Provider>

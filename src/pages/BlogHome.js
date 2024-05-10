@@ -57,7 +57,7 @@ const BlogHome = () => {
     return (
         
             <Box sx={{ bgColor: "#fafafa", minHeight: "100vh" }}>
-                <Header />
+                {/* <Header /> */}
                 <Container sx={{ pt: 5, pb: 5, minHeight: "83vh" }}>
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>

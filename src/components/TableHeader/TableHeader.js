@@ -23,9 +23,9 @@ const TableHeader = () => {
       
           <tr className="border py-3 w-50 d-flex justify-content-around bg-color text-white align-items-center ">
             <th>
-              <li class="nav-item dropdown list-unstyled text-decoration-none ">
+              <li className="nav-item dropdown list-unstyled text-decoration-none ">
                 <div
-                  class="nav-link w-100"
+                  className="nav-link w-100"
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -37,9 +37,9 @@ const TableHeader = () => {
                   </span>
                   <FontAwesomeIcon icon={faAngleDown} />
                 </div>
-                <ul class="dropdown-menu list-unstyled mt-2">
+                <ul className="dropdown-menu list-unstyled mt-2">
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       <div className="d-flex justify-content-between align-items-center">
                         <span className="fw-bold">
                           <FontAwesomeIcon
@@ -54,11 +54,11 @@ const TableHeader = () => {
                   </li>
 
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
 
                   <li className="custom">
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       <div className="d-flex justify-content-between align-items-center">
                         <span className="fw-bold">
                           <FontAwesomeIcon icon={faPersonDress} />
@@ -70,11 +70,11 @@ const TableHeader = () => {
                   </li>
 
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
 
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       <div className="d-flex justify-content-between align-items-center">
                         <span className="fw-bold">
                           <FontAwesomeIcon icon={faChildReaching} />
@@ -86,11 +86,11 @@ const TableHeader = () => {
                   </li>
 
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
 
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       <div className="d-flex justify-content-between align-items-center">
                         <span className="fw-bold">
                           <FontAwesomeIcon icon={faChargingStation} />
@@ -102,11 +102,11 @@ const TableHeader = () => {
                   </li>
 
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
 
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       <div className="d-flex justify-content-between align-items-center">
                         <span className="fw-bold">
                           <FontAwesomeIcon icon={faBed} />

@@ -11,9 +11,9 @@ const HomeFooter = () => {
         <div className="container  pt-5">
           <div className="row">
             <div className="col-lg-4 col-md-4 col-sm-12 col-12 text-start text-white pt-4">
-              <h2 className="start-border pb-2">MEDISURE PHARMA</h2>
+              <h2 className="start-border pb-2">HelperHub</h2>
               <p className="footer-align">
-              The rapidly expanding MediSure Pharma is pleased to introduce its targeted audience of medical professionals, dermatologists, and beauticians to the products of foreign companies operating in the nation's pharma and dermatology markets.
+              The rapidly expanding helperhub is pleased to introduce its targeted audience of medical professionals, dermatologists, and beauticians to the products of foreign companies operating in the nation's pharma and dermatology markets.
 
               </p>
               <button className="social-info"><a target="_blank" href="https://www.facebook.com/profile.php?id=100084636297328"><FontAwesomeIcon className="icon-sizing" icon={faFacebookF} /></a></button>
@@ -71,7 +71,7 @@ const HomeFooter = () => {
           <div className="d-flex gap-3 flex-lg-row flex-md-row flex-sm-column flex-column container">
             <div className="text-white me-5">
               <small>
-                &copy;2023-2024 All Rights Reserved | Medisure Pharma.
+                &copy;2024 All Rights Reserved | HelperHub.
               </small>
             </div>
             <p className="text-white">Developed by: <a className="text-white border-bottom border-danger border-2" target="_blank" href="https://www.facebook.com/greensofttech">Green Software Technology - GST</a></p>

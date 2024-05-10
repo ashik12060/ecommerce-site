@@ -127,7 +127,7 @@ const Register = () => {
                             helperText={formik.touched.password && formik.errors.password}
                         />
 
-                        <Button fullWidth className='bg-color text-white fw-bold' type='submit' >Register</Button>
+                        <Button fullWidth className='bg-danger text-white fw-bold' type='submit' >Register</Button>
                         <Link to='/login' className='mt-2 fs-6 font-color'><u>Already Registered? Login</u></Link>
                     </Box>
                 </Box>

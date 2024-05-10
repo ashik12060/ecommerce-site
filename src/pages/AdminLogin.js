@@ -107,7 +107,6 @@ const handleSignOut = () =>{
     return (
         <>
             <Header name={user.name}/>
-            <h1>Admin Login</h1>
             
             <Box sx={{ height: '81vh', display: "flex", alignItems: "center", justifyContent: "center", bgcolor: "primary.white" }}>
 

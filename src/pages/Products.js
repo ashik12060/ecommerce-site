@@ -6,9 +6,9 @@ import HomeFooter from '../components/Footer/HomeFooter'
 const Products = () => {
   return (
     <div>
-        <Header />
+        {/* <Header />
         <BlogPro />
-        <HomeFooter />
+        <HomeFooter /> */}
     </div>
   )
 }

@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { userLogoutAction } from "../../redux/actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
+import Header from "../../components/Shared/Header/Header";
 
 const pages = ["Home", "Log In"];
 
@@ -51,140 +52,143 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Container sx={{ display: "flex", justifyContent: "right" }}>
-        {/* principal Menu */}
-        <Toolbar disableGutters>
-          <div className="d-flex justify-content-between">
-            <Box className="d-flex justify-content-between">
-            <Box className="d-flex flex-row ">
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                HOME
-              </Typography>
+    // <AppBar position="static">
+    //   <Container sx={{ display: "flex", justifyContent: "right" }}>
+    //     {/* principal Menu */}
+    //     <Toolbar disableGutters>
+    //       <div className="d-flex justify-content-between">
+    //         <Box className="d-flex justify-content-between">
+    //         <Box className="d-flex flex-row ">
+    //           <Typography
+    //             variant="h6"
+    //             noWrap
+    //             component="a"
+    //             href="/"
+    //             sx={{
+    //               mr: 2,
+    //               display: { xs: "flex", md: "flex" },
+    //               fontFamily: "monospace",
+    //               fontWeight: 700,
+    //               letterSpacing: ".3rem",
+    //               color: "inherit",
+    //               textDecoration: "none",
+    //             }}
+    //           >
+    //             HOME
+    //           </Typography>
 
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/products"
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                PRODUCTS
-              </Typography>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/bloghome"
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                BLOG
-              </Typography>
-            </Box>
+    //           <Typography
+    //             variant="h6"
+    //             noWrap
+    //             component="a"
+    //             href="/products"
+    //             sx={{
+    //               mr: 2,
+    //               display: { xs: "flex", md: "flex" },
+    //               fontFamily: "monospace",
+    //               fontWeight: 700,
+    //               letterSpacing: ".3rem",
+    //               color: "inherit",
+    //               textDecoration: "none",
+    //             }}
+    //           >
+    //             PRODUCTS
+    //           </Typography>
+    //           <Typography
+    //             variant="h6"
+    //             noWrap
+    //             component="a"
+    //             href="/bloghome"
+    //             sx={{
+    //               mr: 2,
+    //               display: { xs: "flex", md: "flex" },
+    //               fontFamily: "monospace",
+    //               fontWeight: 700,
+    //               letterSpacing: ".3rem",
+    //               color: "inherit",
+    //               textDecoration: "none",
+    //             }}
+    //           >
+    //             BLOG
+    //           </Typography>
+    //         </Box>
 
             
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                PaperProps={{
-                  sx: {
-                    "& 	.MuiMenu-list": {
-                      bgColor: "primary.white",
-                      color: "white",
-                    },
-                  },
-                }}
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      to="/admin/dashboard"
-                    >
-                      Admin{" "}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      to="/user/dashboard"
-                    >
-                      User{" "}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-                {userInfo ? (
-                  <MenuItem onClick={logOutUser}>
-                    <Typography textAlign="center" color="#8e67b2">
-                      Log Out{" "}
-                    </Typography>
-                  </MenuItem>
-                ) : (
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">
-                      <Link style={{ textDecoration: "none" }} to="/login">
-                        Login{" "}
-                      </Link>
-                    </Typography>
-                  </MenuItem>
-                )}
-              </Menu>
-            </Box>
-            </Box>
-          </div>
-        </Toolbar>
-      </Container>
-    </AppBar>
+    //         <Box sx={{ flexGrow: 0 }}>
+    //           <Tooltip title="Open settings">
+    //             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+    //               <Avatar alt="Remy Sharp" src="" />
+    //             </IconButton>
+    //           </Tooltip>
+    //           <Menu
+    //             PaperProps={{
+    //               sx: {
+    //                 "& 	.MuiMenu-list": {
+    //                   bgColor: "primary.white",
+    //                   color: "white",
+    //                 },
+    //               },
+    //             }}
+    //             sx={{ mt: "45px" }}
+    //             id="menu-appbar"
+    //             anchorEl={anchorElUser}
+    //             anchorOrigin={{
+    //               vertical: "top",
+    //               horizontal: "right",
+    //             }}
+    //             keepMounted
+    //             transformOrigin={{
+    //               vertical: "top",
+    //               horizontal: "right",
+    //             }}
+    //             open={Boolean(anchorElUser)}
+    //             onClose={handleCloseUserMenu}
+    //           >
+    //             <MenuItem onClick={handleCloseUserMenu}>
+    //               <Typography textAlign="center">
+    //                 <Link
+    //                   style={{ textDecoration: "none" }}
+    //                   to="/admin/dashboard"
+    //                 >
+    //                   Admin{" "}
+    //                 </Link>
+    //               </Typography>
+    //             </MenuItem>
+    //             <MenuItem onClick={handleCloseUserMenu}>
+    //               <Typography textAlign="center">
+    //                 <Link
+    //                   style={{ textDecoration: "none" }}
+    //                   to="/user/dashboard"
+    //                 >
+    //                   User{" "}
+    //                 </Link>
+    //               </Typography>
+    //             </MenuItem>
+    //             {userInfo ? (
+    //               <MenuItem onClick={logOutUser}>
+    //                 <Typography textAlign="center" color="#8e67b2">
+    //                   Log Out{" "}
+    //                 </Typography>
+    //               </MenuItem>
+    //             ) : (
+    //               <MenuItem onClick={handleCloseUserMenu}>
+    //                 <Typography textAlign="center">
+    //                   <Link style={{ textDecoration: "none" }} to="/login">
+    //                     Login{" "}
+    //                   </Link>
+    //                 </Typography>
+    //               </MenuItem>
+    //             )}
+    //           </Menu>
+    //         </Box>
+    //         </Box>
+    //       </div>
+    //     </Toolbar>
+    //   </Container>
+    // </AppBar>
+    <div>
+      <Header />
+    </div>
   );
 };
 export default Navbar;

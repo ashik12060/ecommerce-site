@@ -105,7 +105,7 @@ const ItemsHome = () => {
           </Grid>
           {items.length > 4 && visibleItems < items.length && (
             <div className="text-center my-5">
-              <button onClick={showMoreItems} className="see-more-button fw-bold">
+              <button onClick={()=>showMoreItems()} className="see-more-button fw-bold">
                 See More <FontAwesomeIcon icon={faAnglesRight} />
               </button>
             </div>

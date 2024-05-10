@@ -9,14 +9,13 @@ import Test from "./Test";
 import Test2 from "./Test2";
 import CarouselHandle from "../CarouselHandle/CarouselHandle";
 import MapLoaction from "../MapLocation/MapLoaction";
-import Header from "../Shared/Header/Header";
+// import Header from "../Shared/Header/Header";
 import TableHeader from "../TableHeader/TableHeader";
 import ProductsLists from "../ProductsLists/ProductsLists";
 import Footer from "../Shared/Footer/Footer";
 const Home = () => {
   return (
     <div className="overflow-hidden">
-      <Header />
       <TableHeader />
 
       <ProductsLists />

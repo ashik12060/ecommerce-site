@@ -96,7 +96,7 @@ const SidebarAdm = () => {
                                 },
                             }}
                         >
-                            <MenuItem onClick={logOut} icon={<LoginIcon />}>   Log out </MenuItem>
+                            <MenuItem onClick={()=>logOut()} icon={<LoginIcon />}>   Log out </MenuItem>
                         </Menu>
                     </Box>
                 </Box>

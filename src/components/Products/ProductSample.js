@@ -17,13 +17,9 @@ const ProductSample = () => {
                     className="img-fluid pt-2 border"
                     alt="name"
                   />
-                  {/* <h2>{title}</h2>
                   
-                  
-                  <p>
-                    {content}
-                  </p> */}
                 </div>
+                
                 <div className="col-lg-9 col-md-9 col-sm-12 my-3">
                     <h2>Reliable Air Bud - Intact imported from China</h2>
                     <br/>

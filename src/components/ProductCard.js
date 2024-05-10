@@ -17,21 +17,20 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
-// import axiosInstance from "../pages/axiosInstance";
 
 const ProductCard = ({
   id,
   title,
   feature1,
-  subheader,
   image,
   content,
+  subheader,
   comments,
   likes,
   showProducts,
   likesId,
 }) => {
-  const { userInfo } = useSelector((state) => state.signIn);
+  // const { userInfo } = useSelector((state) => state.signIn);
   const [truncatedContent, setTruncatedContent] = useState("");
 
   useEffect(() => {
@@ -70,7 +69,17 @@ const ProductCard = ({
     }
   };
 
-
+  // const addToCart = () => {
+  //   handleAddServices({
+  //     id,
+  //     title,
+  //     feature1,
+  //     image,
+  //     content,
+  //     price: feature1,
+  //     quantity: 1
+  //   });
+  // };
   return (
     <div className="overflow-hidden ">
       <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6  ">
@@ -80,8 +89,8 @@ const ProductCard = ({
               <img className="advisor-img w-100 img-height border rounded" src={image} alt="advisor_team" />
             </Link>
             <p className="pt-2 px-1 fw-bold">{title}</p>
-            <p>{feature1}</p>
-            {truncatedContent}
+           
+            <p><span className="fw-bold">Origin:</span> {truncatedContent}</p>
             <br />
                 <span>
                 <FontAwesomeIcon icon={faStar} className='text-warning ' />
@@ -91,11 +100,12 @@ const ProductCard = ({
                 <FontAwesomeIcon icon={faStar} className='text-warning ' />
                 </span>
                 <br />
-                <span className='fw-bold font-color'>$19</span>
+                <span className='fw-bold font-color'>${feature1}</span>
                 <br/>
-                <Link to=''>
+                <Link  to={`/product/${id}`}>
                 <button className='bg-color  text-white border-0 px-2 py-1'>Buy Now</button>
                 </Link>
+               
           </div>
           
 

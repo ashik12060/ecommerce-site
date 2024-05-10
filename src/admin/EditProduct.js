@@ -485,7 +485,7 @@ const EditProduct = () => {
             elevation={0}
             sx={{ mt: 3, p: 1, mb: 2, borderRadius: "25px" }}
           >
-            Update product2
+            Update product
           </Button>
         </Box>
       </Box>

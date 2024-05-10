@@ -323,7 +323,7 @@ const dispatch = useDispatch();
                 </a>
               </li> */}
               <li className="nav-item me-2">
-                <a className="nav-link  " href="mailto:business@medisurepharmabd.com" target="blank">
+                <a className="nav-link  " href="mailto:business@helperhub.com" target="blank">
                   <FontAwesomeIcon className="header-icon" icon={faEnvelope} />
                 </a>
               </li>

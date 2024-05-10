@@ -10,8 +10,14 @@ import { auth } from "../../Firebase/PhoneAuth/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
 import './PhoneLogin.css'
+import { Navigate } from 'react-router-dom';
+
+
 
 const PhoneLogin = () => {
+
+
+
 
     const [otp, setOtp] = useState("");
   const [ph, setPh] = useState("");
@@ -73,18 +79,19 @@ const PhoneLogin = () => {
 
 
   return (
-    <section className="log-bg">
+    <section className="log-bg py-5">
       <div>
         <Toaster toastOptions={{ duration: 4000 }} />
         <div id="recaptcha-container"></div>
         {user ? (
           <h2 className="text-center text-white fs-2">
             👍Login Success
+            <Navigate to='/' />
           </h2>
         ) : (
           <div className="w-80 flex flex-col gap-4 rounded-lg p-4">
             <h1 className="text-center text-white fw-bold border-bottom border-1 mb-6">
-              User Log-in
+              Seller Log-in
             </h1>
             {showOTP ? (
               <>
@@ -130,7 +137,7 @@ const PhoneLogin = () => {
                 <PhoneInput country={"bd"} value={ph} onChange={setPh} />
                 <button
                   onClick={onSignup}
-                  className="log-bg-2 border-0 fw-bold fs-5 w-100  py-3 my-3 text-white rounded"
+                  className="log-bg-2 border-0 fw-bold fs-5 w-100  py-3 my-3 text-white rounded mb-5"
                 >
                   {loading && (
                     <CgSpinner size={20} className="mt-1 animate-spin" />
@@ -139,9 +146,11 @@ const PhoneLogin = () => {
                 </button>
               </>
             )}
+             
           </div>
         )}
       </div>
+     
     </section>
   )
 }

@@ -7,8 +7,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EmailJSResponseStatus from "@emailjs/browser";
-import Header from "../Shared/Header/Header";
-import HomeFooter from "../Footer/HomeFooter";
 import contactLotti from "./contact-lottie.json";
 import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
@@ -50,7 +48,7 @@ const Contact = () => {
 
   return (
     <div className="">
-      <Header />
+      
 
       <div className="background-contact">
         <div className="text-contact">
@@ -84,7 +82,7 @@ const Contact = () => {
             <h2 className=" mt-4 "><span className="contact-border">Our Contact</span></h2>
             <div className="d-flex mt-5 mb-2">
               <div>
-                <a href="mailto:business@medisurepharmabd.com">
+                <a href="mailto:business@helperhub.com">
                   <FontAwesomeIcon className="contact-icon" icon={faEnvelope} />
                 </a>
               </div>
@@ -93,7 +91,7 @@ const Contact = () => {
                 <p>
                   <a
                     className="text-black"
-                    href="mailto:business@medisurepharmabd.com"
+                    href="mailto:business@helperhub.com"
                   >
                     business@helperhub.com
                   </a>{" "}

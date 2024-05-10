@@ -11,15 +11,39 @@ import Header from "../components/Header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
+import SinglePro from "./SinglePro";
 const socket = io("/", {
   reconnection: true,
 });
 
 const BlogPro = () => {
+
+
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [postAddLike, setPostAddLike] = useState([]);
   const [postRemoveLike, setPostRemoveLike] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  // const handleAddServices = (service) => {
+  //   const serviceExist = cartItems.find((item) => item.id === service.id);
+  //   if (serviceExist) {
+  //     setCartItems(
+  //       cartItems.map((item) =>
+  //         item.id === service.id
+  //           ? { ...serviceExist, quantity: serviceExist.quantity + 1 }
+  //           : item
+  //       )
+  //     );
+  //   } else {
+  //     setCartItems([...cartItems, { ...service, quantity: 1 }]);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   showProducts();
+  // }, []);
 
   const showProducts = async () => {
     setLoading(true);
@@ -58,6 +82,7 @@ const BlogPro = () => {
 
   return (
     <>
+    
       
       <Box sx={{ bgColor: "#fafafa", minHeight: "100vh" }}>
         <div className="text-center mt-3">
@@ -72,10 +97,12 @@ const BlogPro = () => {
                 uiPosts.map((product, index) => (
                   <Grid item key={index} xs={12} sm={6} md={4} lg={2}>
                     <ProductCard
+                
                       image={product.image ? product.image.url : ""}
                       id={product._id}
                       title={product.title}
                       content={product.content}
+                      feature1={product.feature1}
                       subheader={moment(product.createdAt).format(
                         "MMMM DD, YYYY"
                       )}

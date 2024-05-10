@@ -30,13 +30,13 @@ const Partners = () => {
       <h3 className="text-center mt-3">
         <span className="pharma">Navana Pharma</span>
       </h3>
-      <div class="container mt-4">
-        <div class="row">
-          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-4" >
-            <img src={navana} alt="navana-pharma" class="border w-75 h-75 w-sm-100 w-100 " />
+      <div className="container mt-4">
+        <div className="row">
+          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-4" >
+            <img src={navana} alt="navana-pharma" className="border w-75 h-75 w-sm-100 w-100 " />
           </div>
-          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ps-2 pt-4">
-            <p class="para-alignment">
+          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 ps-2 pt-4">
+            <p className="para-alignment">
               Since 1992, NPL is continuously expanding its business through new
               ideas, innovations, and quality products. Navana Pharmaceuticals
               Ltd. operates its business under two divisions: Veterinary
@@ -62,10 +62,10 @@ const Partners = () => {
       <h3 className="text-center mt-3">
         <span className="pharma">Euro Pharma</span>
       </h3>
-      <div class="container mt-4">
-        <div class="row">
-          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ps-2 pt-4">
-            <p class="para-alignment">
+      <div className="container mt-4">
+        <div className="row">
+          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 ps-2 pt-4">
+            <p className="para-alignment">
               Euro Pharma, incorporated as a limited company in 2003, received
               its regulatory approval in July 2006 to operate as a
               pharmaceutical company to manufacture and market medicine in
@@ -92,8 +92,8 @@ const Partners = () => {
             </p>
           </div>
 
-          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-4">
-            <img src={europharma} alt="navana-pharma" class="border  w-75 h-75 w-sm-100 w-100" />
+          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-4">
+            <img src={europharma} alt="navana-pharma" className="border  w-75 h-75 w-sm-100 w-100" />
           </div>
         </div>
       </div>
@@ -120,16 +120,16 @@ const Partners = () => {
       <h3 className="text-center mt-3">
         <span className="pharma"> Royel Laboratories (AY) Ltd</span>
       </h3>
-      <div class="container mt-4">
-        <div class="row">
-          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ps-2 pt-4">
-            <p class="para-alignment">
+      <div className="container mt-4">
+        <div className="row">
+          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 ps-2 pt-4">
+            <p className="para-alignment">
             Royal Laboratories Ltd 2000+ employees are currently employed in the health care of the people of Bangladesh.We are from 14/05/1986 with valuable service in medicine section in Bangladesh.The Royal Laboratories uses herbal ingredients He always makes quality medicines.We are Fast ime ISO Certified Ayurvedic Medicine Company In Bangladesh ISO 9001:2015 Certified
             </p>
           </div>
 
-          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-4">
-            <img src={royal} alt="navana-pharma" class="border  w-75 h-75 w-sm-100 w-100" />
+          <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-4">
+            <img src={royal} alt="navana-pharma" className="border  w-75 h-75 w-sm-100 w-100" />
           </div>
         </div>
       </div>

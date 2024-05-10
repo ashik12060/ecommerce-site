@@ -447,8 +447,47 @@ const AdminDashboard = () => {
 // items end
   return (
     <div className="">
-      {/* post  */}
+
+      {/* Products  */}
       <Box>
+        <Typography variant="h4" sx={{ color: "black",  mt:5}}>
+          PRODUCTS
+        </Typography>
+        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
+          <Button variant="contained" color="success" startIcon={<AddIcon />}>
+            <Link
+              style={{ color: "white", textDecoration: "none" }}
+              to="/admin/product/create"
+            >
+              Add Products
+            </Link>{" "}
+          </Button>
+        </Box>
+        <Paper sx={{ bgColor: "white" }}>
+          <Box sx={{ height: 400, width: "100%" }}>
+            <DataGrid
+              getRowId={(row) => row._id}
+              sx={{
+                "& .MuiTablePagination-displayedRows": {
+                  color: "black",
+                },
+                color: "black",
+                [`& .${gridClasses.row}`]: {
+                  bgColor: "white",
+                },
+              }}
+              rows={products}
+              columns={ProductColumns}
+              pageSize={3}
+              rowsPerPageOptions={[3]}
+              checkboxSelection
+            />
+          </Box>
+        </Paper>
+      </Box>
+
+      {/* post  */}
+      <Box className="mt-5">
         <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
          Blog Posts
         </Typography>
@@ -499,46 +538,9 @@ const AdminDashboard = () => {
       </Box>
 
 
-      {/* MEDICINE  */}
-      <Box>
-        <Typography variant="h4" sx={{ color: "black",  mt:5}}>
-          MEDICINE
-        </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button variant="contained" color="success" startIcon={<AddIcon />}>
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to="/admin/product/create"
-            >
-              Add Medicine
-            </Link>{" "}
-          </Button>
-        </Box>
-        <Paper sx={{ bgColor: "white" }}>
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              getRowId={(row) => row._id}
-              sx={{
-                "& .MuiTablePagination-displayedRows": {
-                  color: "black",
-                },
-                color: "black",
-                [`& .${gridClasses.row}`]: {
-                  bgColor: "white",
-                },
-              }}
-              rows={products}
-              columns={ProductColumns}
-              pageSize={3}
-              rowsPerPageOptions={[3]}
-              checkboxSelection
-            />
-          </Box>
-        </Paper>
-      </Box>
-
+      
       {/* ITEMS  */}
-      <Box>
+      {/* <Box>
         <Typography variant="h4" sx={{ color: "black", pb: 3,mt:5 }}>
          SURGICAL ITEMS
         </Typography>
@@ -586,13 +588,13 @@ const AdminDashboard = () => {
             />
           </Box>
         </Paper>
-      </Box>
+      </Box> */}
 
       
 
 
       {/* Gallery  */}
-      <Box>
+      {/* <Box>
         <Typography variant="h4" sx={{ color: "black",  mt:5}}>
           Gallery
         </Typography>
@@ -627,7 +629,7 @@ const AdminDashboard = () => {
             />
           </Box>
         </Paper>
-      </Box>
+      </Box> */}
     </div>
   );
 };

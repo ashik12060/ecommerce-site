@@ -1,11 +1,10 @@
-
 const firebaseConfig = {
-    apiKey: "AIzaSyBkNzoZLDu8JwCXHh3OJk020-Q7Hz5OK9g",
-    authDomain: "simple-firebase-cac87.firebaseapp.com",
-    projectId: "simple-firebase-cac87",
-    storageBucket: "simple-firebase-cac87.appspot.com",
-    messagingSenderId: "660458395972",
-    appId: "1:660458395972:web:c7b2defa7591148ec91f11"
-  };
-  
-  export default firebaseConfig;
+  apiKey: "AIzaSyDsy_p4bNtdLZrMpiI-YPu4la62dqfXTXg",
+  authDomain: "phone-authentication-b5248.firebaseapp.com",
+  projectId: "phone-authentication-b5248",
+  storageBucket: "phone-authentication-b5248.appspot.com",
+  messagingSenderId: "916446005479",
+  appId: "1:916446005479:web:3d40761edcbf2a700dba42",
+};
+
+export default firebaseConfig;
