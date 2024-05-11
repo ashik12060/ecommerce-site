@@ -112,7 +112,7 @@ function App() {
               <Route path="/bloghome" element={<BlogHome />} />
               <Route path="/buycontact" element={<BuyContact />} />
               <Route path="/product-sample" element={<ProductCart />} />
-              <Route path="/checkout" element={<CheckOut />} />
+              <Route path="/checkout/:id/:totalPrice" element={<CheckOut  />} />
               
               
               <Route path="/login" element={<LogIn  element={<LogIn setIsAuthenticated={setIsAuthenticated} />} />} />

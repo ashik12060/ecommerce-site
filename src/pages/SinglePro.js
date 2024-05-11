@@ -80,7 +80,6 @@ const SinglePro = () => {
   }, []);
 
   useEffect(() => {
-    // console.log('SOCKET IO', socket);
     socket.on("new-comment", (newComment) => {
       setCommentsRealTime(newComment);
     });
@@ -131,17 +130,15 @@ const decrementQuantity = () => {
 
 
 const addToCart = () => {
-  // Redirect to the checkout page only if the user is authenticated
-  if (isAuthenticated) {
-    // Construct the URL with query parameter
-    const checkoutUrl = `/checkout?totalPrice=${totalPrice}`;
-    // Navigate to the checkout page
+  // if (isAuthenticated) {
+    const checkoutUrl = `/checkout/${id}/${totalPrice}`;
     history(checkoutUrl);
-  } else {
-    // Redirect the user to the login page if not authenticated
-    history("/login");
-  }
+  // } else {
+  //   history("/login");
+  // }
 };
+
+
   return (
     <>
       <Header />

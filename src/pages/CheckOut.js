@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import {
   faAward,
@@ -11,31 +11,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../components/Shared/Header/Header";
 
 const CheckOut = () => {
+  
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-  // Retrieve totalPrices from query parameter and parse it as a number
   const totalPrices = parseFloat(queryParams.get("totalPrice")) || 0;
 
-  const [totalPrice, setTotalPrice] = useState(0);
+ 
 
-  useEffect(() => {
-    // Calculate total price including delivery fee only if totalPrices is not 0
-    if (totalPrices !== 0) {
-      const deliveryFee = 15; // Assuming a static delivery fee of $15
-      const totalPriceWithDelivery = totalPrices + deliveryFee;
-      setTotalPrice(totalPriceWithDelivery);
-    }
-  }, [totalPrices]);
+  const search = useParams();
+  console.log(search.totalPrice);
+
+
+      const deliveryFee = 15; 
+      const price = Number(search.totalPrice) +deliveryFee;
+
+      console.log(price);
   
   return (
     <div>
-      <div>
-      <h2>Checkout</h2>
-      <p>Total Price (Excluding Delivery Fee): ${totalPrice}</p>
-      <p>Delivery Fee: $15</p>
-      <p>Total Price (Including Delivery Fee): ${totalPrices}</p>
-    </div>
       <Header />
       <div className="d-flex">
         <div className="pt-5 card2-bg px-5 w-75">
@@ -83,7 +77,7 @@ const CheckOut = () => {
           <h6>
             <strong>Product Price:</strong>{" "}
             <span className="ps-3">
-            ${totalPrices}
+            ${search.totalPrice}
             </span>
           </h6>
           <h6>
@@ -92,7 +86,7 @@ const CheckOut = () => {
           </h6>
           <h6>
             <strong>Total Price</strong>{" "}
-            <span className="ps-5">${totalPrice}</span>
+            <span className="ps-5">${price}</span>
           </h6>
           <Link to="/bkash-payment">
             <button className="px-5 py-2 rounded bg-color border-0 text-white fw-bold">

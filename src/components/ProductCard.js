@@ -8,10 +8,10 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import CommentIcon from '@mui/icons-material/Comment';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import CommentIcon from "@mui/icons-material/Comment";
 
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -36,7 +36,7 @@ const ProductCard = ({
   likesId,
 }) => {
   const { userInfo } = useSelector((state) => state.signIn);
-  
+
   const [truncatedContent, setTruncatedContent] = useState("");
   const history = useNavigate();
   const isAuthenticated = useSelector((state) => state.signIn.isAuthenticated);
@@ -77,7 +77,6 @@ const ProductCard = ({
     }
   };
 
-
   const addToCart = () => {
     // Redirect to the checkout page only if the user is authenticated
     if (isAuthenticated) {
@@ -97,40 +96,48 @@ const ProductCard = ({
         <div id="productInfo" className="   w-100  shadow">
           <div className="mb-2 pb-3 rounded px-2 py-2 border border-1 ">
             <Link to={`/product/${id}`}>
-              <img className="advisor-img w-100 img-height border rounded" src={image} alt="advisor_team" />
+              <img
+                className="advisor-img w-100 img-height border rounded"
+                src={image}
+                alt="advisor_team"
+              />
             </Link>
             <p className="pt-2 px-1 fw-bold">{title}</p>
-           
-            <p><span className="fw-bold">Origin:</span> {truncatedContent}</p>
-            <br />
-                <span>
-                <FontAwesomeIcon icon={faStar} className='text-warning ' />
-                <FontAwesomeIcon icon={faStar} className='text-warning ' />
-                <FontAwesomeIcon icon={faStar} className='text-warning ' />
-                <FontAwesomeIcon icon={faStar} className='text-warning ' />
-                <FontAwesomeIcon icon={faStar} className='text-warning ' />
-                </span>
-                <br />
-                <span className='fw-bold font-color'>${feature1}</span>
-                <br/>
-                <Link  to={`/product/${id}`}>
-                <button className='bg-color  text-white border-0 px-2 py-1'>Buy Now</button>
-                </Link>
-               
-          </div>
-          
 
+            <p>
+              <span className="fw-bold">Origin:</span> {truncatedContent}
+            </p>
+            <br />
+            <span>
+              <FontAwesomeIcon icon={faStar} className="text-warning " />
+              <FontAwesomeIcon icon={faStar} className="text-warning " />
+              <FontAwesomeIcon icon={faStar} className="text-warning " />
+              <FontAwesomeIcon icon={faStar} className="text-warning " />
+              <FontAwesomeIcon icon={faStar} className="text-warning " />
+            </span>
+            <br />
+            <span className="fw-bold font-color">${feature1}</span>
+            <br />
+            <Link to={`/product/${id}`}>
+              <button className="bg-color  text-white border-0 px-2 py-1">
+                Buy Now
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
-      <CardContent>
-                <Typography variant="body2" color="text.primary">
-                    {/* {content} */}
+      {/* <CardContent>
+        <Typography variant="body2" color="text.primary">
 
-                    <Box component='span' dangerouslySetInnerHTML={{ __html: content.split(" ").slice(0, 10).join(" ") + "..." }}></Box>
-
-                </Typography>
-            </CardContent>
-            <CardActions >
+          <Box
+            component="span"
+            dangerouslySetInnerHTML={{
+              __html: content.split(" ").slice(0, 10).join(" ") + "...",
+            }}
+          ></Box>
+        </Typography>
+      </CardContent> */}
+      {/* <CardActions >
                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                     <Box>
 
@@ -155,8 +162,7 @@ const ProductCard = ({
                     </Box>
                 </Box>
 
-            </CardActions>
-
+            </CardActions> */}
     </div>
   );
 };
