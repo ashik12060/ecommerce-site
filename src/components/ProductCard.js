@@ -7,7 +7,12 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import CommentIcon from '@mui/icons-material/Comment';
+
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -30,8 +35,11 @@ const ProductCard = ({
   showProducts,
   likesId,
 }) => {
-  // const { userInfo } = useSelector((state) => state.signIn);
+  const { userInfo } = useSelector((state) => state.signIn);
+  
   const [truncatedContent, setTruncatedContent] = useState("");
+  const history = useNavigate();
+  const isAuthenticated = useSelector((state) => state.signIn.isAuthenticated);
 
   useEffect(() => {
     const contentArray = content.split("\n");
@@ -69,17 +77,20 @@ const ProductCard = ({
     }
   };
 
-  // const addToCart = () => {
-  //   handleAddServices({
-  //     id,
-  //     title,
-  //     feature1,
-  //     image,
-  //     content,
-  //     price: feature1,
-  //     quantity: 1
-  //   });
-  // };
+
+  const addToCart = () => {
+    // Redirect to the checkout page only if the user is authenticated
+    if (isAuthenticated) {
+      // Construct the URL with query parameter
+      // const checkoutUrl = `/product/${id}?totalPrices=${totalPrices}`;
+      // Navigate to the checkout page
+
+      history("/singlepro");
+    } else {
+      // Redirect the user to the login page if not authenticated
+      history("/login");
+    }
+  };
   return (
     <div className="overflow-hidden ">
       <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6  ">
@@ -111,6 +122,40 @@ const ProductCard = ({
 
         </div>
       </div>
+      <CardContent>
+                <Typography variant="body2" color="text.primary">
+                    {/* {content} */}
+
+                    <Box component='span' dangerouslySetInnerHTML={{ __html: content.split(" ").slice(0, 10).join(" ") + "..." }}></Box>
+
+                </Typography>
+            </CardContent>
+            <CardActions >
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+                    <Box>
+
+                        {
+                            likesId.includes(userInfo && userInfo.id) ?
+                                <IconButton onClick={removeLike} aria-label="add to favorites">
+                                    <FavoriteIcon sx={{ color: 'red' }} />
+                                </IconButton>
+                                :
+                                <IconButton onClick={addLike} aria-label="add to favorites">
+                                    <FavoriteBorderIcon sx={{ color: 'red' }} />
+                                </IconButton>
+                        }
+
+                        {likes} Like(s)
+                    </Box>
+                    <Box>
+                        {comments}
+                        <IconButton aria-label="comment">
+                            <CommentIcon />
+                        </IconButton>
+                    </Box>
+                </Box>
+
+            </CardActions>
 
     </div>
   );

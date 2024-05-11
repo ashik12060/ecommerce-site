@@ -101,6 +101,7 @@ const PostCard = ({
 
                 </Typography>
             </CardContent>
+            
             <CardActions >
                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                     <Box>

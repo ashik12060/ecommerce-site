@@ -55,7 +55,6 @@ import CompanyStructure from './pages/CompanyStructure/CompanyStructure';
 import SisterConcerns from './pages/Manufacture/SisterConcerns';
 import ProductSample from './components/Products/ProductSample';
 import ProductCart from './components/Products/ProductCart';
-import Header from './components/Shared/Header/Header';
 import { getAuth,signOut  } from "firebase/auth";
 import AdminLogin from './pages/AdminLogin';
 import LoginUser from './pages/LoginSeller';
@@ -87,7 +86,7 @@ function App() {
     <Provider store={store}>
     <ProSidebarProvider>
       <BrowserRouter>
-      <Header  />
+     
       {/* <ScrollButton /> */}
       <Routes>
         <Route path='/' element={<Home />}></Route>
@@ -102,9 +101,7 @@ function App() {
         <Route path='/mission' element={<Mission/>}></Route>
         <Route path='/companystructure' element={<CompanyStructure/>}></Route>
         <Route path='/admin-login' element={<AdminLogin/>}></Route>
-
-        <Route path="/*" element={<Header />} />
-        
+ 
 
         {/* blog  */}
         <Route path="members" element={<Members />} />

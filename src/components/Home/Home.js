@@ -13,9 +13,12 @@ import MapLoaction from "../MapLocation/MapLoaction";
 import TableHeader from "../TableHeader/TableHeader";
 import ProductsLists from "../ProductsLists/ProductsLists";
 import Footer from "../Shared/Footer/Footer";
+import Header from "../Shared/Header/Header";
 const Home = () => {
   return (
     <div className="overflow-hidden">
+      <Header />
+     
       <TableHeader />
 
       <ProductsLists />
