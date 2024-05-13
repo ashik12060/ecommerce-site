@@ -10,20 +10,21 @@ import "react-quill/dist/quill.snow.css";
 import { modules } from "../components/moduleToolbar";
 import axiosInstance from "../pages/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Shared/Header/Header";
 // import axiosInstance from "../pages/axiosInstance";
 
 const validationSchema = yup.object({
   title: yup
-    .string("Add a post title")
-    .min(4, "text content should have a minimum of 4 characters ")
-    .required("Post title is required"),
+    .string("Add a Item title")
+    .min(1, "text content should have a minimum of 4 characters ")
+    .required("Item's title is required"),
   content: yup
     .string("Add text content")
-    .min(10, "text content should have a minimum of 10 characters ")
+    .min(1, "text content should have a minimum of 10 characters ")
     .required("text content is required"),
 });
 
-const CreatePost = () => {
+const SellerAc = () => {
   const navigate=useNavigate()
   const {
     values,
@@ -42,19 +43,20 @@ const CreatePost = () => {
 
     validationSchema: validationSchema,
     onSubmit: (values, actions) => {
-      createNewPost(values);
+      createNewItem(values);
       //alert(JSON.stringify(values, null, 2));
       actions.resetForm();
     },
   });
 
-  const createNewPost = async (values) => {
+  const createNewItem = async (values) => {
     try {
 
-      const result = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/post/create`, values);
+      const result = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/item/create`, values);
       if (result?.data?.success === true) {
-        toast.success("post created");
-        navigate("/admin/dashboard");
+        toast.success("Item created");
+        // navigate("/admin/dashboard");
+        navigate('/seller-account')
       }
     } catch (error) {
       console.log(error);
@@ -69,9 +71,10 @@ const CreatePost = () => {
     // ...
   };
 
-
   return (
     <>
+    <Header />
+    <h3>Welcome to seller account. </h3>
       <Box sx={{ bgColor: "white",
       padding: "20px",
       width: "100%",
@@ -79,19 +82,19 @@ const CreatePost = () => {
       margin: "0 auto",}}>
         <Typography variant="h5" sx={{ pb: 4 }}>
           {" "}
-          Create post{" "}
+          Add Product{" "}
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             sx={{ mb: 3 }}
             fullWidth
             id="title"
-            label="Post title"
+            label="Product Name"
             name="title"
             InputLabelProps={{
               shrink: true,
             }}
-            placeholder="Post title"
+            placeholder="Product Name"
             value={values.title}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -108,7 +111,7 @@ const CreatePost = () => {
               name="content"
               multiline
               rows={4}
-              placeholder="Write the post content..."
+              placeholder="Write the item content..."
               value={values.content}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -191,13 +194,14 @@ const CreatePost = () => {
           <Button
             type="submit"
             fullWidth
-            variant="contained"
+            // variant="contained"
+            className="bg-color"
             elevation={0}
             sx={{ mt: 3, p: 1, mb: 2, borderRadius: "25px" }}
             // onClick={handlePostContent}
             // disabled={loading}
           >
-            Create Post
+            Add Product
           </Button>
         </Box>
       </Box>
@@ -205,4 +209,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default SellerAc;

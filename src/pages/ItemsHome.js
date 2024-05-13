@@ -66,7 +66,7 @@ const ItemsHome = () => {
   return (
     <Box sx={{ bgColor: "#fafafa", minHeight: "100vh" }}>
       <div className='text-center pt-4  '>
-      <h3><span  className='product-header '>SURGICAL ITEMS</span></h3>
+      <h3><span  className='bg-color text-white px-4 py-1'>Popular Products</span></h3>
     </div>
       <Container sx={{ pt: 3, pb: 5, minHeight: "83vh" }}>
         <Box sx={{ flexGrow: 1 }}>

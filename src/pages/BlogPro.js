@@ -26,25 +26,7 @@ const BlogPro = () => {
   const [postRemoveLike, setPostRemoveLike] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  // const handleAddServices = (service) => {
-  //   const serviceExist = cartItems.find((item) => item.id === service.id);
-  //   if (serviceExist) {
-  //     setCartItems(
-  //       cartItems.map((item) =>
-  //         item.id === service.id
-  //           ? { ...serviceExist, quantity: serviceExist.quantity + 1 }
-  //           : item
-  //       )
-  //     );
-  //   } else {
-  //     setCartItems([...cartItems, { ...service, quantity: 1 }]);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   showProducts();
-  // }, []);
-
+ 
   const showProducts = async () => {
     setLoading(true);
     try {

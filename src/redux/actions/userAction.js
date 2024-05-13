@@ -27,7 +27,7 @@ export const userSignInAction = (user) => async (dispatch) => {
             type: USER_SIGNIN_SUCCESS,
             payload: data
         });
-        toast.success("Login Successfully!");
+        toast.success("Login Successfully!"); 
         console.log("sign in from userAction")
     } catch (error) {
         dispatch({

@@ -1,5 +1,4 @@
 import Card from "@mui/material/Card";
-import "./ProductCard.css";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -23,9 +22,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 
-const ProductCard = ({
+const UserInfo = ({
   id,
   title,
+  user,
   feature1,
   image,
   content,
@@ -95,28 +95,20 @@ const ProductCard = ({
       <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6  ">
         <div id="productInfo" className="   w-100  shadow">
           <div className="mb-2 pb-3 rounded px-2 py-2 border border-1 ">
-            <Link to={`/product/${id}`}>
+            {/* <Link to={`/show-users/${id}`}>
               <img
                 className="advisor-img w-100 img-height border rounded"
                 src={image}
                 alt="advisor_team"
               />
-            </Link>
-            <p className="pt-2 px-1 fw-bold">{title}</p>
+            </Link> */}
+            <p className="pt-2 px-1 fw-bold">The user: {user}</p>
 
-            <p>
-              <span className="fw-bold">Origin:</span> {truncatedContent}
-            </p>
+            
             <br />
-            <span>
-              <FontAwesomeIcon icon={faStar} className="text-warning " />
-              <FontAwesomeIcon icon={faStar} className="text-warning " />
-              <FontAwesomeIcon icon={faStar} className="text-warning " />
-              <FontAwesomeIcon icon={faStar} className="text-warning " />
-              <FontAwesomeIcon icon={faStar} className="text-warning " />
-            </span>
+          
             <br />
-            <span className="fw-bold font-color">${feature1}</span>
+            
             <br />
             <Link to={`/product/${id}`}>
               <button className="bg-color  text-white border-0 px-2 py-1">
@@ -130,4 +122,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default UserInfo;

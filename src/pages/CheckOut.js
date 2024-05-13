@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import {
   faAward,
@@ -9,24 +9,47 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../components/Shared/Header/Header";
+import axiosInstance from "./axiosInstance";
+import axios from "axios";
 
 const CheckOut = () => {
   
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
 
-  const totalPrices = parseFloat(queryParams.get("totalPrice")) || 0;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [orderId, setOrderId] = useState(null);
+  const history = useNavigate();
 
+  // const searches = match.params;
  
 
   const search = useParams();
   console.log(search.totalPrice);
+  console.log(search.id);
 
 
       const deliveryFee = 15; 
       const price = Number(search.totalPrice) +deliveryFee;
 
       console.log(price);
+
+// sending data to mongodb
+const handlePlaceOrder = () => {
+  const data = {
+    productId: search.id, // Assuming `search.id` contains the product ID
+    totalPrice: price // Assuming `price` contains the total price
+  };
+  // await axiosInstance.get(
+  //   `${process.env.REACT_APP_API_URL}/api/products/show`
+
+  axios.post(`${process.env.REACT_APP_API_URL}/api/product-info/add`, data)
+    .then(response => {
+      console.log("Order placed successfully:", response.data);
+    })
+    .catch(error => {
+      console.error("Error placing order:", error);
+    });
+};
   
   return (
     <div>
@@ -88,11 +111,11 @@ const CheckOut = () => {
             <strong>Total Price</strong>{" "}
             <span className="ps-5">${price}</span>
           </h6>
-          <Link to="/bkash-payment">
-            <button className="px-5 py-2 rounded bg-color border-0 text-white fw-bold">
+          {/* <Link to="/bkash-payment"> */}
+            <button onClick={handlePlaceOrder}  className="px-5 py-2 rounded bg-color border-0 text-white fw-bold">
               Place Order
             </button>
-          </Link>
+          {/* </Link> */}
           
         </div>
       </div>

@@ -14,9 +14,6 @@ import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-//import image from '../images/blog.jpg'
-// import am from '../images/amar.jpeg'
-// import am from '../assets/'
 import am from '../assets/medisure_logo.jpg'
 import axiosInstance from '../pages/axiosInstance';
 // import axiosInstance from '../pages/axiosInstance';

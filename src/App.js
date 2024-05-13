@@ -60,6 +60,8 @@ import AdminLogin from './pages/AdminLogin';
 import LoginUser from './pages/LoginSeller';
 import CheckOut from './pages/CheckOut';
 import Bkash from './pages/Bkash';
+import ShowUsers from './pages/ShowUsers';
+import SellerAc from './pages/SellerAc';
 //HOC
 const AdminDashboardHOC = Layout(AdminDashboard);
 
@@ -96,11 +98,13 @@ function App() {
         <Route path='/sisterconcerns' element={<SisterConcerns/>}></Route>
         <Route path='/leadership' element={<Leadership/>}></Route>
         <Route path='/seller-login' element={<LoginUser/>}></Route>
+        <Route path='/seller-account' element={<SellerAc/>}></Route>
         <Route path='/bkash-payment' element={<Bkash/>}></Route>
 
         <Route path='/mission' element={<Mission/>}></Route>
         <Route path='/companystructure' element={<CompanyStructure/>}></Route>
         <Route path='/admin-login' element={<AdminLogin/>}></Route>
+        <Route path='/show-users' element={<ShowUsers/>}></Route>
  
 
         {/* blog  */}

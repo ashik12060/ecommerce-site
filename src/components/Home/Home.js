@@ -23,7 +23,7 @@ const Home = () => {
 
       <ProductsLists />
       <div className="mt-5">
-      
+      <ItemsHome />
       </div>
       <Footer />
     </div>

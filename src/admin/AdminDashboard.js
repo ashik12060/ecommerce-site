@@ -540,7 +540,7 @@ const AdminDashboard = () => {
 
       
       {/* ITEMS  */}
-      {/* <Box>
+      <Box>
         <Typography variant="h4" sx={{ color: "black", pb: 3,mt:5 }}>
          SURGICAL ITEMS
         </Typography>
@@ -588,7 +588,7 @@ const AdminDashboard = () => {
             />
           </Box>
         </Paper>
-      </Box> */}
+      </Box>
 
       
 

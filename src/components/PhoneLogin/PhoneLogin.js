@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
 
@@ -9,17 +9,11 @@ import "react-phone-input-2/lib/style.css";
 import { auth } from "../../Firebase/PhoneAuth/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
-import './PhoneLogin.css'
-import { Navigate } from 'react-router-dom';
-
-
+import "./PhoneLogin.css";
+import { Navigate } from "react-router-dom";
 
 const PhoneLogin = () => {
-
-
-
-
-    const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState("");
   const [ph, setPh] = useState("");
   const [loading, setLoading] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
@@ -27,7 +21,8 @@ const PhoneLogin = () => {
 
   function onCaptchVerify() {
     if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(auth,
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        auth,
         "recaptcha-container",
         {
           size: "invisible",
@@ -35,8 +30,7 @@ const PhoneLogin = () => {
             onSignup();
           },
           "expired-callback": () => {},
-        },
-        
+        }
       );
     }
   }
@@ -77,7 +71,6 @@ const PhoneLogin = () => {
       });
   }
 
-
   return (
     <section className="log-bg py-5">
       <div>
@@ -86,7 +79,7 @@ const PhoneLogin = () => {
         {user ? (
           <h2 className="text-center text-white fs-2">
             👍Login Success
-            <Navigate to='/' />
+            <Navigate to="/seller-account" />
           </h2>
         ) : (
           <div className="w-80 flex flex-col gap-4 rounded-lg p-4">
@@ -146,13 +139,11 @@ const PhoneLogin = () => {
                 </button>
               </>
             )}
-             
           </div>
         )}
       </div>
-     
     </section>
-  )
-}
+  );
+};
 
-export default PhoneLogin
+export default PhoneLogin;

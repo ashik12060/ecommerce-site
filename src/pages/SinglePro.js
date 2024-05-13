@@ -114,7 +114,7 @@ const SinglePro = () => {
 
 // Calculate total price
 useEffect(() => {
-  const totalPrices = parseFloat(feature1) * quantity;
+  const totalPrices = Number(feature1) * quantity;
   setTotalPrice(totalPrices);
 }, [feature1, quantity]);
 
@@ -129,13 +129,22 @@ const decrementQuantity = () => {
 };
 
 
+// const addToCart = () => {
+//   // if (isAuthenticated) {
+//     const checkoutUrl = `/checkout/${id}/${totalPrice}`;
+//     history(checkoutUrl);
+//   // } else {
+//   //   history("/login");
+//   // }
+// };
 const addToCart = () => {
-  // if (isAuthenticated) {
+  if (userInfo?.token) {
+    console.log({ totalPrice });
     const checkoutUrl = `/checkout/${id}/${totalPrice}`;
     history(checkoutUrl);
-  // } else {
-  //   history("/login");
-  // }
+  } else {
+    history("/login");
+  }
 };
 
 

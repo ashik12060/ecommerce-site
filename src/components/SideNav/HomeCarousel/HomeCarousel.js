@@ -6,7 +6,7 @@ import "./HomeCarousel.css";
 import SideNav from "../SideNav";
 const HomeCarousel = () => {
   return (
-    <div classNameName=" border border-3">
+    <div className=" border border-3">
      
 
       <div
