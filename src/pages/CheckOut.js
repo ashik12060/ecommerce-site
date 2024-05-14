@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../components/Shared/Header/Header";
 import axiosInstance from "./axiosInstance";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const CheckOut = () => {
   
@@ -20,7 +21,7 @@ const CheckOut = () => {
   const [orderId, setOrderId] = useState(null);
   const history = useNavigate();
 
-  // const searches = match.params;
+  
  
 
   const search = useParams();
@@ -36,15 +37,15 @@ const CheckOut = () => {
 // sending data to mongodb
 const handlePlaceOrder = () => {
   const data = {
-    productId: search.id, // Assuming `search.id` contains the product ID
-    totalPrice: price // Assuming `price` contains the total price
+    productId: search.id, 
+    totalPrice: price 
   };
-  // await axiosInstance.get(
-  //   `${process.env.REACT_APP_API_URL}/api/products/show`
+ 
 
   axios.post(`${process.env.REACT_APP_API_URL}/api/product-info/add`, data)
     .then(response => {
       console.log("Order placed successfully:", response.data);
+      toast.success("Payment Completed");
     })
     .catch(error => {
       console.error("Error placing order:", error);
@@ -111,11 +112,11 @@ const handlePlaceOrder = () => {
             <strong>Total Price</strong>{" "}
             <span className="ps-5">${price}</span>
           </h6>
-          {/* <Link to="/bkash-payment"> */}
+          <Link to="/bkash-payment">
             <button onClick={handlePlaceOrder}  className="px-5 py-2 rounded bg-color border-0 text-white fw-bold">
               Place Order
             </button>
-          {/* </Link> */}
+          </Link>
           
         </div>
       </div>

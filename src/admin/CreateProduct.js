@@ -267,7 +267,7 @@ const CreateProduct = () => {
             elevation={0}
             sx={{ mt: 3, p: 1, mb: 2, borderRadius: "25px" }}
           >
-            Post Medicine
+            Create Product
           </Button>
           
         </Box>

@@ -1,4 +1,4 @@
-// Allahu akbar
+
 import React, { useEffect, useState } from "react";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
     displayProduct();
   }, []);
 
-  //display gallery
+//   //display gallery
   const displayGallery = async () => {
     try {
       const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/galleries/show`);
@@ -77,7 +77,7 @@ const AdminDashboard = () => {
     displayGallery();
   }, []);
 
-  //delete post by Id
+//   //delete post by Id
   const deletePostById = async (e, id) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try { 
@@ -143,7 +143,7 @@ const AdminDashboard = () => {
     }
   };
 
-  // post columns
+//   // post columns
   const PostColumns = [
     {
       field: "_id",
@@ -217,7 +217,7 @@ const AdminDashboard = () => {
       ),
     },
   ];
-  // Item columns
+//   // Item columns
   const ItemColumns = [
     {
       field: "_id",
@@ -291,12 +291,12 @@ const AdminDashboard = () => {
       ),
     },
   ];
-// items end
+// // items end
 
 
 
 
-  //products columns add extra
+//   //products columns add extra
   const ProductColumns = [
     {
       field: "_id",
@@ -370,7 +370,7 @@ const AdminDashboard = () => {
   ];
 
 
-   // Gallery columns
+//    // Gallery columns
    const GalleryColumns = [
     {
       field: "_id",
@@ -444,6 +444,223 @@ const AdminDashboard = () => {
       ),
     },
   ];
+
+
+
+
+// new example
+// const [currentSection, setCurrentSection] = useState("products");
+//   const [posts, setPosts] = useState([]);
+//   const [items, setItems] = useState([]);
+//   const [products, setProducts] = useState([]);
+
+//   // useEffect hooks for fetching data
+//   useEffect(() => {
+//     displayPost();
+//     displayItem();
+//     displayProduct();
+//   }, []);
+
+//   // Function to fetch and display posts
+//   const displayPost = async () => {
+//     try {
+//       const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/posts/show`);
+//       setPosts(data.posts);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   // Function to fetch and display items
+//   const displayItem = async () => {
+//     try {
+//       const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/items/show`);
+//       setItems(data.items);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   // Function to fetch and display products
+//   const displayProduct = async () => {
+//     try {
+//       const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/products/show`);
+//       setProducts(data.products);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   // Function to handle section change
+//   const handleSectionChange = (section) => {
+//     setCurrentSection(section);
+//   };
+
+//   // Render the appropriate section based on currentSection state
+//   const renderSection = () => {
+//     switch (currentSection) {
+//       case "posts":
+//         return renderPostsSection();
+//       case "items":
+//         return renderItemsSection();
+//       default:
+//         return renderProductsSection();
+//     }
+//   };
+
+//   // Render the Products section
+//   const renderProductsSection = () => {
+//     return (
+//       <div>
+//         <Typography variant="h4" sx={{ color: "black",  mt:5}}>
+//           PRODUCTS
+//         </Typography>
+//         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
+//           <Button variant="contained" color="success" startIcon={<AddIcon />}>
+//             <Link
+//               style={{ color: "white", textDecoration: "none" }}
+//               to="/admin/product/create"
+//             >
+//               Add Products
+//             </Link>{" "}
+//           </Button>
+//         </Box>
+//         <Paper sx={{ bgColor: "white" }}>
+//           <Box sx={{ height: 400, width: "100%" }}>
+//             <DataGrid
+//               getRowId={(row) => row._id}
+//               sx={{
+//                 "& .MuiTablePagination-displayedRows": {
+//                   color: "black",
+//                 },
+//                 color: "black",
+//                 [`& .${gridClasses.row}`]: {
+//                   bgColor: "white",
+//                 },
+//               }}
+//               rows={products}
+//               columns={ProductColumns}
+//               pageSize={3}
+//               rowsPerPageOptions={[3]}
+//               checkboxSelection
+//             />
+//           </Box>
+//         </Paper>
+//       </div>
+//     );
+//   };
+
+//   // Render the Blog Posts section
+//   const renderPostsSection = () => {
+//     return (
+//       <Box className="mt-5">
+//         <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
+//          Blog Posts
+//         </Typography>
+//         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
+//           <Button
+//             variant="contained"
+//             color="success"
+//             startIcon={<AddIcon />}
+//             sx={{
+//               fontSize: "1rem", 
+//               padding: "8px 16px", 
+//               "@media (max-width: 768px)": {
+//                 fontSize: "0.9rem", 
+//                 padding: "6px 12px", 
+//               },
+//             }}
+//           >
+//             <Link
+//               style={{ color: "white", textDecoration: "none" }}
+//               to="/admin/post/create"
+//             >
+//               Create Post
+//             </Link>{" "}
+//           </Button>
+//         </Box>
+//         <Paper sx={{ bgColor: "white" }}>
+//           <Box sx={{ height: 400, width: "100%" }}>
+//             <DataGrid
+//               getRowId={(row) => row._id}
+//               sx={{
+//                 "& .MuiTablePagination-displayedRows": {
+//                   color: "black",
+//                 },
+//                 color: "black",
+//                 [`& .${gridClasses.row}`]: {
+//                   bgColor: "white",
+//                 },
+//               }}
+//               rows={posts}
+//               columns={PostColumns}
+//               pageSize={3}
+//               rowsPerPageOptions={[3]}
+//               checkboxSelection
+//             />
+//           </Box>
+//         </Paper>
+//       </Box>
+//     );
+//   };
+
+//   // Render the Surgical Items section
+//   const renderItemsSection = () => {
+//     return (
+//       <div>
+//         <Typography variant="h4" sx={{ color: "black", pb: 3,mt:5 }}>
+//          SURGICAL ITEMS
+//         </Typography>
+//         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
+//           <Button
+//             variant="contained"
+//             color="success"
+//             startIcon={<AddIcon />}
+//             sx={{
+//               fontSize: "1rem", 
+//               padding: "8px 16px", 
+//               "@media (max-width: 768px)": {
+//                 fontSize: "0.9rem", 
+//                 padding: "6px 12px", 
+//               },
+//             }}
+//            >
+//             <Link
+//               style={{ color: "white", textDecoration: "none" }}
+//               to="/admin/item/create"
+//             >
+//               Add Item
+//             </Link>{" "}
+//           </Button>
+//         </Box>
+//         <Paper sx={{ bgColor: "white" }}>
+//           <Box sx={{ height: 400, width: "100%" }}>
+//             <DataGrid
+//               getRowId={(row) => row._id}
+//               sx={{
+//                 "& .MuiTablePagination-displayedRows": {
+//                   color: "black",
+//                 },
+//                 color: "black",
+//                 [`& .${gridClasses.row}`]: {
+//                   bgcolor: "white",
+//                 },
+//               }}
+//               rows={items}
+//               columns={ItemColumns}
+//               pageSize={3}
+//               rowsPerPageOptions={[3]}
+//               checkboxSelection
+//             />
+//           </Box>
+//         </Paper>
+//       </div>
+//     );
+//   };
+
+
+
+
 // items end
   return (
     <div className="">
@@ -542,7 +759,7 @@ const AdminDashboard = () => {
       {/* ITEMS  */}
       <Box>
         <Typography variant="h4" sx={{ color: "black", pb: 3,mt:5 }}>
-         SURGICAL ITEMS
+         Seller Products 
         </Typography>
         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
           <Button
@@ -630,7 +847,41 @@ const AdminDashboard = () => {
           </Box>
         </Paper>
       </Box> */}
+{/* <Box sx={{ width: 200, padding: 2 }}>
+        <Typography variant="h6" gutterBottom>
+          Sections
+        </Typography>
+        <Button
+          variant={currentSection === "products" ? "contained" : "outlined"}
+          onClick={() => handleSectionChange("products")}
+        >
+          Products
+        </Button>
+        <Button
+          variant={currentSection === "posts" ? "contained" : "outlined"}
+          onClick={() => handleSectionChange("posts")}
+        >
+          Blog Posts
+        </Button>
+        <Button
+          variant={currentSection === "items" ? "contained" : "outlined"}
+          onClick={() => handleSectionChange("items")}
+        >
+          Surgical Items
+        </Button>
+      </Box> */}
+
+      {/* Render the selected section */}
+      {/* <Box sx={{ marginLeft: 220 }}>
+        {renderSection()}
+      </Box>
+       */}
     </div>
+
+
+
+
+
   );
 };
 

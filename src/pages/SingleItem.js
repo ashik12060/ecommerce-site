@@ -30,9 +30,6 @@ const SingleItem = () => {
     const [comments, setComments] = useState([]);
     const [commentsRealTime, setCommentsRealTime] = useState([]);
 
-
-
-
     const { id } = useParams();
     //fetch single item
     const displaySingleItem = async () => {
@@ -40,7 +37,6 @@ const SingleItem = () => {
         try {
             // 
             const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/item/${id}`);
-            // console.log(data)
             setTitle(data.item.title);
             setContent(data.item.content);
             setImage(data.item.image.url);

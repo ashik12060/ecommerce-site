@@ -207,13 +207,14 @@ const EditProduct = () => {
             id="feature2"
             label="feature 2"
             name="feature2"
+            className="my-3"
             value={values.feature2}
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.feature2 && Boolean(errors.feature2)}
             helperText={touched.feature2 && errors.feafeature2ture1}
           />
-          <TextField
+          {/* <TextField
             fullWidth
             id="feature3"
             label="feature 3"
@@ -300,11 +301,11 @@ const EditProduct = () => {
             onBlur={handleBlur}
             error={touched.feature10 && Boolean(errors.feature10)}
             helperText={touched.feature10 && errors.feature10}
-          />
+          /> */}
 
           {/* Add the remaining TextField components for features 2-10 here */}
 
-          <TextField
+          {/* <TextField
             fullWidth
             id="techSpec1"
             label="Technical Spec 1"
@@ -447,7 +448,7 @@ const EditProduct = () => {
             onBlur={handleBlur}
             error={touched.techSpec12 && Boolean(errors.techSpec12)}
             helperText={touched.techSpec12 && errors.techSpec12}
-          />
+          /> */}
 
           {/* Add the remaining TextField components for technical specifications 2-12 here */}
 

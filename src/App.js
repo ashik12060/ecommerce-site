@@ -94,15 +94,15 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/contact' element={<Contact />}></Route>
-        <Route path='/companyprofile' element={<CompanyProfile/>}></Route>
-        <Route path='/sisterconcerns' element={<SisterConcerns/>}></Route>
-        <Route path='/leadership' element={<Leadership/>}></Route>
+        {/* <Route path='/companyprofile' element={<CompanyProfile/>}></Route> */}
+        {/* <Route path='/sisterconcerns' element={<SisterConcerns/>}></Route> */}
+        {/* <Route path='/leadership' element={<Leadership/>}></Route> */}
         <Route path='/seller-login' element={<LoginUser/>}></Route>
         <Route path='/seller-account' element={<SellerAc/>}></Route>
         <Route path='/bkash-payment' element={<Bkash/>}></Route>
 
-        <Route path='/mission' element={<Mission/>}></Route>
-        <Route path='/companystructure' element={<CompanyStructure/>}></Route>
+        {/* <Route path='/mission' element={<Mission/>}></Route> */}
+        {/* <Route path='/companystructure' element={<CompanyStructure/>}></Route> */}
         <Route path='/admin-login' element={<AdminLogin/>}></Route>
         <Route path='/show-users' element={<ShowUsers/>}></Route>
  

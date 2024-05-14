@@ -51,7 +51,7 @@ const LogIn = () => {
       if (loginFlow === "checkout") {
         navigate("/checkout/:id/:totalPrice");
       } else {
-        navigate("/checkout/:id/:totalPrice");
+        navigate("/");
       }
     }
   }, [isAuthenticated, loginFlow, navigate]);
@@ -68,17 +68,14 @@ const LogIn = () => {
         };
         setUser(loggedInUser);
   
-        // Set persistence for Google authentication sessions
         setPersistence(auth, browserLocalPersistence)
           .then(() => {
-            // Session will persist even after page reload
             console.log("Google authentication session persisted");
           })
           .catch((error) => {
             console.error("Error setting persistence:", error.message);
           });
 
-        // Dispatch action to set login flow to "checkout" when logging in from the cart page
         if (loginFlow === "checkout") {
           dispatch({ type: "SET_LOGIN_FLOW", payload: "checkout" });
         }
