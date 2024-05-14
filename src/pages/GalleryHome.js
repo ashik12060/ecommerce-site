@@ -6,9 +6,9 @@ import moment from 'moment';
 import Loader from '../components/Loader';
 import { io } from 'socket.io-client';
 import axiosInstance from './axiosInstance';
-import HomeFooter from '../components/Footer/HomeFooter';
-import Header from '../components/Header/Header';
 import GalleryCard from '../components/GalleryCard';
+import Footer from '../components/Shared/Footer/Footer';
+import Header from '../components/Shared/Header/Header';
 // import axiosInstance from './axiosInstance';
 
 const socket = io('/', {
@@ -86,7 +86,7 @@ const GalleryHome = () => {
                     </Box>
 
                 </Container>
-                <HomeFooter />
+                <Footer />
             </Box>
         
     )

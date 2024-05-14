@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import "./BuyContact.css";
 // import Header from './Shared/Header/Header';
 import { toast } from 'react-toastify';
-import Header from './Header/Header';
+import Header from './Shared/Header/Header';
 
 const BuyContact = () => {
     const [name, setName] = useState('');

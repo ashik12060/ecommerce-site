@@ -19,7 +19,7 @@ import { toast } from 'react-toastify';
 import CommentList from '../components/CommentList';
 import { io } from 'socket.io-client';
 import axiosInstance from './axiosInstance';
-import Header from '../components/Header/Header';
+import Header from '../components/Shared/Header/Header';
 
 const socket = io('/', {
     reconnection: true

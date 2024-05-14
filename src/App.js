@@ -2,12 +2,7 @@ import './App.css';
 import Home from './components/Home/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Contact from './components/Contact/Contact';
-import CompanyProfile from './pages/CompanyProfile/CompanyProfile';
 import NotFound from './pages/NotFound/NotFound';
-import Manufacture from './pages/Manufacture/SisterConcerns';
-import Leadership from './pages/Leadership/Leadership';
-import { QualityPolicy } from './pages/QualityPolicy/QualityPolicy';
-import Values from './pages/Values/Values';
 // import ScrollButton from "./components/ScrollButton/ScrollButton";
 
 
@@ -36,24 +31,16 @@ import SinglePro from "./pages/SinglePro";
 import CreateProduct from "./admin/CreateProduct";
 import EditProduct from "./admin/EditProduct";
 import BuyContact from "./components/BuyContact";
-import MemberDetail from './pages/BoardMembers/MemberDetail';
 import { useEffect, useState } from 'react';
-import Members from './pages/BoardMembers/Members';
-import ItemsHome from './pages/ItemsHome';
 import CreateItem from './admin/CreateItem';
 import EditItem from './admin/EditItem';
 import Products from './pages/Products';
 import SurgicalItems from './pages/SurgicalItems';
 import SingleItem from './pages/SingleItem';
-import Partners from './components/Partners/Partners';
 import GalleryHome from './pages/GalleryHome';
 import SingleGallery from './pages/SingleGallery';
 import CreateGallery from './admin/CreateGallery';
 import EditGallery from './admin/EditGallery';
-import Mission from './pages/Mission/Mission';
-import CompanyStructure from './pages/CompanyStructure/CompanyStructure';
-import SisterConcerns from './pages/Manufacture/SisterConcerns';
-import ProductSample from './components/Products/ProductSample';
 import ProductCart from './components/Products/ProductCart';
 import { getAuth,signOut  } from "firebase/auth";
 import AdminLogin from './pages/AdminLogin';
@@ -94,24 +81,13 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/contact' element={<Contact />}></Route>
-        {/* <Route path='/companyprofile' element={<CompanyProfile/>}></Route> */}
-        {/* <Route path='/sisterconcerns' element={<SisterConcerns/>}></Route> */}
-        {/* <Route path='/leadership' element={<Leadership/>}></Route> */}
         <Route path='/seller-login' element={<LoginUser/>}></Route>
         <Route path='/seller-account' element={<SellerAc/>}></Route>
         <Route path='/bkash-payment' element={<Bkash/>}></Route>
 
-        {/* <Route path='/mission' element={<Mission/>}></Route> */}
-        {/* <Route path='/companystructure' element={<CompanyStructure/>}></Route> */}
         <Route path='/admin-login' element={<AdminLogin/>}></Route>
         <Route path='/show-users' element={<ShowUsers/>}></Route>
  
-
-        {/* blog  */}
-        <Route path="members" element={<Members />} />
-
-
-
         <Route path="/" element={<BlogHome />} />              
               <Route path="/bloghome" element={<BlogHome />} />
               <Route path="/buycontact" element={<BuyContact />} />
@@ -129,7 +105,6 @@ function App() {
 
               <Route path='/items' element={<SurgicalItems />}/>
               <Route path="/item/:id" element={<SingleItem />} />
-              <Route path="/partners" element={<Partners />} />
               <Route path="/gallery" element={<GalleryHome />} />
 
 
@@ -178,7 +153,7 @@ function App() {
 
 
 
-
+<Route path='/user-dash' element={<UserDashboard />}></Route>
               <Route
                 path="/admin/post/edit/:id"
                 element={
@@ -212,7 +187,7 @@ function App() {
                 }
               />
 
-
+                  
               <Route
                 path="/user/dashboard"
                 element={

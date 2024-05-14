@@ -6,7 +6,6 @@ import moment from "moment";
 import Loader from "../components/Loader";
 import { io } from "socket.io-client";
 import axiosInstance from "./axiosInstance";
-import HomeFooter from "../components/Footer/HomeFooter";
 import ProductCard from "../components/ProductCard";
 import ItemCard from "../components/ItemCard";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";

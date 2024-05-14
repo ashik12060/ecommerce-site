@@ -6,9 +6,7 @@ import moment from 'moment';
 import Loader from '../components/Loader';
 import { io } from 'socket.io-client';
 import axiosInstance from './axiosInstance';
-import HomeFooter from '../components/Footer/HomeFooter';
-// import Header from '../components/Header/Header';
-import Header from '../components/Shared/Header/Header';
+import Footer from '../components/Shared/Footer/Footer';
 
 // import axiosInstance from './axiosInstance';
 
@@ -85,7 +83,7 @@ const BlogHome = () => {
                     </Box>
 
                 </Container>
-                <HomeFooter />
+                <Footer />
             </Box>
         
     )

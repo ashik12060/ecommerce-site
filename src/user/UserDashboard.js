@@ -1,23 +1,35 @@
+
 import { Box } from '@mui/material';
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { userProfileAction } from '../redux/actions/userAction';
+import Header from '../components/Shared/Header/Header';
 
 const UserDashboard = () => {
+    const dispatch = useDispatch();
+    const { user, loading, error } = useSelector(state => state.userProfile);
 
-    const { user } = useSelector(state => state.userProfile);
-    console.log(user)
+    useEffect(() => {
+        dispatch(userProfileAction());
+    }, [dispatch]);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
-        <>
-            <Box sx={{ bgColor: "white", p: 3 }}>
-                <h1>Dashboard</h1>
-                
-                <p>Complete name: {user && user.name}</p>
-                <p>E-mail: {user && user.email}</p>
-                <p>Role: {user && user.role}</p>
-            </Box>
-        </>
-    )
+
+       <>
+       <Header />
+        <Box className="ms-5 mt-2" >
+           
+            <h1 className='fw-bold'>Dashboard</h1>
+            <p><span className='fw-bold'>Complete name:</span> {user && user.name}</p>
+            <p><span className='fw-bold'>E-mail:</span> {user && user.email}</p>
+            <p><span className='fw-bold'>Role:</span> {user && user.role}</p>
+            
+        </Box>
+       </>
+    );
 }
 
-export default UserDashboard
+export default UserDashboard;

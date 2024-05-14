@@ -7,7 +7,6 @@ import ProductCard from "../components/ProductCard";
 import NavbarProducts from "../components/NavbarProducts";
 import "./Pro.css";
 import axiosInstance from "./axiosInstance";
-import Header from "../components/Header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -30,9 +29,8 @@ const BlogPro = () => {
   const showProducts = async () => {
     setLoading(true);
     try {
-      
       const { data } = await axiosInstance.get(
-        `${process.env.REACT_APP_API_URL}/api/products/show`
+        `${process.env.REACT_APP_API_URL}/api/products/show` 
       );
       setProducts(data.products);
       setLoading(false);

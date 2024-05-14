@@ -1,14 +1,15 @@
 import React from 'react'
-import Header from '../components/Header/Header'
 import ItemsHome from './ItemsHome'
-import HomeFooter from '../components/Footer/HomeFooter'
+import Header from '../components/Shared/Header/Header'
+import Footer from '../components/Shared/Footer/Footer'
+
 
 const SurgicalItems = () => {
   return (
     <div>
         <Header />
         <ItemsHome />
-        <HomeFooter />
+        <Footer />
     </div>
   )
 }

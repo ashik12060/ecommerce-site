@@ -10,7 +10,6 @@ const reducer = combineReducers({
     signUp: userReducerSignUp,
     logOut: userReducerLogout,
     userProfile: userReducerProfile,
-    // user: userReducer,
 });
 
 
