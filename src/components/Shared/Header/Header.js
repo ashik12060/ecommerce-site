@@ -14,10 +14,16 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogoutAction } from "../../../redux/actions/userAction";
+import { useCart } from "../../../hooks";
+import { useAuth } from "../../../AuthContext";
 
 const Header = ({ totalServices, name }) => {
   // const { user, handleSignOut } = useAuth()
   const history = useNavigate();
+
+  const { isAuthenticated, logout } = useAuth();
+
+  const { cart } = useCart();
   const linkHandler = (link) => history(link);
 
   const [isCompanyOpen, setCompanyOpen] = useState(false);
@@ -72,12 +78,12 @@ const Header = ({ totalServices, name }) => {
   };
 
   const logOutUser = () => {
-    dispatch(userLogoutAction());
-    window.location.reload(true);
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
+    logout(() => {
+      dispatch(userLogoutAction());
+    });
   };
+
+  console.log({ isAuthenticated });
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -113,119 +119,114 @@ const Header = ({ totalServices, name }) => {
           <div className="d-flex">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex ">
               {/* Become a Seller */}
-             
-                <li className="nav-item">
-                  <Link className="text-decoration-none" to="/seller-login">
-                    <p className=" fw-bold text-black" aria-current="page">
-                      Become a Seller
-                    </p>
-                  </Link>
-                </li>
-              
 
-              
-                {/* login */}
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
-                    <Box sx={{ flexGrow: 0 }}>
-                      <Tooltip title="Open settings">
-                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                          {/* <Avatar alt="Remy Sharp" src="" /> */}
-                          <FontAwesomeIcon
-                            className="fs-5 font-color"
-                            icon={faUser}
-                          />
-                        </IconButton>
-                      </Tooltip>
-                      <Menu
-                        PaperProps={{
-                          sx: {
-                            "& 	.MuiMenu-list": {
-                              bgColor: "primary.white",
-                              color: "white",
-                            },
+              <li className="nav-item">
+                <Link className="text-decoration-none" to="/seller-login">
+                  <p className=" fw-bold text-black" aria-current="page">
+                    Become a Seller
+                  </p>
+                </Link>
+              </li>
+
+              {/* login */}
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">
+                  <Box sx={{ flexGrow: 0 }}>
+                    <Tooltip title="Open settings">
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        {/* <Avatar alt="Remy Sharp" src="" /> */}
+                        <FontAwesomeIcon
+                          className="fs-5 font-color"
+                          icon={faUser}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                    <Menu
+                      PaperProps={{
+                        sx: {
+                          "& 	.MuiMenu-list": {
+                            bgColor: "primary.white",
+                            color: "white",
                           },
-                        }}
-                        sx={{ mt: "45px" }}
-                        id="menu-appbar"
-                        anchorEl={anchorElUser}
-                        anchorOrigin={{
-                          vertical: "top",
-                          horizontal: "right",
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                          vertical: "top",
-                          horizontal: "right",
-                        }}
-                        open={Boolean(anchorElUser)}
-                        onClose={handleCloseUserMenu}
-                      >
+                        },
+                      }}
+                      sx={{ mt: "45px" }}
+                      id="menu-appbar"
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">
+                          <Link
+                            className="text-black"
+                            style={{ textDecoration: "none" }}
+                            to="/admin/dashboard"
+                          >
+                            Admin{" "}
+                          </Link>
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">
+                          <Link
+                            className="text-black"
+                            style={{ textDecoration: "none" }}
+                            to="/register"
+                          >
+                            Register{" "}
+                          </Link>
+                        </Typography>
+                      </MenuItem>
+                      {isAuthenticated ? (
+                        <MenuItem onClick={logOutUser}>
+                          <Typography textAlign="center" color="#8e67b2">
+                            Log Out{" "}
+                          </Typography>
+                        </MenuItem>
+                      ) : (
                         <MenuItem onClick={handleCloseUserMenu}>
                           <Typography textAlign="center">
                             <Link
                               className="text-black"
                               style={{ textDecoration: "none" }}
-                              to="/admin/dashboard"
+                              to="/login"
                             >
-                              Admin{" "}
+                              User Login{" "}
                             </Link>
                           </Typography>
                         </MenuItem>
-                        <MenuItem onClick={handleCloseUserMenu}>
-                          <Typography textAlign="center">
-                            <Link
-                              className="text-black"
-                              style={{ textDecoration: "none" }}
-                              to="/register"
-                            >
-                              Register{" "}
-                            </Link>
-                          </Typography>
-                        </MenuItem>
-                        {userInfo ? (
-                          <MenuItem   onClick={logOutUser}>
-                            <Typography textAlign="center" color="#8e67b2" >
-                              Log Out{" "}
-                            </Typography>
-                          </MenuItem>
-                        ) : (
-                          <MenuItem onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center">
-                              <Link
-                                className="text-black"
-                                style={{ textDecoration: "none" }}
-                                to="/login"
-                              >
-                                User Login{" "}
-                              </Link>
-                            </Typography>
-                          </MenuItem>
-                        )}
-                      </Menu>
-                    </Box>
-                  </a>
-                </li>
+                      )}
+                    </Menu>
+                  </Box>
+                </a>
+              </li>
 
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    <FontAwesomeIcon
-                      className="fs-5 font-color"
-                      icon={faHeart}
-                    />
-                  </a>
-                </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <FontAwesomeIcon className="fs-5 font-color" icon={faHeart} />
+                </a>
+              </li>
 
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    <FontAwesomeIcon
-                      className="fs-5 font-color"
-                      icon={faCartShopping}
-                    />
-                    <span className="ps-1 fw-bold ">0</span>
-                  </a>
-                </li>
-             
+              <li className="nav-item">
+                <Link className="nav-link" to="/cart">
+                  <FontAwesomeIcon
+                    className="fs-5 font-color"
+                    icon={faCartShopping}
+                  />
+                  <span className="ps-1 fw-bold ">{cart?.length}</span>
+                </Link>
+              </li>
+
               <li className="nav-item">
                 <div className="nav-link" href="#">
                   {name && (
@@ -239,31 +240,28 @@ const Header = ({ totalServices, name }) => {
                   )}
                 </div>
               </li>
-
-              
-
             </ul>
             <div>
-                {userInfo ? (
-                  <MenuItem onClick={logOutUser}>
-                    <Typography textAlign="center" color="#8e67b2">
-                      Log Out{" "}
-                    </Typography>
-                  </MenuItem>
-                ) : (
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">
-                      <Link
-                        className="text-black bg-danger text-white p-2"
-                        style={{ textDecoration: "none" }}
-                        to="/admin-login"
-                      >
-                        Admin Login
-                      </Link>
-                    </Typography>
-                  </MenuItem>
-                )}
-              </div>
+              {isAuthenticated ? (
+                <MenuItem onClick={logOutUser}>
+                  <Typography textAlign="center" color="#8e67b2">
+                    Log Out{" "}
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      className="text-black bg-danger text-white p-2"
+                      style={{ textDecoration: "none" }}
+                      to="/admin-login"
+                    >
+                      Admin Login
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              )}
+            </div>
           </div>
         </div>
       </nav>

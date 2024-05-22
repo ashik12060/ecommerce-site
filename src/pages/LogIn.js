@@ -1,4 +1,3 @@
-
 import { Avatar, Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import LockClockOutlined from "@mui/icons-material/LockClockOutlined";
@@ -10,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userSignInAction } from "../redux/actions/userAction";
 import Header from "../components/Shared/Header/Header";
-import google from '../assets/google-photo.png'
+import google from "../assets/google-photo.png";
 
 import {
   getAuth,
@@ -21,6 +20,7 @@ import {
   browserLocalPersistence,
 } from "firebase/auth";
 import initializeAuthentication from "../Firebase/firebase.init";
+import { useAuth } from "../AuthContext";
 
 // google sign in
 initializeAuthentication();
@@ -37,64 +37,48 @@ const validationSchema = yup.object({
     .required("Password is required"),
 });
 
-const LogIn = () => {
-  const [user, setUser] = useState({});
-  const [logout, setLogout] = useState({});
-  const [loginFlow,setLoginFlow] = ('checkout')
-  const navigate = useNavigate();
-
+const LogIn = (props) => {
+  const { isAuthenticated, login } = useAuth();
   const dispatch = useDispatch();
-  const { isAuthenticated, userInfo } = useSelector((state) => state.signIn);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      if (loginFlow === "checkout") {
-        navigate("/checkout/:id/:totalPrice");
-      } else {
-        navigate("/user/dashboard");
-      }
-    }
-  }, [isAuthenticated, loginFlow, navigate]);
 
   const handleGoogleSignIn = () => {
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const { displayName, email, photoURL } = result.user;
-        const loggedInUser = {
-          name: displayName,
-          email: email,
-          photo: photoURL,
-        };
-        setUser(loggedInUser);
-  
-        setPersistence(auth, browserLocalPersistence)
-          .then(() => {
-            console.log("Google authentication session persisted");
-          })
-          .catch((error) => {
-            console.error("Error setting persistence:", error.message);
-          });
-
-        if (loginFlow === "checkout") {
-          dispatch({ type: "SET_LOGIN_FLOW", payload: "checkout" });
-        }
-      })
-      .catch((error) => {
-        console.error("Google sign-in error:", error.message);
-      });
+    // const auth = getAuth();
+    // signInWithPopup(auth, provider)
+    //   .then((result) => {
+    //     const { displayName, email, photoURL } = result.user;
+    //     const loggedInUser = {
+    //       name: displayName,
+    //       email: email,
+    //       photo: photoURL,
+    //     };
+    //     setUser(loggedInUser);
+    //     setPersistence(auth, browserLocalPersistence)
+    //       .then(() => {
+    //         console.log("Google authentication session persisted");
+    //       })
+    //       .catch((error) => {
+    //         console.error("Error setting persistence:", error.message);
+    //       });
+    //     if (loginFlow === "checkout") {
+    //       dispatch({ type: "SET_LOGIN_FLOW", payload: "checkout" });
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Google sign-in error:", error.message);
+    //   });
   };
 
   const handleSignOut = () => {
-    console.log("Attempting sign out...");
-
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      console.log("Sign out successful.");
-      setLogout({});
-    }).catch(error => {
-      console.error("Sign out error:", error);
-    });
+    // console.log("Attempting sign out...");
+    // const auth = getAuth();
+    // signOut(auth)
+    //   .then(() => {
+    //     console.log("Sign out successful.");
+    //     setLogout({});
+    //   })
+    //   .catch((error) => {
+    //     console.error("Sign out error:", error);
+    //   });
   };
 
   const formik = useFormik({
@@ -104,15 +88,15 @@ const LogIn = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, actions) => {
-      dispatch(userSignInAction(values));
+      login(() => {
+        dispatch(userSignInAction(values));
+      });
       actions.resetForm();
     },
   });
 
   return (
     <>
-      <Header name={user.name} />
-
       <Box
         sx={{
           height: "81vh",
@@ -191,15 +175,20 @@ const LogIn = () => {
               Log In
             </Button>
 
-           <div className="my-2">
-           {!user.name ? (
-              <button className="border-0 rounded bg-white" onClick={handleGoogleSignIn}>
-                <img className="google-img" src={google} alt="google" />
-              </button>
-            ) : (
-              <button type="button" onClick={handleSignOut}>Sign out</button>
-            )}
-           </div>
+            <div className="my-2">
+              {!isAuthenticated ? (
+                <button
+                  className="border-0 rounded bg-white"
+                  onClick={handleGoogleSignIn}
+                >
+                  <img className="google-img" src={google} alt="google" />
+                </button>
+              ) : (
+                <button type="button" onClick={handleSignOut}>
+                  Sign out
+                </button>
+              )}
+            </div>
             <Link to="/register" className="font-color mt-2 fs-6">
               <u>Register Now</u>
             </Link>

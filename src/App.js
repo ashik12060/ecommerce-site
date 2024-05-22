@@ -1,10 +1,9 @@
-import './App.css';
-import Home from './components/Home/Home';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Contact from './components/Contact/Contact';
-import NotFound from './pages/NotFound/NotFound';
+import "./App.css";
+import Home from "./components/Home/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Contact from "./components/Contact/Contact";
+import NotFound from "./pages/NotFound/NotFound";
 // import ScrollButton from "./components/ScrollButton/ScrollButton";
-
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,24 +30,29 @@ import SinglePro from "./pages/SinglePro";
 import CreateProduct from "./admin/CreateProduct";
 import EditProduct from "./admin/EditProduct";
 import BuyContact from "./components/BuyContact";
-import { useEffect, useState } from 'react';
-import CreateItem from './admin/CreateItem';
-import EditItem from './admin/EditItem';
-import Products from './pages/Products';
-import SurgicalItems from './pages/SurgicalItems';
-import SingleItem from './pages/SingleItem';
-import GalleryHome from './pages/GalleryHome';
-import SingleGallery from './pages/SingleGallery';
-import CreateGallery from './admin/CreateGallery';
-import EditGallery from './admin/EditGallery';
-import ProductCart from './components/Products/ProductCart';
-import { getAuth,signOut  } from "firebase/auth";
-import AdminLogin from './pages/AdminLogin';
-import LoginUser from './pages/LoginSeller';
-import CheckOut from './pages/CheckOut';
-import Bkash from './pages/Bkash';
-import ShowUsers from './pages/ShowUsers';
-import SellerAc from './pages/SellerAc';
+import { useEffect, useState } from "react";
+import CreateItem from "./admin/CreateItem";
+import EditItem from "./admin/EditItem";
+import Products from "./pages/Products";
+import SurgicalItems from "./pages/SurgicalItems";
+import SingleItem from "./pages/SingleItem";
+import GalleryHome from "./pages/GalleryHome";
+import SingleGallery from "./pages/SingleGallery";
+import CreateGallery from "./admin/CreateGallery";
+import EditGallery from "./admin/EditGallery";
+import ProductCart from "./components/Products/ProductCart";
+import { getAuth, signOut } from "firebase/auth";
+import AdminLogin from "./pages/AdminLogin";
+import LoginUser from "./pages/LoginSeller";
+import CheckOut from "./pages/CheckOut";
+import Bkash from "./pages/Bkash";
+import ShowUsers from "./pages/ShowUsers";
+import SellerAc from "./pages/SellerAc";
+import { CartProvider } from "./hooks";
+import Header from "./components/Shared/Header/Header";
+import CartComponent from "./components/CartComponent";
+import PrivateRoute from "./PrivateRoute";
+import { AuthProvider } from "./AuthContext";
 //HOC
 const AdminDashboardHOC = Layout(AdminDashboard);
 
@@ -59,149 +63,196 @@ const CreateGalleryHOC = Layout(CreateGallery);
 const EditPostHOC = Layout(EditPost);
 const EditItemHOC = Layout(EditItem);
 const EditProductHOC = Layout(EditProduct);
-const EditGalleryHOC = Layout(EditGallery)
+const EditGalleryHOC = Layout(EditGallery);
 const UserDashboardHOC = Layout(UserDashboard);
 
-
-
 function App() {
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
 
   return (
     <>
-    <ToastContainer />
-    <Provider store={store}>
-    <ProSidebarProvider>
-      <BrowserRouter>
-     
-      {/* <ScrollButton /> */}
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/home' element={<Home />}></Route>
-        <Route path='/contact' element={<Contact />}></Route>
-        <Route path='/seller-login' element={<LoginUser/>}></Route>
-        <Route path='/seller-account' element={<SellerAc/>}></Route>
-        <Route path='/bkash-payment' element={<Bkash/>}></Route>
+      <ToastContainer />
+      <Provider store={store}>
+        <BrowserRouter>
+          <AuthProvider>
+            <ProSidebarProvider>
+              {/* <ScrollButton /> */}
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <>
+                      <CartProvider>
+                        <Header />
+                      </CartProvider>
+                      <Home />
+                    </>
+                  }
+                ></Route>
+                <Route
+                  path="/home"
+                  element={
+                    <>
+                      <CartProvider>
+                        <Header />
+                      </CartProvider>
+                      <Home />
+                    </>
+                  }
+                ></Route>
+                <Route path="/contact" element={<Contact />}></Route>
+                <Route path="/seller-login" element={<LoginUser />}></Route>
+                <Route path="/seller-account" element={<SellerAc />}></Route>
+                <Route path="/bkash-payment" element={<Bkash />}></Route>
 
-        <Route path='/admin-login' element={<AdminLogin/>}></Route>
-        <Route path='/show-users' element={<ShowUsers/>}></Route>
- 
-        <Route path="/" element={<BlogHome />} />              
-              <Route path="/bloghome" element={<BlogHome />} />
-              <Route path="/buycontact" element={<BuyContact />} />
-              <Route path="/product-sample" element={<ProductCart />} />
-              <Route path="/checkout/:id/:totalPrice" element={<CheckOut  />} />
-              
-              
-              <Route path="/login" element={<LogIn  element={<LogIn setIsAuthenticated={setIsAuthenticated} />} />} />
-              <Route path="/register" element={<Register />} />
-              
-              <Route path="/post/:id" element={<SinglePost />} />
+                <Route path="/admin-login" element={<AdminLogin />}></Route>
+                <Route path="/show-users" element={<ShowUsers />}></Route>
 
-               <Route path="/medicine" element = {<Products />} />
-              <Route path="/product/:id" element={<SinglePro />} />
+                <Route path="/" element={<BlogHome />} />
+                <Route path="/bloghome" element={<BlogHome />} />
+                <Route path="/buycontact" element={<BuyContact />} />
+                <Route path="/product-sample" element={<ProductCart />} />
+                <Route
+                  path="/checkout"
+                  element={
+                    <PrivateRoute>
+                      <CartProvider>
+                        <CheckOut />
+                      </CartProvider>
+                    </PrivateRoute>
+                  }
+                />
 
-              <Route path='/items' element={<SurgicalItems />}/>
-              <Route path="/item/:id" element={<SingleItem />} />
-              <Route path="/gallery" element={<GalleryHome />} />
+                <Route
+                  path="/login"
+                  element={
+                    <LogIn
+                      element={
+                        <LogIn setIsAuthenticated={setIsAuthenticated} />
+                      }
+                    />
+                  }
+                />
+                <Route path="/register" element={<Register />} />
 
+                <Route path="/post/:id" element={<SinglePost />} />
 
-              <Route
-                path="/admin/dashboard"
-                element={
-                  <AdminRoute>
-                    <AdminDashboardHOC />
-                  </AdminRoute>
-                }
-              />
-              
-              <Route
-                path="/admin/post/create"
-                element={
-                  <AdminRoute>
-                    <CreatePostHOC />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/item/create"
-                element={
-                  <AdminRoute>
-                    <CreateItemHOC />
-                  </AdminRoute>
-                }
-              />
+                <Route path="/medicine" element={<Products />} />
+                <Route
+                  path="/product/:id"
+                  element={
+                    <CartProvider>
+                      <Header />
+                      <SinglePro />
+                    </CartProvider>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <PrivateRoute>
+                      <CartProvider>
+                        <Header />
+                        <CartComponent />
+                      </CartProvider>
+                    </PrivateRoute>
+                  }
+                />
 
-              <Route
-                path="/admin/product/create"
-                element={
-                  <AdminRoute>
-                    <CreateProductHOC />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/gallery/create"
-                element={
-                  <AdminRoute>
-                    <CreateGalleryHOC />
-                  </AdminRoute>
-                }
-              />
+                <Route path="/items" element={<SurgicalItems />} />
+                <Route path="/item/:id" element={<SingleItem />} />
+                <Route path="/gallery" element={<GalleryHome />} />
 
+                <Route
+                  path="/admin/dashboard"
+                  element={
+                    <AdminRoute>
+                      <AdminDashboardHOC />
+                    </AdminRoute>
+                  }
+                />
 
+                <Route
+                  path="/admin/post/create"
+                  element={
+                    <AdminRoute>
+                      <CreatePostHOC />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/item/create"
+                  element={
+                    <AdminRoute>
+                      <CreateItemHOC />
+                    </AdminRoute>
+                  }
+                />
 
+                <Route
+                  path="/admin/product/create"
+                  element={
+                    <AdminRoute>
+                      <CreateProductHOC />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/gallery/create"
+                  element={
+                    <AdminRoute>
+                      <CreateGalleryHOC />
+                    </AdminRoute>
+                  }
+                />
 
-              <Route
-                path="/admin/post/edit/:id"
-                element={
-                  <AdminRoute>
-                    <EditPostHOC />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/item/edit/:id"
-                element={
-                  <AdminRoute>
-                    <EditItemHOC />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/product/edit/:id"
-                element={
-                  <AdminRoute>
-                    <EditProductHOC />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/gallery/edit/:id"
-                element={
-                  <AdminRoute>
-                    <EditGalleryHOC />
-                  </AdminRoute>
-                }
-              />
-{/* <Route path='/user-dash' element={<UserDashboard />}></Route> */}
-                  
-              <Route
-                path="/user/dashboard"
-                element={
-                  <UserRoute>
-                    <UserDashboardHOC />
-                  </UserRoute>
-                }
-              />
-              <Route path='*' element={<NotFound />}></Route>
+                <Route
+                  path="/admin/post/edit/:id"
+                  element={
+                    <AdminRoute>
+                      <EditPostHOC />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/item/edit/:id"
+                  element={
+                    <AdminRoute>
+                      <EditItemHOC />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/product/edit/:id"
+                  element={
+                    <AdminRoute>
+                      <EditProductHOC />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/gallery/edit/:id"
+                  element={
+                    <AdminRoute>
+                      <EditGalleryHOC />
+                    </AdminRoute>
+                  }
+                />
+                {/* <Route path='/user-dash' element={<UserDashboard />}></Route> */}
 
-      </Routes>
-
-      </BrowserRouter>
-      </ProSidebarProvider>
+                <Route
+                  path="/user/dashboard"
+                  element={
+                    <UserRoute>
+                      <UserDashboardHOC />
+                    </UserRoute>
+                  }
+                />
+                <Route path="*" element={<NotFound />}></Route>
+              </Routes>
+            </ProSidebarProvider>
+          </AuthProvider>
+        </BrowserRouter>
       </Provider>
     </>
   );

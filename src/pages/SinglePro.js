@@ -29,20 +29,24 @@ import CommentList from "../components/CommentList";
 import { toast } from "react-toastify";
 import { Button } from "bootstrap";
 import Header from "../components/Shared/Header/Header";
+import { addCartItemToStorage } from "../helpers/helpers";
+import { CartProvider, useCart } from "../hooks";
 const socket = io("/", {
   reconnection: true,
 });
 
 const SinglePro = () => {
   const { userInfo } = useSelector((state) => state.signIn);
+  const {
+    cart,
+    addCartItem,
+    incrementItem,
+    decrementItem,
+    removeItemFromCart,
+  } = useCart();
 
-  const [product,setProduct] = useState(null);
-  // const [title, setTitle] = useState("");
-  // const [content, setContent] = useState("");
-  // const [feature1, setFeature1] = useState("");
-  // const [feature2, setFeature2] = useState("");
-  // const [image, setImage] = useState("");
-  const [createdAt, setCreatedAt] = useState("");
+  const [product, setProduct] = useState(null);
+
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -50,11 +54,9 @@ const SinglePro = () => {
   // const [comments, setComments] = useState([]);
   const [commentsRealTime, setCommentsRealTime] = useState([]);
 
-  const history = useNavigate();
+  const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.signIn.isAuthenticated);
   const { id } = useParams();
-
-  
 
   // Fetch single product
   const displaySingleProduct = async () => {
@@ -63,14 +65,8 @@ const SinglePro = () => {
       const { data } = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/api/product/${id}`
       );
-      setProduct(data.product)
-      // setTitle(data.product.title);
-      // setContent(data.product.content);
-      // setFeature1(data.product.feature1);
-      // setFeature2(data.product.feature2);
-      // setImage(data.product.image.url);
-      // setCreatedAt(data.product.createdAt);
-      // setComments(data.product.comments);
+      setProduct(data.product);
+
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -87,8 +83,6 @@ const SinglePro = () => {
     });
   }, []);
 
-  
-
   // add comment
   const addComment = async (e) => {
     e.preventDefault();
@@ -103,7 +97,6 @@ const SinglePro = () => {
 
         socket.emit("comment", data.product?.comments);
       }
-      console.log("comment post", data.product)
     } catch (error) {
       console.log(error);
       toast.error(error);
@@ -113,46 +106,45 @@ const SinglePro = () => {
   let uiCommentUpdate =
     commentsRealTime.length > 0 ? commentsRealTime : product?.comments;
 
+  // Calculate total price
+  useEffect(() => {
+    if (product) {
+      const totalPrices = Number(product.feature1) * quantity;
+      setTotalPrice(totalPrices);
+    }
+  }, [product, quantity]);
 
-// Calculate total price
-useEffect(() => {
-  const totalPrices = Number(product.feature1) * quantity;
-  setTotalPrice(totalPrices);
-}, [product?.feature1, quantity]);
+  const incrementQuantity = () => {
+    // setQuantity(quantity + 1);
+    console.log(product);
+  };
 
-const incrementQuantity = () => {
-  setQuantity(quantity + 1);
-};
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
 
-const decrementQuantity = () => {
-  if (quantity > 1) {
-    setQuantity(quantity - 1);
-  }
-};
-
-
-// const addToCart = () => {
-//   // if (isAuthenticated) {
-//     const checkoutUrl = `/checkout/${id}/${totalPrice}`;
-//     history(checkoutUrl);
-//   // } else {
-//   //   history("/login");
-//   // }
-// };
-const addToCart = () => {
-  if (userInfo?.token) {
-    console.log({ totalPrice });
+  // const addToCart = () => {
+  //   // if (isAuthenticated) {
+  //     const checkoutUrl = `/checkout/${id}/${totalPrice}`;
+  //     history(checkoutUrl);
+  //   // } else {
+  //   //   history("/login");
+  //   // }
+  // };
+  const addToCart = () => {
+    addCartItem(product);
     // const checkoutUrl = `/checkout/${id}/${totalPrice}`;
     // history(checkoutUrl);
-  } else {
-    history("/login");
-  }
-};
+  };
 
+  const handleBuyNow = () => {
+    navigate("/checkout");
+  };
 
   return (
     <>
-      <Header />
       <div
         className="bg-white"
         sx={{
@@ -163,7 +155,7 @@ const addToCart = () => {
           minHeight: "100vh",
         }}
       >
-        {loading  ? (
+        {loading || !product ? (
           <Loader />
         ) : (
           <>
@@ -172,7 +164,7 @@ const addToCart = () => {
                 <div className="row d-flex ">
                   <div className="col-lg-3 col-md-3 col-sm-12 pt-4">
                     <img
-                      src={product.image}
+                      src={product.image?.url}
                       className="img-fluid pt-2 border"
                       alt="name"
                     />
@@ -208,10 +200,13 @@ const addToCart = () => {
                       <span className="font-color">{product.feature2}</span>
                     </p>
                     <p className="pb-5">
-                      <span className="fw-bold ">Origin:</span> {product.content}
+                      <span className="fw-bold ">Origin:</span>{" "}
+                      {product.content}
                       <p>
                         <hr />
-                        <p className="fw-bold font-color fs-2">${product.feature1}</p>
+                        <p className="fw-bold font-color fs-2">
+                          ${product.feature1}
+                        </p>
                       </p>
                       <span>
                         <del className="text-secondary">$30</del> -30%
@@ -221,28 +216,50 @@ const addToCart = () => {
                         <span className="fw-bold"> Color Family:</span> Black
                       </p>
                       <br />
-                      <p className="pb-4">
-                        Quantity:{" "}
-                        <button
-                          className="border-0 fs-4 ms-2 bg-secondary px-3 text-white"
-                          onClick={decrementQuantity}
-                        >
-                          -
-                        </button>{" "}
-                        <span className="fs-4 mx-3">{product.quantity}</span>{" "}
-                        <button
-                          className="border-0 fs-4 bg-secondary px-3 text-white"
-                          onClick={incrementQuantity}
-                        >
-                          +
-                        </button>
-                      </p>
+                      {cart?.find((itm) => itm._id === product._id) && (
+                        <p className="pb-4">
+                          Quantity:{" "}
+                          <button
+                            className="border-0 fs-4 ms-2 bg-secondary px-3 text-white"
+                            onClick={() => {
+                              if (
+                                cart.find((itm) => itm._id === product._id)
+                                  ?.quantity === 1
+                              ) {
+                                removeItemFromCart(product._id);
+                              } else {
+                                decrementItem(product._id);
+                              }
+                            }}
+                          >
+                            -
+                          </button>{" "}
+                          <span className="fs-4 mx-3">
+                            {cart?.find((itm) => itm._id === product._id)
+                              ?.quantity || 1}
+                          </span>{" "}
+                          <button
+                            className="border-0 fs-4 bg-secondary px-3 text-white"
+                            onClick={() => incrementItem(product._id)}
+                          >
+                            +
+                          </button>
+                        </p>
+                      )}
                       <div className="pb-4">
-                        Total Price: ${totalPrice.toFixed(2)}
+                        Total Price: $
+                        {totalPrice.toFixed(2) *
+                          (cart.find((itm) => itm._id === product._id)
+                            ?.quantity || 1)}
                       </div>
-                      <button onClick={() => addToCart()} className="bg-warning border-0 text-white fw-bold py-2 px-5">
-                        Buy Now
-                      </button>
+                      {cart?.find((itm) => itm._id === product._id) && (
+                        <button
+                          onClick={() => handleBuyNow()}
+                          className="bg-warning border-0 text-white fw-bold py-2 px-5"
+                        >
+                          Buy Now
+                        </button>
+                      )}
                       <button
                         className="mx-3 bg-color border-0 text-white fw-bold py-2 px-5"
                         onClick={() => addToCart()}
@@ -250,8 +267,6 @@ const addToCart = () => {
                         Add To Cart
                       </button>
                     </p>
-                    
-          
                   </div>
                 </div>
               </div>
@@ -288,64 +303,60 @@ const addToCart = () => {
                   </p>
                 </div>
               </div>
-              
             </div>
             <CardContent>
-          
-
-          {userInfo ? (
-            <>
-              <Box sx={{ pt: 1, pl: 3, pb: 3, bgColor: "#fafafa" }}>
-                <h2>Add your comment here!</h2>
-                <form onSubmit={addComment}>
-                  <TextareaAutosize
-                    onChange={(e) => setComment(e.target.value)}
-                    value={product.comment}
-                    aria-label="minimum height"
-                    minRows={3}
-                    placeholder="Add a comment..."
-                    style={{ width: "80%", padding: "5px" }}
-                  />
-                  <Box sx={{ pt: 1 }}>
-                    <button type="submit" variant="contained" className="mx-3 bg-color border-0 text-white fw-bold py-2 px-5" >
-                      Comment
-                    </button>
+              {userInfo ? (
+                <>
+                  <Box sx={{ pt: 1, pl: 3, pb: 3, bgColor: "#fafafa" }}>
+                    <h2>Add your comment here!</h2>
+                    <form onSubmit={addComment}>
+                      <TextareaAutosize
+                        onChange={(e) => setComment(e.target.value)}
+                        value={product.comment}
+                        aria-label="minimum height"
+                        minRows={3}
+                        placeholder="Add a comment..."
+                        style={{ width: "80%", padding: "5px" }}
+                      />
+                      <Box sx={{ pt: 1 }}>
+                        <button
+                          type="submit"
+                          variant="contained"
+                          className="mx-3 bg-color border-0 text-white fw-bold py-2 px-5"
+                        >
+                          Comment
+                        </button>
+                      </Box>
+                    </form>
                   </Box>
-                </form>
-              </Box>
-            </>
-            
-          ) : (
-            <>
-              <Link to="/login"> Log In to add a comment</Link>
-            </>
-          )}
+                </>
+              ) : (
+                <>
+                  <Link to="/login"> Log In to add a comment</Link>
+                </>
+              )}
 
+              <Typography variant="body2" color="text.secondary"></Typography>
+              <Divider variant="inset" />
+              {/* add comment list */}
+              {product?.comments.length === 0 ? (
+                ""
+              ) : (
+                <Typography variant="h5" sx={{ pt: 3, mb: 2 }}>
+                  Comments:
+                </Typography>
+              )}
 
-<Typography variant="body2" color="text.secondary">
-            
-          </Typography>
-          <Divider variant="inset" />
-          {/* add comment list */}
-          {product?.comments.length === 0 ? (
-            ""
-          ) : (
-            <Typography variant="h5" sx={{ pt: 3, mb: 2 }}>
-              Comments:
-            </Typography>
-          )}
-
-          {uiCommentUpdate.map((comment) => (
-            <CommentList
-              key={comment._id}
-              name={comment.postedBy.name}
-              text={comment.text}
-            />
-          ))}
-        </CardContent>
+              {uiCommentUpdate.map((comment) => (
+                <CommentList
+                  key={comment._id}
+                  name={comment.postedBy.name}
+                  text={comment.text}
+                />
+              ))}
+            </CardContent>
           </>
         )}
-        
       </div>
       <Footer />
     </>

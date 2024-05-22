@@ -25,7 +25,7 @@ const validationSchema = yup.object({
 });
 
 const SellerAc = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const {
     values,
     errors,
@@ -51,12 +51,14 @@ const SellerAc = () => {
 
   const createNewItem = async (values) => {
     try {
-
-      const result = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/item/create`, values);
+      const result = await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/api/item/create`,
+        values
+      );
       if (result?.data?.success === true) {
         toast.success("Item created");
         // navigate("/admin/dashboard");
-        navigate('/seller-account')
+        navigate("/seller-account");
       }
     } catch (error) {
       console.log(error);
@@ -73,13 +75,16 @@ const SellerAc = () => {
 
   return (
     <>
-    <Header />
-    <h3>Welcome to seller account. </h3>
-      <Box sx={{ bgColor: "white",
-      padding: "20px",
-      width: "100%",
-      maxWidth: "1200px",
-      margin: "0 auto",}}>
+      <h3>Welcome to seller account. </h3>
+      <Box
+        sx={{
+          bgColor: "white",
+          padding: "20px",
+          width: "100%",
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
         <Typography variant="h5" sx={{ pb: 4 }}>
           {" "}
           Add Product{" "}
