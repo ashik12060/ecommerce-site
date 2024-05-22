@@ -89,7 +89,7 @@ const Header = ({ totalServices, name }) => {
             <div>
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link to="/">
+                  <Link className="text-decoration-none" to="/">
                     <h2 className="fs-1 fw-bold text-black" aria-current="page">
                       Helper<span className="font-color">Hub</span>
                     </h2>
@@ -115,7 +115,7 @@ const Header = ({ totalServices, name }) => {
               {/* Become a Seller */}
              
                 <li className="nav-item">
-                  <Link to="/seller-login">
+                  <Link className="text-decoration-none" to="/seller-login">
                     <p className=" fw-bold text-black" aria-current="page">
                       Become a Seller
                     </p>
@@ -184,8 +184,8 @@ const Header = ({ totalServices, name }) => {
                           </Typography>
                         </MenuItem>
                         {userInfo ? (
-                          <MenuItem onClick={logOutUser}>
-                            <Typography textAlign="center" color="#8e67b2">
+                          <MenuItem   onClick={logOutUser}>
+                            <Typography textAlign="center" color="#8e67b2" >
                               Log Out{" "}
                             </Typography>
                           </MenuItem>

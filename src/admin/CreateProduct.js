@@ -115,7 +115,7 @@ const CreateProduct = () => {
           {" "}
           Create Product{" "}
         </Typography>
-        {/* onSubmit={handleSubmit} */}
+        
         
         {/* noValidate */}
         <Box component="form"  onSubmit={handleSubmit}  sx={{ mt: 1 }}>
@@ -142,11 +142,11 @@ const CreateProduct = () => {
               sx={{ mb: 3 }}
               fullWidth
               id="content"
-              label="Content"
+              label="Country Origin"
               name="content"
               multiline
               rows={4}
-              placeholder="Write the post content..."
+              placeholder="Write the country from..."
               value={values.content}
               onChange={handleChange}
               onBlur={handleBlur}

@@ -238,7 +238,7 @@ const addToCart = () => {
                       <div className="pb-4">
                         Total Price: ${totalPrice.toFixed(2)}
                       </div>
-                      <button className="bg-warning border-0 text-white fw-bold py-2 px-5">
+                      <button onClick={() => addToCart()} className="bg-warning border-0 text-white fw-bold py-2 px-5">
                         Buy Now
                       </button>
                       <button

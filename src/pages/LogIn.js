@@ -51,7 +51,7 @@ const LogIn = () => {
       if (loginFlow === "checkout") {
         navigate("/checkout/:id/:totalPrice");
       } else {
-        navigate("/");
+        navigate("/user/dashboard");
       }
     }
   }, [isAuthenticated, loginFlow, navigate]);

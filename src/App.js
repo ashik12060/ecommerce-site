@@ -153,7 +153,7 @@ function App() {
 
 
 
-<Route path='/user-dash' element={<UserDashboard />}></Route>
+
               <Route
                 path="/admin/post/edit/:id"
                 element={
@@ -186,7 +186,7 @@ function App() {
                   </AdminRoute>
                 }
               />
-
+{/* <Route path='/user-dash' element={<UserDashboard />}></Route> */}
                   
               <Route
                 path="/user/dashboard"

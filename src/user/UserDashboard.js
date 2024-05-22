@@ -19,7 +19,6 @@ const UserDashboard = () => {
     return (
 
        <>
-       <Header />
         <Box className="ms-5 mt-2" >
            
             <h1 className='fw-bold'>Dashboard</h1>
