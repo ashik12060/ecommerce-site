@@ -36,17 +36,18 @@ const socket = io("/", {
 const SinglePro = () => {
   const { userInfo } = useSelector((state) => state.signIn);
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [feature1, setFeature1] = useState("");
-  const [feature2, setFeature2] = useState("");
-  const [image, setImage] = useState("");
+  const [product,setProduct] = useState(null);
+  // const [title, setTitle] = useState("");
+  // const [content, setContent] = useState("");
+  // const [feature1, setFeature1] = useState("");
+  // const [feature2, setFeature2] = useState("");
+  // const [image, setImage] = useState("");
   const [createdAt, setCreatedAt] = useState("");
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
   const [commentsRealTime, setCommentsRealTime] = useState([]);
 
   const history = useNavigate();
@@ -62,13 +63,14 @@ const SinglePro = () => {
       const { data } = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/api/product/${id}`
       );
-      setTitle(data.product.title);
-      setContent(data.product.content);
-      setFeature1(data.product.feature1);
-      setFeature2(data.product.feature2);
-      setImage(data.product.image.url);
-      setCreatedAt(data.product.createdAt);
-      setComments(data.product.comments);
+      setProduct(data.product)
+      // setTitle(data.product.title);
+      // setContent(data.product.content);
+      // setFeature1(data.product.feature1);
+      // setFeature2(data.product.feature2);
+      // setImage(data.product.image.url);
+      // setCreatedAt(data.product.createdAt);
+      // setComments(data.product.comments);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -99,7 +101,7 @@ const SinglePro = () => {
         setComment("");
         toast.success("comment added");
 
-        socket.emit("comment", data.product.comments);
+        socket.emit("comment", data.product?.comments);
       }
       console.log("comment post", data.product)
     } catch (error) {
@@ -109,14 +111,14 @@ const SinglePro = () => {
   };
 
   let uiCommentUpdate =
-    commentsRealTime.length > 0 ? commentsRealTime : comments;
+    commentsRealTime.length > 0 ? commentsRealTime : product?.comments;
 
 
 // Calculate total price
 useEffect(() => {
-  const totalPrices = Number(feature1) * quantity;
+  const totalPrices = Number(product.feature1) * quantity;
   setTotalPrice(totalPrices);
-}, [feature1, quantity]);
+}, [product?.feature1, quantity]);
 
 const incrementQuantity = () => {
   setQuantity(quantity + 1);
@@ -140,8 +142,8 @@ const decrementQuantity = () => {
 const addToCart = () => {
   if (userInfo?.token) {
     console.log({ totalPrice });
-    const checkoutUrl = `/checkout/${id}/${totalPrice}`;
-    history(checkoutUrl);
+    // const checkoutUrl = `/checkout/${id}/${totalPrice}`;
+    // history(checkoutUrl);
   } else {
     history("/login");
   }
@@ -161,7 +163,7 @@ const addToCart = () => {
           minHeight: "100vh",
         }}
       >
-        {loading ? (
+        {loading  ? (
           <Loader />
         ) : (
           <>
@@ -170,14 +172,14 @@ const addToCart = () => {
                 <div className="row d-flex ">
                   <div className="col-lg-3 col-md-3 col-sm-12 pt-4">
                     <img
-                      src={image}
+                      src={product.image}
                       className="img-fluid pt-2 border"
                       alt="name"
                     />
                   </div>
                   <div className="col-lg-9 col-md-9 col-sm-12 mt-3 pt-2">
                     <p>
-                      <h2>{title}</h2>
+                      <h2>{product.title}</h2>
                       <span className="py-2">
                         <FontAwesomeIcon
                           icon={faStar}
@@ -203,13 +205,13 @@ const addToCart = () => {
                     </p>
                     <p className="">
                       <span className="fw-bold ">Brand:</span>{" "}
-                      <span className="font-color">{feature2}</span>
+                      <span className="font-color">{product.feature2}</span>
                     </p>
                     <p className="pb-5">
-                      <span className="fw-bold ">Origin:</span> {content}
+                      <span className="fw-bold ">Origin:</span> {product.content}
                       <p>
                         <hr />
-                        <p className="fw-bold font-color fs-2">${feature1}</p>
+                        <p className="fw-bold font-color fs-2">${product.feature1}</p>
                       </p>
                       <span>
                         <del className="text-secondary">$30</del> -30%
@@ -227,7 +229,7 @@ const addToCart = () => {
                         >
                           -
                         </button>{" "}
-                        <span className="fs-4 mx-3">{quantity}</span>{" "}
+                        <span className="fs-4 mx-3">{product.quantity}</span>{" "}
                         <button
                           className="border-0 fs-4 bg-secondary px-3 text-white"
                           onClick={incrementQuantity}
@@ -298,7 +300,7 @@ const addToCart = () => {
                 <form onSubmit={addComment}>
                   <TextareaAutosize
                     onChange={(e) => setComment(e.target.value)}
-                    value={comment}
+                    value={product.comment}
                     aria-label="minimum height"
                     minRows={3}
                     placeholder="Add a comment..."
@@ -325,7 +327,7 @@ const addToCart = () => {
           </Typography>
           <Divider variant="inset" />
           {/* add comment list */}
-          {comments.length === 0 ? (
+          {product?.comments.length === 0 ? (
             ""
           ) : (
             <Typography variant="h5" sx={{ pt: 3, mb: 2 }}>
