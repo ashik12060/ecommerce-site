@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
@@ -13,19 +12,35 @@ import axios from "axios";
 import axiosInstance from "../pages/axiosInstance";
 
 const AdminDashboard = () => {
-
   const [posts, setPosts] = useState([]);
   const [items, setItems] = useState([]);
   const [galleries, setGalleries] = useState([]);
   const [products, setProducts] = useState([]);
-
+  const [orders, setOrders] = useState([]);
   const [comments, setComments] = useState([]);
 
+  // Fetch orders from server
+  const fetchOrders = async () => {
+    try {
+      const { data } = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/api/orders`
+      );
+      setOrders(data.orders);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
   // display post
   const displayPost = async () => {
     try {
-      const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/posts/show`);
+      const { data } = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/api/posts/show`
+      );
       setPosts(data.posts);
     } catch (error) {
       console.log(error);
@@ -35,10 +50,12 @@ const AdminDashboard = () => {
     displayPost();
   }, []);
 
-   // display item
-   const displayItem = async () => {
+  // display item
+  const displayItem = async () => {
     try {
-      const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/items/show`);
+      const { data } = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/api/items/show`
+      );
       setItems(data.items);
     } catch (error) {
       console.log(error);
@@ -52,7 +69,9 @@ const AdminDashboard = () => {
   //display products
   const displayProduct = async () => {
     try {
-      const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/products/show`);
+      const { data } = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/api/products/show`
+      );
       setProducts(data.products);
     } catch (error) {
       console.log(error);
@@ -63,10 +82,12 @@ const AdminDashboard = () => {
     displayProduct();
   }, []);
 
-//   //display gallery
+  //   //display gallery
   const displayGallery = async () => {
     try {
-      const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/galleries/show`);
+      const { data } = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/api/galleries/show`
+      );
       setGalleries(data.galleries);
     } catch (error) {
       console.log(error);
@@ -77,11 +98,13 @@ const AdminDashboard = () => {
     displayGallery();
   }, []);
 
-//   //delete post by Id
+  //   //delete post by Id
   const deletePostById = async (e, id) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
-      try { 
-        const result = await axiosInstance.delete(`${process.env.REACT_APP_API_URL}/api/delete/post/${id}`);
+      try {
+        const result = await axiosInstance.delete(
+          `${process.env.REACT_APP_API_URL}/api/delete/post/${id}`
+        );
         if (result?.data?.success === true) {
           toast.success("post deleted");
           displayPost();
@@ -95,8 +118,10 @@ const AdminDashboard = () => {
   //delete item by Id
   const deleteItemById = async (e, id) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
-      try { 
-        const result = await axiosInstance.delete(`${process.env.REACT_APP_API_URL}/api/delete/item/${id}`);
+      try {
+        const result = await axiosInstance.delete(
+          `${process.env.REACT_APP_API_URL}/api/delete/item/${id}`
+        );
         if (result?.data?.success === true) {
           toast.success("Item deleted");
           displayItem();
@@ -110,11 +135,13 @@ const AdminDashboard = () => {
 
   //delete product by Id
   const deleteProductById = async (e, id) => {
-    console.log(id)
+    console.log(id);
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
-        // 
-        const { data } = await axiosInstance.delete(`${process.env.REACT_APP_API_URL}/api/delete/product/${id}`);
+        //
+        const { data } = await axiosInstance.delete(
+          `${process.env.REACT_APP_API_URL}/api/delete/product/${id}`
+        );
         if (data.success === true) {
           toast.success(data.message);
           displayProduct();
@@ -127,11 +154,13 @@ const AdminDashboard = () => {
   };
   //delete product by Id
   const deleteGalleryById = async (e, id) => {
-    console.log(id)
+    console.log(id);
     if (window.confirm("Are you sure you want to delete this image?")) {
       try {
-        // 
-        const { data } = await axiosInstance.delete(`${process.env.REACT_APP_API_URL}/api/delete/gallery/${id}`);
+        //
+        const { data } = await axiosInstance.delete(
+          `${process.env.REACT_APP_API_URL}/api/delete/gallery/${id}`
+        );
         if (data.success === true) {
           toast.success(data.message);
           displayGallery();
@@ -143,7 +172,25 @@ const AdminDashboard = () => {
     }
   };
 
-//   // post columns
+  // Delete order by ID
+  const deleteOrderById = async (orderId) => {
+    if (window.confirm("Are you sure you want to delete this order?")) {
+      try {
+        const response = await axiosInstance.delete(
+          `${process.env.REACT_APP_API_URL}/api/orders/${orderId}`
+        );
+        if (response?.data?.success) {
+          toast.success("Order deleted successfully");
+          fetchOrders();
+        }
+      } catch (error) {
+        console.error("Error deleting order:", error);
+        toast.error("Failed to delete order");
+      }
+    }
+  };
+
+  //   // post columns
   const PostColumns = [
     {
       field: "_id",
@@ -217,7 +264,7 @@ const AdminDashboard = () => {
       ),
     },
   ];
-//   // Item columns
+  //   // Item columns
   const ItemColumns = [
     {
       field: "_id",
@@ -291,12 +338,9 @@ const AdminDashboard = () => {
       ),
     },
   ];
-// // items end
+  // // items end
 
-
-
-
-//   //products columns add extra
+  //   //products columns add extra
   const ProductColumns = [
     {
       field: "_id",
@@ -369,9 +413,8 @@ const AdminDashboard = () => {
     },
   ];
 
-
-//    // Gallery columns
-   const GalleryColumns = [
+  //    // Gallery columns
+  const GalleryColumns = [
     {
       field: "_id",
       headerName: "Gallery ID",
@@ -445,229 +488,54 @@ const AdminDashboard = () => {
     },
   ];
 
+  // order columns
+  const orderColumns = [
+    { field: "_id", headerName: "Order ID", width: 150 },
+    { field: "userId", headerName: "User ID", width: 150 },
+    { field: "orderDate", headerName: "Order Date", width: 200 },
+    // Add more columns as needed
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => (
+        <Box>
+          <IconButton
+            onClick={() => deleteOrderById(params.row._id)}
+            aria-label="delete"
+          >
+            <DeleteIcon sx={{ color: "red" }} />
+          </IconButton>
+        </Box>
+      ),
+    },
+  ];
 
-
-
-// new example
-// const [currentSection, setCurrentSection] = useState("products");
-//   const [posts, setPosts] = useState([]);
-//   const [items, setItems] = useState([]);
-//   const [products, setProducts] = useState([]);
-
-//   // useEffect hooks for fetching data
-//   useEffect(() => {
-//     displayPost();
-//     displayItem();
-//     displayProduct();
-//   }, []);
-
-//   // Function to fetch and display posts
-//   const displayPost = async () => {
-//     try {
-//       const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/posts/show`);
-//       setPosts(data.posts);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   // Function to fetch and display items
-//   const displayItem = async () => {
-//     try {
-//       const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/items/show`);
-//       setItems(data.items);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   // Function to fetch and display products
-//   const displayProduct = async () => {
-//     try {
-//       const { data } = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/products/show`);
-//       setProducts(data.products);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   // Function to handle section change
-//   const handleSectionChange = (section) => {
-//     setCurrentSection(section);
-//   };
-
-//   // Render the appropriate section based on currentSection state
-//   const renderSection = () => {
-//     switch (currentSection) {
-//       case "posts":
-//         return renderPostsSection();
-//       case "items":
-//         return renderItemsSection();
-//       default:
-//         return renderProductsSection();
-//     }
-//   };
-
-//   // Render the Products section
-//   const renderProductsSection = () => {
-//     return (
-//       <div>
-//         <Typography variant="h4" sx={{ color: "black",  mt:5}}>
-//           PRODUCTS
-//         </Typography>
-//         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-//           <Button variant="contained" color="success" startIcon={<AddIcon />}>
-//             <Link
-//               style={{ color: "white", textDecoration: "none" }}
-//               to="/admin/product/create"
-//             >
-//               Add Products
-//             </Link>{" "}
-//           </Button>
-//         </Box>
-//         <Paper sx={{ bgColor: "white" }}>
-//           <Box sx={{ height: 400, width: "100%" }}>
-//             <DataGrid
-//               getRowId={(row) => row._id}
-//               sx={{
-//                 "& .MuiTablePagination-displayedRows": {
-//                   color: "black",
-//                 },
-//                 color: "black",
-//                 [`& .${gridClasses.row}`]: {
-//                   bgColor: "white",
-//                 },
-//               }}
-//               rows={products}
-//               columns={ProductColumns}
-//               pageSize={3}
-//               rowsPerPageOptions={[3]}
-//               checkboxSelection
-//             />
-//           </Box>
-//         </Paper>
-//       </div>
-//     );
-//   };
-
-//   // Render the Blog Posts section
-//   const renderPostsSection = () => {
-//     return (
-//       <Box className="mt-5">
-//         <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
-//          Blog Posts
-//         </Typography>
-//         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-//           <Button
-//             variant="contained"
-//             color="success"
-//             startIcon={<AddIcon />}
-//             sx={{
-//               fontSize: "1rem", 
-//               padding: "8px 16px", 
-//               "@media (max-width: 768px)": {
-//                 fontSize: "0.9rem", 
-//                 padding: "6px 12px", 
-//               },
-//             }}
-//           >
-//             <Link
-//               style={{ color: "white", textDecoration: "none" }}
-//               to="/admin/post/create"
-//             >
-//               Create Post
-//             </Link>{" "}
-//           </Button>
-//         </Box>
-//         <Paper sx={{ bgColor: "white" }}>
-//           <Box sx={{ height: 400, width: "100%" }}>
-//             <DataGrid
-//               getRowId={(row) => row._id}
-//               sx={{
-//                 "& .MuiTablePagination-displayedRows": {
-//                   color: "black",
-//                 },
-//                 color: "black",
-//                 [`& .${gridClasses.row}`]: {
-//                   bgColor: "white",
-//                 },
-//               }}
-//               rows={posts}
-//               columns={PostColumns}
-//               pageSize={3}
-//               rowsPerPageOptions={[3]}
-//               checkboxSelection
-//             />
-//           </Box>
-//         </Paper>
-//       </Box>
-//     );
-//   };
-
-//   // Render the Surgical Items section
-//   const renderItemsSection = () => {
-//     return (
-//       <div>
-//         <Typography variant="h4" sx={{ color: "black", pb: 3,mt:5 }}>
-//          SURGICAL ITEMS
-//         </Typography>
-//         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-//           <Button
-//             variant="contained"
-//             color="success"
-//             startIcon={<AddIcon />}
-//             sx={{
-//               fontSize: "1rem", 
-//               padding: "8px 16px", 
-//               "@media (max-width: 768px)": {
-//                 fontSize: "0.9rem", 
-//                 padding: "6px 12px", 
-//               },
-//             }}
-//            >
-//             <Link
-//               style={{ color: "white", textDecoration: "none" }}
-//               to="/admin/item/create"
-//             >
-//               Add Item
-//             </Link>{" "}
-//           </Button>
-//         </Box>
-//         <Paper sx={{ bgColor: "white" }}>
-//           <Box sx={{ height: 400, width: "100%" }}>
-//             <DataGrid
-//               getRowId={(row) => row._id}
-//               sx={{
-//                 "& .MuiTablePagination-displayedRows": {
-//                   color: "black",
-//                 },
-//                 color: "black",
-//                 [`& .${gridClasses.row}`]: {
-//                   bgcolor: "white",
-//                 },
-//               }}
-//               rows={items}
-//               columns={ItemColumns}
-//               pageSize={3}
-//               rowsPerPageOptions={[3]}
-//               checkboxSelection
-//             />
-//           </Box>
-//         </Paper>
-//       </div>
-//     );
-//   };
-
-
-
-
-// items end
   return (
     <div className="">
+      <div>
+        {/* Orders */}
+        <Box>
+          <Typography variant="h4" sx={{ color: "black", mt: 5 }}>
+            Orders
+          </Typography>
+          <Paper sx={{ bgColor: "white" }}>
+            <Box sx={{ height: 400, width: "100%" }}>
+              <DataGrid
+                rows={orders}
+                columns={orderColumns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                getRowId={(row) => row._id} // Use the "_id" field as the unique identifier
+              />
+            </Box>
+          </Paper>
+        </Box>
+      </div>
 
       {/* Products  */}
       <Box>
-        <Typography variant="h4" sx={{ color: "black",  mt:5}}>
+        <Typography variant="h4" sx={{ color: "black", mt: 5 }}>
           PRODUCTS
         </Typography>
         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
@@ -706,7 +574,7 @@ const AdminDashboard = () => {
       {/* post  */}
       <Box className="mt-5">
         <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
-         Blog Posts
+          Blog Posts
         </Typography>
         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
           <Button
@@ -714,12 +582,11 @@ const AdminDashboard = () => {
             color="success"
             startIcon={<AddIcon />}
             sx={{
-              fontSize: "1rem", 
-              padding: "8px 16px", 
+              fontSize: "1rem",
+              padding: "8px 16px",
               "@media (max-width: 768px)": {
-               
-                fontSize: "0.9rem", 
-                padding: "6px 12px", 
+                fontSize: "0.9rem",
+                padding: "6px 12px",
               },
             }}
           >
@@ -754,12 +621,10 @@ const AdminDashboard = () => {
         </Paper>
       </Box>
 
-
-      
       {/* ITEMS  */}
       <Box>
-        <Typography variant="h4" sx={{ color: "black", pb: 3,mt:5 }}>
-         Seller Products 
+        <Typography variant="h4" sx={{ color: "black", pb: 3, mt: 5 }}>
+          Seller Products
         </Typography>
         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
           <Button
@@ -767,15 +632,14 @@ const AdminDashboard = () => {
             color="success"
             startIcon={<AddIcon />}
             sx={{
-              fontSize: "1rem", 
-              padding: "8px 16px", 
+              fontSize: "1rem",
+              padding: "8px 16px",
               "@media (max-width: 768px)": {
-               
-                fontSize: "0.9rem", 
-                padding: "6px 12px", 
+                fontSize: "0.9rem",
+                padding: "6px 12px",
               },
             }}
-           >
+          >
             <Link
               style={{ color: "white", textDecoration: "none" }}
               to="/admin/item/create"
@@ -806,9 +670,6 @@ const AdminDashboard = () => {
           </Box>
         </Paper>
       </Box>
-
-      
-
 
       {/* Gallery  */}
       {/* <Box>
@@ -847,7 +708,7 @@ const AdminDashboard = () => {
           </Box>
         </Paper>
       </Box> */}
-{/* <Box sx={{ width: 200, padding: 2 }}>
+      {/* <Box sx={{ width: 200, padding: 2 }}>
         <Typography variant="h6" gutterBottom>
           Sections
         </Typography>
@@ -877,11 +738,6 @@ const AdminDashboard = () => {
       </Box>
        */}
     </div>
-
-
-
-
-
   );
 };
 
