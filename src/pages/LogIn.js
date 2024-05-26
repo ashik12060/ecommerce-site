@@ -21,6 +21,7 @@ import {
 } from "firebase/auth";
 import initializeAuthentication from "../Firebase/firebase.init";
 import { useAuth } from "../AuthContext";
+import { CartProvider } from "../hooks";
 
 // google sign in
 initializeAuthentication();
@@ -97,6 +98,10 @@ const LogIn = (props) => {
 
   return (
     <>
+      {/* <Header /> */}
+      <CartProvider>
+        <Header/>
+      </CartProvider>
       <Box
         sx={{
           height: "81vh",

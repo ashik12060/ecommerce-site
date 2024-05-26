@@ -10,6 +10,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
 import axios from "axios";
 import axiosInstance from "../pages/axiosInstance";
+import Header from "../components/Shared/Header/Header";
+import { CartProvider } from "../hooks";
+import OrderSingle from "../components/OrderSingle";
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -26,6 +29,8 @@ const AdminDashboard = () => {
         `${process.env.REACT_APP_API_URL}/api/orders`
       );
       setOrders(data.orders);
+      console.log(orders)
+      console.log(orders.orderItems.price)
     } catch (error) {
       console.error("Error fetching orders:", error);
     }
@@ -493,6 +498,27 @@ const AdminDashboard = () => {
     { field: "_id", headerName: "Order ID", width: 150 },
     { field: "userId", headerName: "User ID", width: 150 },
     { field: "orderDate", headerName: "Order Date", width: 200 },
+    { field: "orders", headerName: "Quantity", width: 200 },
+    // Add more columns as needed
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => (
+        <Box>
+          <IconButton
+            onClick={() => deleteOrderById(params.row._id)}
+            aria-label="delete"
+          >
+            <DeleteIcon sx={{ color: "red" }} />
+          </IconButton>
+        </Box>
+      ),
+    },
+  ];
+  const orderItems = [
+    { field: "_id", headerName: "Order ID", width: 150 },
+    { field: "quantity", headerName: "Quantity", width: 150 },
     // Add more columns as needed
     {
       field: "actions",
@@ -511,13 +537,25 @@ const AdminDashboard = () => {
     },
   ];
 
+
   return (
-    <div className="">
+    <div>
+      <CartProvider>
+        <Header/>
+      </CartProvider>
+
       <div>
-        {/* Orders */}
+        
+<OrderSingle />
+      
+
+      </div>
+      {/* <div>
+    
         <Box>
           <Typography variant="h4" sx={{ color: "black", mt: 5 }}>
             Orders
+           
           </Typography>
           <Paper sx={{ bgColor: "white" }}>
             <Box sx={{ height: 400, width: "100%" }}>
@@ -526,12 +564,11 @@ const AdminDashboard = () => {
                 columns={orderColumns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                getRowId={(row) => row._id} // Use the "_id" field as the unique identifier
-              />
+                getRowId={(row) => row._id} />
             </Box>
           </Paper>
         </Box>
-      </div>
+      </div> */}
 
       {/* Products  */}
       <Box>

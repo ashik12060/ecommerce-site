@@ -53,6 +53,7 @@ import Header from "./components/Shared/Header/Header";
 import CartComponent from "./components/CartComponent";
 import PrivateRoute from "./PrivateRoute";
 import { AuthProvider } from "./AuthContext";
+import OrderSingle from "./components/OrderSingle";
 //HOC
 const AdminDashboardHOC = Layout(AdminDashboard);
 
@@ -107,6 +108,7 @@ function App() {
 
                 <Route path="/admin-login" element={<AdminLogin />}></Route>
                 <Route path="/show-users" element={<ShowUsers />}></Route>
+                <Route path="/order-single" element={<OrderSingle />}></Route>
 
                 <Route path="/" element={<BlogHome />} />
                 <Route path="/bloghome" element={<BlogHome />} />
@@ -123,6 +125,7 @@ function App() {
                   }
                 />
 
+                
                 <Route
                   path="/login"
                   element={
