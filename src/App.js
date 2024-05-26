@@ -53,7 +53,7 @@ import Header from "./components/Shared/Header/Header";
 import CartComponent from "./components/CartComponent";
 import PrivateRoute from "./PrivateRoute";
 import { AuthProvider } from "./AuthContext";
-import OrderSingle from "./components/OrderSingle";
+import OrderSingle from "./admin/OrderSingle";
 //HOC
 const AdminDashboardHOC = Layout(AdminDashboard);
 
