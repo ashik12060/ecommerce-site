@@ -3,19 +3,15 @@ import Home from "./components/Home/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Contact from "./components/Contact/Contact";
 import NotFound from "./pages/NotFound/NotFound";
-// import ScrollButton from "./components/ScrollButton/ScrollButton";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import AdminDashboard from "./admin/AdminDashboard";
-// import AdminDashboardTwo from "./admin/AdminDashboardTwo";
 import AdminRoute from "./components/AdminRoute";
 import UserRoute from "./components/UserRoute";
 import CreatePost from "./admin/CreatePost";
-
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
 import Layout from "./admin/global/Layout";
@@ -24,36 +20,29 @@ import UserDashboard from "./user/UserDashboard";
 import SinglePost from "./pages/SinglePost";
 //main
 import BlogHome from "./pages/BlogHome";
-// import ProductBuying from "./components/Products/ProductBuying";
 import BlogPro from "./pages/BlogPro";
 import SinglePro from "./pages/SinglePro";
 import CreateProduct from "./admin/CreateProduct";
 import EditProduct from "./admin/EditProduct";
 import BuyContact from "./components/BuyContact";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CreateItem from "./admin/CreateItem";
 import EditItem from "./admin/EditItem";
 import Products from "./pages/Products";
-import SurgicalItems from "./pages/SurgicalItems";
-import SingleItem from "./pages/SingleItem";
-import GalleryHome from "./pages/GalleryHome";
-import SingleGallery from "./pages/SingleGallery";
 import CreateGallery from "./admin/CreateGallery";
 import EditGallery from "./admin/EditGallery";
 import ProductCart from "./components/Products/ProductCart";
-import { getAuth, signOut } from "firebase/auth";
 import AdminLogin from "./pages/AdminLogin";
 import LoginUser from "./pages/LoginSeller";
 import CheckOut from "./pages/CheckOut";
-import Bkash from "./pages/Bkash";
 import ShowUsers from "./pages/ShowUsers";
-import SellerAc from "./pages/SellerAc";
 import { CartProvider } from "./hooks";
 import Header from "./components/Shared/Header/Header";
 import CartComponent from "./components/CartComponent";
 import PrivateRoute from "./PrivateRoute";
 import { AuthProvider } from "./AuthContext";
 import OrderSingle from "./admin/OrderSingle";
+import Seller from "./components/Seller";
 //HOC
 const AdminDashboardHOC = Layout(AdminDashboard);
 
@@ -103,8 +92,9 @@ function App() {
                 ></Route>
                 <Route path="/contact" element={<Contact />}></Route>
                 <Route path="/seller-login" element={<LoginUser />}></Route>
-                <Route path="/seller-account" element={<SellerAc />}></Route>
-                <Route path="/bkash-payment" element={<Bkash />}></Route>
+                <Route path="/seller" element={<Seller />} />
+
+              
 
                 <Route path="/admin-login" element={<AdminLogin />}></Route>
                 <Route path="/show-users" element={<ShowUsers />}></Route>
@@ -162,9 +152,6 @@ function App() {
                   }
                 />
 
-                <Route path="/items" element={<SurgicalItems />} />
-                <Route path="/item/:id" element={<SingleItem />} />
-                <Route path="/gallery" element={<GalleryHome />} />
 
                 <Route
                   path="/admin/dashboard"
@@ -241,7 +228,6 @@ function App() {
                     </AdminRoute>
                   }
                 />
-                {/* <Route path='/user-dash' element={<UserDashboard />}></Route> */}
 
                 <Route
                   path="/user/dashboard"

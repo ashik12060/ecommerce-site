@@ -48,7 +48,10 @@ const CheckOut = () => {
   });
   return (
     <div>
-      <div>
+      <CartProvider>
+        <Header />
+      </CartProvider>
+      {/* <div>
         {cart?.map((itm) => (
           <div
             className="border p-3 my-2 d-flex justify-content-between"
@@ -59,31 +62,31 @@ const CheckOut = () => {
             </h6>
             <div>
               <span>Total: {Number(itm.feature1) * itm.quantity}</span>
-              {/* <button
-                className="mx-2 px-3"
-                onClick={() => decrementItem(itm._id)}
-              >
-                -
-              </button>
-              <span className="mx-2 px-3">{itm.quantity}</span>
-              <button
-                className="mx-2 px-3"
-                onClick={() => incrementItem(itm._id)}
-              >
-                +
-              </button>
-              <button
-                className="mx-2 px-3"
-                onClick={() => removeItemFromCart(itm._id)}
-              >
-                Delete
-              </button> */}
+              
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
       <div className="d-flex">
         <div className="pt-5 card2-bg px-5 w-75">
+          <h3>CheckOut</h3>
+          <div>
+            {cart?.map((itm) => (
+              <div
+                className="border p-3 my-2 d-flex justify-content-between"
+                key={itm._id}
+              >
+                <h6>
+                  {itm.title} - {Number(itm.feature1)} x {itm.quantity}
+                </h6>
+                <div>
+                  <span className="fw-bold">
+                    Total: {Number(itm.feature1) * itm.quantity}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
           <p className="font-color fw-bold">Delivery</p>
           <hr />
           <p>

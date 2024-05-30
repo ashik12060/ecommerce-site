@@ -174,11 +174,11 @@ const CreateProduct = () => {
               sx={{ mb: 3 }}
               fullWidth
               id="feature2"
-              label="feature2"
+              label="Brand"
               name="feature2"
               multiline
               rows={4}
-              placeholder="Write the feature2..."
+              placeholder="brand name..."
               value={values.feature2}
               onChange={handleChange}
               onBlur={handleBlur}

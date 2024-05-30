@@ -19,7 +19,7 @@ const CartComponent = () => {
     <div className="p-5">
       {cart?.map((itm) => (
         <div
-          className="border p-3 my-2 d-flex justify-content-between"
+          className="border border-1 p-3 my-2 d-flex justify-content-between"
           key={itm._id}
         >
           <h6>
@@ -28,20 +28,20 @@ const CartComponent = () => {
           <div>
             <span>Total: {Number(itm.feature1) * itm.quantity}</span>
             <button
-              className="mx-2 px-3"
+              className="mx-2 px-3 bg-primary text-white border-0 py-1 rounded fw-bold fs-5"
               onClick={() => decrementItem(itm._id)}
             >
               -
             </button>
-            <span className="mx-2 px-3">{itm.quantity}</span>
+            <span className="mx-2 px-3 fw-bold fs-5">{itm.quantity}</span>
             <button
-              className="mx-2 px-3"
+              className="mx-2 px-3 bg-primary text-white border-0 py-1 rounded fw-bold fs-5"
               onClick={() => incrementItem(itm._id)}
             >
               +
             </button>
             <button
-              className="mx-2 px-3"
+              className="mx-2 px-3 bg-danger text-white border-0 py-1 rounded"
               onClick={() => removeItemFromCart(itm._id)}
             >
               Delete
@@ -51,7 +51,7 @@ const CartComponent = () => {
       ))}
       <h4 className="text-end m-3">Subtotal : {totalSum} BDT</h4>
       <Link to={"/checkout"}>
-        <button>Proceed to checkout</button>
+        <button className="bg-color  text-white border-0 px-2 py-1">Proceed to checkout</button>
       </Link>
     </div>
   );

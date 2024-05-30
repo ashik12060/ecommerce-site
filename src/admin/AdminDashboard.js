@@ -13,7 +13,7 @@ import axiosInstance from "../pages/axiosInstance";
 import Header from "../components/Shared/Header/Header";
 import { CartProvider } from "../hooks";
 import OrderSingle from "./OrderSingle";
-import './AdminDashboard.css'
+import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -30,8 +30,7 @@ const AdminDashboard = () => {
         `${process.env.REACT_APP_API_URL}/api/orders`
       );
       setOrders(data.orders);
-      console.log(orders);
-      console.log(orders.orderItems.price);
+      // console.log(orders.orderItems.price);
     } catch (error) {
       console.error("Error fetching orders:", error);
     }
@@ -195,6 +194,8 @@ const AdminDashboard = () => {
       }
     }
   };
+
+  //   // seller columns
 
   //   // post columns
   const PostColumns = [
@@ -538,11 +539,42 @@ const AdminDashboard = () => {
     },
   ];
 
+  // seller information
+  // Ensure that sellers is initialized as an empty array
+  const [sellers, setSellers] = useState([]); // Create a new state for sellers
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSellerProducts = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/seller-products`
+        );
+        console.log(response.data); // Log the entire response data
+        setSellers(response.data.products); // Update state with sellers data
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchSellerProducts();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
-    <div>
+    <>
       <CartProvider>
         <Header />
       </CartProvider>
+
+      {/* seller info */}
+
+      {/* end */}
 
       <div class="d-flex align-items-start mt-3 ">
         <div
@@ -575,7 +607,7 @@ const AdminDashboard = () => {
           >
             Products Info
           </button>
-         
+
           <button
             class="nav-link border border-1 mt-3"
             id="v-pills-messages-tab"
@@ -588,7 +620,7 @@ const AdminDashboard = () => {
           >
             Blog Posts
           </button>
-          <button
+          {/* <button
             class="nav-link border border-1 mt-3"
             id="v-pills-settings-tab"
             data-bs-toggle="pill"
@@ -597,6 +629,18 @@ const AdminDashboard = () => {
             role="tab"
             aria-controls="v-pills-settings"
             aria-selected="false"
+          >
+            Seller Products
+          </button> */}
+          <button
+            class="nav-link  border border-1 mt-3"
+            id="v-pills-seller-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#v-pills-seller"
+            type="button"
+            role="tab"
+            aria-controls="v-pills-seller"
+            aria-selected="true"
           >
             Seller Products
           </button>
@@ -609,6 +653,7 @@ const AdminDashboard = () => {
             aria-labelledby="v-pills-home-tab"
             tabindex="0"
           >
+            
             <OrderSingle />
           </div>
           <div
@@ -619,44 +664,48 @@ const AdminDashboard = () => {
             tabindex="0"
           >
             {/* Products  */}
-      <Box>
-        <Typography variant="h4" sx={{ color: "black", mt: 5 }}>
-          PRODUCTS
-        </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button variant="contained" color="success" startIcon={<AddIcon />}>
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to="/admin/product/create"
-            >
-              Add Products
-            </Link>{" "}
-          </Button>
-        </Box>
-        <Paper sx={{ bgColor: "white" }}>
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              getRowId={(row) => row._id}
-              sx={{
-                "& .MuiTablePagination-displayedRows": {
-                  color: "black",
-                },
-                color: "black",
-                [`& .${gridClasses.row}`]: {
-                  bgColor: "white",
-                },
-              }}
-              rows={products}
-              columns={ProductColumns}
-              pageSize={3}
-              rowsPerPageOptions={[3]}
-              checkboxSelection
-            />
-          </Box>
-        </Paper>
-      </Box>
+            <Box>
+              <Typography variant="h4" sx={{ color: "black", mt: 5 }}>
+                PRODUCTS
+              </Typography>
+              <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  startIcon={<AddIcon />}
+                >
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/admin/product/create"
+                  >
+                    Add Products
+                  </Link>{" "}
+                </Button>
+              </Box>
+              <Paper sx={{ bgColor: "white" }}>
+                <Box sx={{ height: 400, width: "100%" }}>
+                  <DataGrid
+                    getRowId={(row) => row._id}
+                    sx={{
+                      "& .MuiTablePagination-displayedRows": {
+                        color: "black",
+                      },
+                      color: "black",
+                      [`& .${gridClasses.row}`]: {
+                        bgColor: "white",
+                      },
+                    }}
+                    rows={products}
+                    columns={ProductColumns}
+                    pageSize={3}
+                    rowsPerPageOptions={[3]}
+                    checkboxSelection
+                  />
+                </Box>
+              </Paper>
+            </Box>
           </div>
-          
+
           <div
             class="tab-pane fade"
             id="v-pills-messages"
@@ -664,343 +713,161 @@ const AdminDashboard = () => {
             aria-labelledby="v-pills-messages-tab"
             tabindex="0"
           >
-          {/* post  */}
-      <Box className="mt-5">
-        <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
-          Blog Posts
-        </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button
-            variant="contained"
-            color="success"
-            startIcon={<AddIcon />}
-            sx={{
-              fontSize: "1rem",
-              padding: "8px 16px",
-              "@media (max-width: 768px)": {
-                fontSize: "0.9rem",
-                padding: "6px 12px",
-              },
-            }}
-          >
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to="/admin/post/create"
-            >
-              Create Post
-            </Link>{" "}
-          </Button>
-        </Box>
-        <Paper sx={{ bgColor: "white" }}>
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              getRowId={(row) => row._id}
-              sx={{
-                "& .MuiTablePagination-displayedRows": {
-                  color: "black",
-                },
-                color: "black",
-                [`& .${gridClasses.row}`]: {
-                  bgColor: "white",
-                },
-              }}
-              rows={posts}
-              columns={PostColumns}
-              pageSize={3}
-              rowsPerPageOptions={[3]}
-              checkboxSelection
-            />
-          </Box>
-        </Paper>
-      </Box>
+            {/* post  */}
+            <Box className="mt-5">
+              <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
+                Blog Posts
+              </Typography>
+              <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  startIcon={<AddIcon />}
+                  sx={{
+                    fontSize: "1rem",
+                    padding: "8px 16px",
+                    "@media (max-width: 768px)": {
+                      fontSize: "0.9rem",
+                      padding: "6px 12px",
+                    },
+                  }}
+                >
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/admin/post/create"
+                  >
+                    Create Post
+                  </Link>{" "}
+                </Button>
+              </Box>
+              <Paper sx={{ bgColor: "white" }}>
+                <Box sx={{ height: 400, width: "100%" }}>
+                  <DataGrid
+                    getRowId={(row) => row._id}
+                    sx={{
+                      "& .MuiTablePagination-displayedRows": {
+                        color: "black",
+                      },
+                      color: "black",
+                      [`& .${gridClasses.row}`]: {
+                        bgColor: "white",
+                      },
+                    }}
+                    rows={posts}
+                    columns={PostColumns}
+                    pageSize={3}
+                    rowsPerPageOptions={[3]}
+                    checkboxSelection
+                  />
+                </Box>
+              </Paper>
+            </Box>
           </div>
-          <div
+          
+          {/* <div
             class="tab-pane fade"
             id="v-pills-settings"
             role="tabpanel"
             aria-labelledby="v-pills-settings-tab"
             tabindex="0"
           >
-             <Box>
-        <Typography variant="h4" sx={{ color: "black", pb: 3, mt: 5 }}>
-          Seller Products
-        </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button
-            variant="contained"
-            color="success"
-            startIcon={<AddIcon />}
-            sx={{
-              fontSize: "1rem",
-              padding: "8px 16px",
-              "@media (max-width: 768px)": {
-                fontSize: "0.9rem",
-                padding: "6px 12px",
-              },
-            }}
+            <Box>
+              <Typography variant="h4" sx={{ color: "black", pb: 3, mt: 5 }}>
+                Seller Products
+              </Typography>
+              <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  startIcon={<AddIcon />}
+                  sx={{
+                    fontSize: "1rem",
+                    padding: "8px 16px",
+                    "@media (max-width: 768px)": {
+                      fontSize: "0.9rem",
+                      padding: "6px 12px",
+                    },
+                  }}
+                >
+                  <Link
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/admin/item/create"
+                  >
+                    Add Item
+                  </Link>{" "}
+                </Button>
+              </Box>
+              <Paper sx={{ bgColor: "white" }}>
+                <Box sx={{ height: 400, width: "100%" }}>
+                  <DataGrid
+                    getRowId={(row) => row._id}
+                    sx={{
+                      "& .MuiTablePagination-displayedRows": {
+                        color: "black",
+                      },
+                      color: "black",
+                      [`& .${gridClasses.row}`]: {
+                        bgcolor: "white",
+                      },
+                    }}
+                    rows={items}
+                    columns={ItemColumns}
+                    pageSize={3}
+                    rowsPerPageOptions={[3]}
+                    checkboxSelection
+                  />
+                </Box>
+              </Paper>
+            </Box>
+          </div> */}
+
+          <div
+            class="tab-pane fade show "
+            id="v-pills-seller"
+            role="tabpanel"
+            aria-labelledby="v-pills-seller-tab"
+            tabindex="0"
           >
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to="/admin/item/create"
-            >
-              Add Item
-            </Link>{" "}
-          </Button>
-        </Box>
-        <Paper sx={{ bgColor: "white" }}>
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              getRowId={(row) => row._id}
-              sx={{
-                "& .MuiTablePagination-displayedRows": {
-                  color: "black",
-                },
-                color: "black",
-                [`& .${gridClasses.row}`]: {
-                  bgcolor: "white",
-                },
-              }}
-              rows={items}
-              columns={ItemColumns}
-              pageSize={3}
-              rowsPerPageOptions={[3]}
-              checkboxSelection
-            />
-          </Box>
-        </Paper>
-      </Box>
+            <div className="container">
+              <h2 className="fw-bold">Popular Products</h2>
+              <table className="table table-bordered border-1 border border-black">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Check if sellers array is defined and not empty */}
+                  {sellers && sellers.length > 0 ? (
+                    sellers.map((seller) => (
+                      <tr key={seller._id}>
+                        <td>
+                          <img
+                            src={seller.image?.url}
+                            alt={seller.name}
+                            style={{ width: "100px", height: "100px" }}
+                          />
+                        </td>
+                        <td>{seller.name}</td>
+                        <td>${seller.price}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    // Show a message if sellers array is empty or undefined
+                    <tr>
+                      <td colSpan="4">No products available</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-
-      <div>
-        {/* <OrderSingle /> */}
-      </div>
-      {/* <div>
-    
-        <Box>
-          <Typography variant="h4" sx={{ color: "black", mt: 5 }}>
-            Orders
-           
-          </Typography>
-          <Paper sx={{ bgColor: "white" }}>
-            <Box sx={{ height: 400, width: "100%" }}>
-              <DataGrid
-                rows={orders}
-                columns={orderColumns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                getRowId={(row) => row._id} />
-            </Box>
-          </Paper>
-        </Box>
-      </div> */}
-
-      {/* Products  */}
-      {/* <Box>
-        <Typography variant="h4" sx={{ color: "black", mt: 5 }}>
-          PRODUCTS
-        </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button variant="contained" color="success" startIcon={<AddIcon />}>
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to="/admin/product/create"
-            >
-              Add Products
-            </Link>{" "}
-          </Button>
-        </Box>
-        <Paper sx={{ bgColor: "white" }}>
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              getRowId={(row) => row._id}
-              sx={{
-                "& .MuiTablePagination-displayedRows": {
-                  color: "black",
-                },
-                color: "black",
-                [`& .${gridClasses.row}`]: {
-                  bgColor: "white",
-                },
-              }}
-              rows={products}
-              columns={ProductColumns}
-              pageSize={3}
-              rowsPerPageOptions={[3]}
-              checkboxSelection
-            />
-          </Box>
-        </Paper>
-      </Box> */}
-
-      {/* post  */}
-      {/* <Box className="mt-5">
-        <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
-          Blog Posts
-        </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button
-            variant="contained"
-            color="success"
-            startIcon={<AddIcon />}
-            sx={{
-              fontSize: "1rem",
-              padding: "8px 16px",
-              "@media (max-width: 768px)": {
-                fontSize: "0.9rem",
-                padding: "6px 12px",
-              },
-            }}
-          >
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to="/admin/post/create"
-            >
-              Create Post
-            </Link>{" "}
-          </Button>
-        </Box>
-        <Paper sx={{ bgColor: "white" }}>
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              getRowId={(row) => row._id}
-              sx={{
-                "& .MuiTablePagination-displayedRows": {
-                  color: "black",
-                },
-                color: "black",
-                [`& .${gridClasses.row}`]: {
-                  bgColor: "white",
-                },
-              }}
-              rows={posts}
-              columns={PostColumns}
-              pageSize={3}
-              rowsPerPageOptions={[3]}
-              checkboxSelection
-            />
-          </Box>
-        </Paper>
-      </Box> */}
-
-      {/* ITEMS  */}
-      {/* <Box>
-        <Typography variant="h4" sx={{ color: "black", pb: 3, mt: 5 }}>
-          Seller Products
-        </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button
-            variant="contained"
-            color="success"
-            startIcon={<AddIcon />}
-            sx={{
-              fontSize: "1rem",
-              padding: "8px 16px",
-              "@media (max-width: 768px)": {
-                fontSize: "0.9rem",
-                padding: "6px 12px",
-              },
-            }}
-          >
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to="/admin/item/create"
-            >
-              Add Item
-            </Link>{" "}
-          </Button>
-        </Box>
-        <Paper sx={{ bgColor: "white" }}>
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              getRowId={(row) => row._id}
-              sx={{
-                "& .MuiTablePagination-displayedRows": {
-                  color: "black",
-                },
-                color: "black",
-                [`& .${gridClasses.row}`]: {
-                  bgcolor: "white",
-                },
-              }}
-              rows={items}
-              columns={ItemColumns}
-              pageSize={3}
-              rowsPerPageOptions={[3]}
-              checkboxSelection
-            />
-          </Box>
-        </Paper>
-      </Box> */}
-
-      {/* Gallery  */}
-      {/* <Box>
-        <Typography variant="h4" sx={{ color: "black",  mt:5}}>
-          Gallery
-        </Typography>
-        <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-          <Button variant="contained" color="success" startIcon={<AddIcon />}>
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              to="/admin/gallery/create"
-            >
-              ADD A PHOTO
-            </Link>{" "}
-          </Button>
-        </Box>
-        <Paper sx={{ bgColor: "white" }}>
-          <Box sx={{ height: 400, width: "100%" }}>
-            <DataGrid
-              getRowId={(row) => row._id}
-              sx={{
-                "& .MuiTablePagination-displayedRows": {
-                  color: "black",
-                },
-                color: "black",
-                [`& .${gridClasses.row}`]: {
-                  bgColor: "white",
-                },
-              }}
-              rows={galleries}
-              columns={GalleryColumns}
-              pageSize={3}
-              rowsPerPageOptions={[3]}
-              checkboxSelection
-            />
-          </Box>
-        </Paper>
-      </Box> */}
-      {/* <Box sx={{ width: 200, padding: 2 }}>
-        <Typography variant="h6" gutterBottom>
-          Sections
-        </Typography>
-        <Button
-          variant={currentSection === "products" ? "contained" : "outlined"}
-          onClick={() => handleSectionChange("products")}
-        >
-          Products
-        </Button>
-        <Button
-          variant={currentSection === "posts" ? "contained" : "outlined"}
-          onClick={() => handleSectionChange("posts")}
-        >
-          Blog Posts
-        </Button>
-        <Button
-          variant={currentSection === "items" ? "contained" : "outlined"}
-          onClick={() => handleSectionChange("items")}
-        >
-          Surgical Items
-        </Button>
-      </Box> */}
-
-      {/* Render the selected section */}
-      {/* <Box sx={{ marginLeft: 220 }}>
-        {renderSection()}
-      </Box>
-       */}
-    </div>
+    </>
   );
 };
 

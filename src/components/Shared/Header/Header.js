@@ -119,6 +119,13 @@ const Header = ({ totalServices, name }) => {
           <div className="d-flex">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex ">
               {/* Become a Seller */}
+              {/* <li className="nav-item">
+                <Link className="text-decoration-none" to="/user/dashboard">
+                  <p className=" fw-bold text-black" aria-current="page">
+                    User Dashboard
+                  </p>
+                </Link>
+              </li> */}
 
               <li className="nav-item">
                 <Link className="text-decoration-none" to="/seller-login">
@@ -240,6 +247,19 @@ const Header = ({ totalServices, name }) => {
                   )}
                 </div>
               </li>
+
+              {isAuthenticated && (
+                <li className="nav-item">
+                  <Link className="text-decoration-none" to="/user/dashboard">
+                    <p className=" fw-bold text-black" aria-current="page">
+                      User Dashboard
+                    </p>
+                  </Link>
+                </li>
+              )}
+
+
+
             </ul>
             <div>
               {isAuthenticated ? (

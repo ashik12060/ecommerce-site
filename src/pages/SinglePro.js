@@ -247,7 +247,7 @@ const SinglePro = () => {
                         </p>
                       )}
                       <div className="pb-4">
-                        Total Price: $
+                        <span className="fw-bold">Total Price: </span> $
                         {totalPrice.toFixed(2) *
                           (cart.find((itm) => itm._id === product._id)
                             ?.quantity || 1)}
