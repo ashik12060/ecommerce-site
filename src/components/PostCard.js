@@ -14,7 +14,7 @@ import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import am from '../assets//Bkash-logo.png'
+import am from '../assets/user-icon.png'
 import axiosInstance from '../pages/axiosInstance';
 // import axiosInstance from '../pages/axiosInstance';
 
@@ -118,7 +118,7 @@ const PostCard = ({
                     </Box>
                     <Box>
                         {comments}
-                        <IconButton aria-label="comment">
+                        <IconButton  aria-label="comment">
                             <CommentIcon />
                         </IconButton>
                     </Box>

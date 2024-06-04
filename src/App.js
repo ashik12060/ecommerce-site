@@ -43,6 +43,8 @@ import PrivateRoute from "./PrivateRoute";
 import { AuthProvider } from "./AuthContext";
 import OrderSingle from "./admin/OrderSingle";
 import Seller from "./components/Seller";
+import Users from "./admin/Users/Users";
+import Bkash from "./pages/Bkash";
 //HOC
 const AdminDashboardHOC = Layout(AdminDashboard);
 
@@ -93,6 +95,8 @@ function App() {
                 <Route path="/contact" element={<Contact />}></Route>
                 <Route path="/seller-login" element={<LoginUser />}></Route>
                 <Route path="/seller" element={<Seller />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/bkash-payment" element={<Bkash/>} />
 
               
 

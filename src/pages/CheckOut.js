@@ -36,7 +36,7 @@ const CheckOut = () => {
         clearCart();
         console.log("Order placed successfully:", response.data);
         toast.success("Payment Completed");
-        navigate("/");
+        navigate("/bkash-payment");
       })
       .catch((error) => {
         console.error("Error placing order:", error);
@@ -47,79 +47,34 @@ const CheckOut = () => {
     totalSum += Number(itm.price) * itm.quantity;
     // totalSum += Number(itm.feature1) * itm.quantity;
     // console.log(feature1)
-    console.log(price)
+    console.log(price);
   });
   return (
     <div>
       <CartProvider>
         <Header />
       </CartProvider>
-      {/* <div>
-        {cart?.map((itm) => (
-          <div
-            className="border p-3 my-2 d-flex justify-content-between"
-            key={itm._id}
-          >
-            <h6>
-              {itm.title} - {Number(itm.feature1)}
-            </h6>
-            <div>
-              <span>Total: {Number(itm.feature1) * itm.quantity}</span>
-              
-            </div>
-          </div>
-        ))}
-      </div> */}
-      <div className="d-flex">
+      
+      <div className=" m-4 d-flex flex-lg-row flex-md-row flex-sm-column flex-column">
         <div className="pt-5 card2-bg px-5 w-75">
-          <h3>CheckOut</h3>
+          <h3 className="">Checkout</h3>
           <div>
             {cart?.map((itm) => (
               <div
-                className="border p-3 my-2 d-flex justify-content-between"
+                className="border p-3 my-2 d-flex flex-lg-row flex-md-row flex-sm-column flex-column justify-content-between"
                 key={itm._id}
               >
                 <h6>
                   {itm.title} - {Number(itm.price)} x {itm.quantity}
-                  {/* {itm.title} - {Number(itm.feature1)} x {itm.quantity} */}
                 </h6>
                 <div>
                   <span className="fw-bold">
                     Total: {Number(itm.price) * itm.quantity}
-                    {/* Total: {Number(itm.feature1) * itm.quantity} */}
                   </span>
                 </div>
               </div>
             ))}
           </div>
-          <p className="font-color fw-bold">Delivery</p>
-          <hr />
-          <p>
-            <FontAwesomeIcon icon={faLocationDot} className="pe-2 " />
-            Kalabagan, Dhaka-1205
-          </p>
-          <p className="fw-bold">
-            <FontAwesomeIcon icon={faTruck} className="pe-2 " />
-            Free Delivery 20 june - 23 june
-          </p>
-          <p className="bg-white p-2 fw-bold">
-            Enjoy free shipping promotion with minimum 1 items.
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faMoneyBills} className="pe-2 " />
-            Cash On Delivery
-          </p>
-          <hr />
-          <span className="font-color fw-bold">Service</span>
-          <p className="py-3">
-            <FontAwesomeIcon icon={faCalendarDays} className="pe-2 " />7 Days
-            Return
-          </p>
-          <p>Change of mind applicable</p>
-          <p className="pb-5  fw-bold">
-            <FontAwesomeIcon icon={faAward} className="pe-2 " />
-            Warranty Not Available
-          </p>
         </div>
         <div className="ps-5 pt-5">
           <div className="pb-3">

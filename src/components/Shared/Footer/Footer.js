@@ -48,7 +48,7 @@ const Footer = () => {
           <ul className="list-unstyled">
             <li>My Account</li>
             <li>Cart</li>
-            <li>Wishlist</li>
+            <li><Link className="text-decoration-none text-black" to='/bloghome'>Blog</Link></li>
           </ul>
         </div>
 

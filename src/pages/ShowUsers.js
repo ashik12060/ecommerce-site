@@ -3,6 +3,7 @@ import axiosInstance from './axiosInstance';
 import UserInfo from './UserInfo';
 import { Box, Grid } from '@mui/material';
 import Loader from '../components/Loader';
+import axios from 'axios';
 
 const ShowUsers = () => {
     const [users, setUsers] = useState([]);
@@ -15,10 +16,10 @@ const ShowUsers = () => {
         setLoading(true);
         try {
           
-          const { data } = await axiosInstance.get(
-            `${process.env.REACT_APP_API_URL}/api/users`
-          );
-          setUsers(data.users);
+          const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/users`);
+          setUsers(data);
+          // console.log(users)
+          console.log(data);
           setLoading(false);
         } catch (error) {}
       };

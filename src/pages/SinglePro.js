@@ -196,7 +196,7 @@ const SinglePro = () => {
                       </span>
                     </p>
                     <p className="">
-                      <span className="fw-bold ">Brand:</span>{" "}
+                      {/* <span className="fw-bold ">Brand:</span>{" "} */}
                       <span className="font-color">{product.brand}</span>
                     </p>
                     <p className="pb-5">

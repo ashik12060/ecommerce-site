@@ -27,7 +27,7 @@ const SellerProductsShow = ({id}) => {
 
   return (
     <div className='container'>
-      <h2 className='fw-bold'>Popular Products</h2>
+      <h2 className='fw-bold'>Seller Products</h2>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {products.map((product) => (
           <div className='rounded' key={product._id} style={{ border: '1px solid #ccc', padding: '16px', margin: '16px', width: '200px' }}>

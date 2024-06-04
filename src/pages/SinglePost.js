@@ -20,6 +20,7 @@ import CommentList from "../components/CommentList";
 import { io } from "socket.io-client";
 import axiosInstance from "./axiosInstance";
 import Header from "../components/Shared/Header/Header";
+import { CartProvider } from "../hooks";
 
 const socket = io("/", {
   reconnection: true,
@@ -94,6 +95,11 @@ const SinglePost = () => {
     commentsRealTime.length > 0 ? commentsRealTime : comments;
 
   return (
+
+    <>
+    <CartProvider>
+    <Header />
+  </CartProvider>
     <div className="overflow-hidden">
       <Box
         sx={{
@@ -170,8 +176,8 @@ const SinglePost = () => {
 
                     {userInfo ? (
                       <>
-                        <Box sx={{ pt: 1, pl: 3, pb: 3, bgColor: "#fafafa" }}>
-                          <h2>Add your comment here!</h2>
+                        <Box sx={{ pt: 1, pl: 3, pb: 3, bgColor: "#fafafa" }} className="" >
+                          <h4>Add your comment here!</h4>
                           <form onSubmit={addComment}>
                             <TextareaAutosize
                               onChange={(e) => setComment(e.target.value)}
@@ -182,7 +188,7 @@ const SinglePost = () => {
                               style={{ width: "80%", padding: "5px" }}
                             />
                             <Box sx={{ pt: 1 }}>
-                              <Button type="submit" variant="contained">
+                              <Button type="submit" className="bg-danger text-white">
                                 Comment
                               </Button>
                             </Box>
@@ -202,6 +208,7 @@ const SinglePost = () => {
         )}
       </Box>
     </div>
+    </>
   );
 };
 
