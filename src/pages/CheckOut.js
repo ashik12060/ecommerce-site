@@ -44,7 +44,10 @@ const CheckOut = () => {
   };
   let totalSum = 0;
   cart.forEach((itm) => {
-    totalSum += Number(itm.feature1) * itm.quantity;
+    totalSum += Number(itm.price) * itm.quantity;
+    // totalSum += Number(itm.feature1) * itm.quantity;
+    // console.log(feature1)
+    console.log(price)
   });
   return (
     <div>
@@ -77,11 +80,13 @@ const CheckOut = () => {
                 key={itm._id}
               >
                 <h6>
-                  {itm.title} - {Number(itm.feature1)} x {itm.quantity}
+                  {itm.title} - {Number(itm.price)} x {itm.quantity}
+                  {/* {itm.title} - {Number(itm.feature1)} x {itm.quantity} */}
                 </h6>
                 <div>
                   <span className="fw-bold">
-                    Total: {Number(itm.feature1) * itm.quantity}
+                    Total: {Number(itm.price) * itm.quantity}
+                    {/* Total: {Number(itm.feature1) * itm.quantity} */}
                   </span>
                 </div>
               </div>

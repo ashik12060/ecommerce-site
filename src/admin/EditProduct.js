@@ -21,7 +21,7 @@ const validationSchema = yup.object({
     .string("Add text content")
     .min(1)
     .required("Text content is required"),
-  feature1: yup.number("Add text content"),
+    price: yup.number("Add text content"),
   feature2: yup.string("Add text content"),
   feature3: yup.string("Add text content"),
   feature4: yup.string("Add text content"),
@@ -62,7 +62,7 @@ const EditProduct = () => {
     initialValues: {
       title: "",
       content: "",
-      feature1: "",
+      price: "",
       feature2: "",
       feature3: "",
       feature4: "",
@@ -102,7 +102,7 @@ const EditProduct = () => {
       const product = data.product;
       setFieldValue("title", product.title);
       setFieldValue("content", product.content);
-      setFieldValue("feature1", product.feature1);
+      setFieldValue("price", product.price);
       setFieldValue("feature2", product.feature2);
       setFieldValue("feature3", product.feature3);
       setFieldValue("feature4", product.feature4);
@@ -192,14 +192,14 @@ const EditProduct = () => {
 
           <TextField
             fullWidth
-            id="feature1"
-            label="Feature 1"
-            name="feature1"
-            value={values.feature1}
+            id="price"
+            label="price "
+            name="price"
+            value={values.price}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.feature1 && Boolean(errors.feature1)}
-            helperText={touched.feature1 && errors.feature1}
+            error={touched.price && Boolean(errors.price)}
+            helperText={touched.price && errors.price}
           />
 
           <TextField

@@ -82,7 +82,7 @@ const BlogPro = () => {
                       id={product._id}
                       title={product.title}
                       content={product.content}
-                      feature1={product.feature1}
+                      price={product.price}
                       subheader={moment(product.createdAt).format(
                         "MMMM DD, YYYY"
                       )}

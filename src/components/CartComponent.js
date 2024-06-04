@@ -13,7 +13,8 @@ const CartComponent = () => {
   //   console.log({ cart });
   let totalSum = 0;
   cart.forEach((itm) => {
-    totalSum += Number(itm.feature1) * itm.quantity;
+    totalSum += Number(itm.price) * itm.quantity;
+    // totalSum += Number(itm.feature1) * itm.quantity;
   });
   return (
     <div className="p-5">
@@ -23,10 +24,12 @@ const CartComponent = () => {
           key={itm._id}
         >
           <h6>
-            {itm.title} - {Number(itm.feature1)}
+            {itm.title} - {Number(itm.price)}
+            {/* {itm.title} - {Number(itm.feature1)} */}
           </h6>
           <div>
-            <span>Total: {Number(itm.feature1) * itm.quantity}</span>
+            <span>Total: {Number(itm.price) * itm.quantity}</span>
+            {/* <span>Total: {Number(itm.feature1) * itm.quantity}</span> */}
             <button
               className="mx-2 px-3 bg-primary text-white border-0 py-1 rounded fw-bold fs-5"
               onClick={() => decrementItem(itm._id)}

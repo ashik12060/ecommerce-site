@@ -26,7 +26,7 @@ const UserInfo = ({
   id,
   title,
   user,
-  feature1,
+  price,
   image,
   content,
   subheader,

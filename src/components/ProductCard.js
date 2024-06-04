@@ -26,7 +26,7 @@ import { faStar } from "@fortawesome/free-regular-svg-icons";
 const ProductCard = ({
   id,
   title,
-  feature1,
+  price,
   image,
   content,
   subheader,
@@ -116,7 +116,7 @@ const ProductCard = ({
               <FontAwesomeIcon icon={faStar} className="text-warning " />
             </span>
             <br />
-            <span className="fw-bold font-color">${feature1}</span>
+            <span className="fw-bold font-color">${price}</span>
             <br />
             <Link to={`/product/${id}`}>
               <button className="bg-color  text-white border-0 px-2 py-1">

@@ -109,7 +109,7 @@ const SinglePro = () => {
   // Calculate total price
   useEffect(() => {
     if (product) {
-      const totalPrices = Number(product.feature1) * quantity;
+      const totalPrices = Number(product.price) * quantity;
       setTotalPrice(totalPrices);
     }
   }, [product, quantity]);
@@ -205,7 +205,7 @@ const SinglePro = () => {
                       <p>
                         <hr />
                         <p className="fw-bold font-color fs-2">
-                          ${product.feature1}
+                          ${product.price}
                         </p>
                       </p>
                       <span>
