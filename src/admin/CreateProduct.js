@@ -24,7 +24,7 @@ const validationSchema = yup.object({
     .min(1, "Text content should have a minimum of 1 character1")
     .required("Text content is required"),
 price: yup.number("Add Price"),
-feature2: yup.string("Add text content"),
+brand: yup.string("Add text content"),
 
 });
 
@@ -44,7 +44,7 @@ const CreateProduct = () => {
       content: "",
       image: null,
       price: "",
-      feature2:"",
+      brand:"",
       
     },
 
@@ -173,17 +173,17 @@ const CreateProduct = () => {
             <TextField
               sx={{ mb: 3 }}
               fullWidth
-              id="feature2"
+              id="brand"
               label="Brand"
-              name="feature2"
+              name="brand"
               multiline
               rows={4}
               placeholder="brand name..."
-              value={values.feature2}
+              value={values.brand}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.feature2 && Boolean(errors.feature2)}
-              helperText={touched.feature2 && errors.feature2}
+              error={touched.brand && Boolean(errors.brand)}
+              helperText={touched.brand && errors.brand}
             />
            
           </Box>

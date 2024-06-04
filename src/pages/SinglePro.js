@@ -144,9 +144,9 @@ const SinglePro = () => {
   };
 
   return (
-    <>
+    <div className="overflow-hidden">
       <div
-        className="bg-white"
+        className="bg-white overflow-hidden"
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -159,7 +159,7 @@ const SinglePro = () => {
           <Loader />
         ) : (
           <>
-            <div className="container my-4 singlepro-bg d-flex bg-white">
+            <div className="overflow-hidden container my-4 singlepro-bg d-flex bg-white flex-lg-row flex-md-column flex-sm-column flex-column">
               <div>
                 <div className="row d-flex ">
                   <div className="col-lg-3 col-md-3 col-sm-12 pt-4">
@@ -197,7 +197,7 @@ const SinglePro = () => {
                     </p>
                     <p className="">
                       <span className="fw-bold ">Brand:</span>{" "}
-                      <span className="font-color">{product.feature2}</span>
+                      <span className="font-color">{product.brand}</span>
                     </p>
                     <p className="pb-5">
                       <span className="fw-bold ">Origin:</span>{" "}
@@ -271,39 +271,40 @@ const SinglePro = () => {
                 </div>
               </div>
 
-              <div>
-                <div className="pt-5 card2-bg px-5">
-                  <p className="font-color fw-bold">Delivery</p>
-                  <hr />
-                  <p>
-                    <FontAwesomeIcon icon={faLocationDot} className="pe-2 " />
-                    Kalabagan, Dhaka-1205
-                  </p>
-                  <p className="fw-bold">
-                    <FontAwesomeIcon icon={faTruck} className="pe-2 " />
-                    Free Delivery 20 june - 23 june
-                  </p>
-                  <p className="bg-white p-2 fw-bold">
-                    Enjoy free shipping promotion with minimum 1 items.
-                  </p>
-                  <p>
-                    <FontAwesomeIcon icon={faMoneyBills} className="pe-2 " />
-                    Cash On Delivery
-                  </p>
-                  <hr />
-                  <span className="font-color fw-bold">Service</span>
-                  <p className="py-3">
-                    <FontAwesomeIcon icon={faCalendarDays} className="pe-2 " />7
-                    Days Return
-                  </p>
-                  <p>Change of mind applicable</p>
-                  <p className="pb-5  fw-bold">
-                    <FontAwesomeIcon icon={faAward} className="pe-2 " />
-                    Warranty Not Available
-                  </p>
-                </div>
+              <div className="pt-5 card2-bg px-5">
+                <p className="font-color fw-bold">Delivery</p>
+                <hr />
+                <p>
+                  <FontAwesomeIcon icon={faLocationDot} className="pe-2 " />
+                  Kalabagan, Dhaka-1205
+                </p>
+                <p className="fw-bold">
+                  <FontAwesomeIcon icon={faTruck} className="pe-2 " />
+                  Free Delivery 20 june - 23 june
+                </p>
+                <p className="bg-white p-2 fw-bold">
+                  Enjoy free shipping promotion with minimum 1 items.
+                </p>
+                <p>
+                  <FontAwesomeIcon icon={faMoneyBills} className="pe-2 " />
+                  Cash On Delivery
+                </p>
+                <hr />
+                <span className="font-color fw-bold">Service</span>
+                <p className="py-3">
+                  <FontAwesomeIcon icon={faCalendarDays} className="pe-2 " />7
+                  Days Return
+                </p>
+                <p>Change of mind applicable</p>
+                <p className="pb-5  fw-bold">
+                  <FontAwesomeIcon icon={faAward} className="pe-2 " />
+                  Warranty Not Available
+                </p>
               </div>
             </div>
+
+
+{/* comment here */}
             <CardContent>
               {userInfo ? (
                 <>
@@ -359,7 +360,7 @@ const SinglePro = () => {
         )}
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

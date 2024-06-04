@@ -22,7 +22,7 @@ const validationSchema = yup.object({
     .min(1)
     .required("Text content is required"),
     price: yup.number("Add text content"),
-  feature2: yup.string("Add text content"),
+    brand: yup.string("Add text content"),
   feature3: yup.string("Add text content"),
   feature4: yup.string("Add text content"),
   feature5: yup.string("Add text content"),
@@ -63,7 +63,7 @@ const EditProduct = () => {
       title: "",
       content: "",
       price: "",
-      feature2: "",
+      brand: "",
       feature3: "",
       feature4: "",
       feature5: "",
@@ -103,7 +103,7 @@ const EditProduct = () => {
       setFieldValue("title", product.title);
       setFieldValue("content", product.content);
       setFieldValue("price", product.price);
-      setFieldValue("feature2", product.feature2);
+      setFieldValue("brand", product.brand);
       setFieldValue("feature3", product.feature3);
       setFieldValue("feature4", product.feature4);
       setFieldValue("feature5", product.feature5);
@@ -204,15 +204,15 @@ const EditProduct = () => {
 
           <TextField
             fullWidth
-            id="feature2"
-            label="feature 2"
-            name="feature2"
+            id="brand"
+            label="Brand"
+            name="brand"
             className="my-3"
-            value={values.feature2}
+            value={values.brand}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.feature2 && Boolean(errors.feature2)}
-            helperText={touched.feature2 && errors.feafeature2ture1}
+            error={touched.brand && Boolean(errors.brand)}
+            helperText={touched.brand && errors.brand}
           />
           {/* <TextField
             fullWidth

@@ -83,6 +83,7 @@ const BlogPro = () => {
                       title={product.title}
                       content={product.content}
                       price={product.price}
+                      brand={product.brand}
                       subheader={moment(product.createdAt).format(
                         "MMMM DD, YYYY"
                       )}

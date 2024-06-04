@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../hooks";
 import { Link } from "react-router-dom";
+import Footer from "./Shared/Footer/Footer";
 
 const CartComponent = () => {
   const {
@@ -17,10 +18,11 @@ const CartComponent = () => {
     // totalSum += Number(itm.feature1) * itm.quantity;
   });
   return (
-    <div className="p-5">
+    <>
+    <div className="p-5 mb-5">
       {cart?.map((itm) => (
         <div
-          className="border border-1 p-3 my-2 d-flex justify-content-between"
+          className="border border-1 p-3 my-2 d-flex flex-lg-row flex-md-row flex-sm-column flex-column justify-content-between"
           key={itm._id}
         >
           <h6>
@@ -53,10 +55,14 @@ const CartComponent = () => {
         </div>
       ))}
       <h4 className="text-end m-3">Subtotal : {totalSum} BDT</h4>
+      <div className="text-end m-3">
       <Link to={"/checkout"}>
-        <button className="bg-color  text-white border-0 px-2 py-1">Proceed to checkout</button>
+        <button className="bg-color text-white border-0 rounded px-3 py-2">Proceed to checkout</button>
       </Link>
+        </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
