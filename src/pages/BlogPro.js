@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Button, Container, Grid } from "@mui/material";
 import moment from "moment";
 import Loader from "../components/Loader";
 import { io } from "socket.io-client";
@@ -22,13 +22,19 @@ const BlogPro = ({ searchQuery }) => {
   const [postRemoveLike, setPostRemoveLike] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  const showProducts = async () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 12;
+
+  const showProducts = async (page = 1) => {
     setLoading(true);
     try {
       const { data } = await axiosInstance.get(
-        `${process.env.REACT_APP_API_URL}/api/products/show`
+        // `${process.env.REACT_APP_API_URL}/api/products/show`
+        `${process.env.REACT_APP_API_URL}/api/products/paginated?page=${page}&limit=${itemsPerPage}`
       );
       setProducts(data.products);
+      setTotalPages(data.totalPages);
       setLoading(false);
     } catch (error) {}
   };
@@ -63,6 +69,22 @@ const BlogPro = ({ searchQuery }) => {
     );
   }
 
+  useEffect(() => {
+    showProducts(currentPage);
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
   return (
     <>
       <Box sx={{ bgColor: "#fafafa", minHeight: "100vh" }}>
@@ -94,6 +116,44 @@ const BlogPro = ({ searchQuery }) => {
               ))
             )}
           </Grid>
+
+          {/* pagination start */}
+
+          {/* <Box sx={{ mt: 2, textAlign: "center" }}>
+            <Button
+              variant="outlined"
+              disabled={currentPage === 1}
+              onClick={goToPrevPage}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outlined"
+              disabled={products.length < itemsPerPage}
+              onClick={goToNextPage}
+            >
+              Next
+            </Button>
+          </Box> */}
+          <Box sx={{ mt: 2, textAlign: "center" }}>
+            <Button
+              variant="outlined"
+              disabled={currentPage === 1}
+              onClick={handlePrevPage}
+              sx={{ mr: 1 }}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outlined"
+              disabled={currentPage === totalPages}
+              onClick={handleNextPage}
+            >
+              Next
+            </Button>
+          </Box>
+
+          {/* pagination end */}
         </Box>
         {/* </Container> */}
       </Box>
@@ -101,3 +161,4 @@ const BlogPro = ({ searchQuery }) => {
   );
 };
 export default BlogPro;
+

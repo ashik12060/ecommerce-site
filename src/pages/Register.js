@@ -10,6 +10,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import Header from "../components/Shared/Header/Header";
+import { CartProvider } from "../hooks";
 
 const validationSchema = yup.object({
   name: yup.string("Enter your complete name").required("Name is required"),
@@ -42,6 +43,9 @@ const Register = () => {
 
   return (
     <>
+     <CartProvider>
+        <Header/>
+      </CartProvider>
       <Box
         sx={{
           height: "81vh",
@@ -64,7 +68,7 @@ const Register = () => {
               width: "100%",
             }}
           >
-            <Avatar className="bg-color" sx={{ m: 1, mb: 3 }}>
+            <Avatar className="bg-danger" sx={{ m: 1, mb: 3 }}>
               <LockOpenIcon />
             </Avatar>
             <TextField
