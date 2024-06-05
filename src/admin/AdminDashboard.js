@@ -656,7 +656,7 @@ const AdminDashboard = () => {
             aria-controls="v-pills-users"
             aria-selected="true"
           >
-            Users
+            Customers List
           </button>
         </div>
         <div className=" w-75 tab-content" id="v-pills-tabContent">
@@ -681,9 +681,9 @@ const AdminDashboard = () => {
           >
             {/* Products  */}
             <Box>
-              <Typography variant="h4" sx={{ color: "black", mt: 5 }}>
-                PRODUCTS
-              </Typography>
+              <h3 className="mt-3">
+                <span className="py-2 px-4 rounded bg-primary text-white ">PRODUCTS</span>
+              </h3>
               <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
                 <Button
                   variant="contained"
@@ -731,9 +731,10 @@ const AdminDashboard = () => {
           >
             {/* post  */}
             <Box className="mt-5">
-              <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
-                Blog Posts
-              </Typography>
+              <h3>
+                
+                <span className="py-2 px-4 rounded bg-primary text-white ">Blog Posts</span>
+              </h3>
               <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
                 <Button
                   variant="contained"
@@ -780,62 +781,7 @@ const AdminDashboard = () => {
             </Box>
           </div>
           
-          {/* <div
-            class="tab-pane fade"
-            id="v-pills-settings"
-            role="tabpanel"
-            aria-labelledby="v-pills-settings-tab"
-            tabindex="0"
-          >
-            <Box>
-              <Typography variant="h4" sx={{ color: "black", pb: 3, mt: 5 }}>
-                Seller Products
-              </Typography>
-              <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-                <Button
-                  variant="contained"
-                  color="success"
-                  startIcon={<AddIcon />}
-                  sx={{
-                    fontSize: "1rem",
-                    padding: "8px 16px",
-                    "@media (max-width: 768px)": {
-                      fontSize: "0.9rem",
-                      padding: "6px 12px",
-                    },
-                  }}
-                >
-                  <Link
-                    style={{ color: "white", textDecoration: "none" }}
-                    to="/admin/item/create"
-                  >
-                    Add Item
-                  </Link>{" "}
-                </Button>
-              </Box>
-              <Paper sx={{ bgColor: "white" }}>
-                <Box sx={{ height: 400, width: "100%" }}>
-                  <DataGrid
-                    getRowId={(row) => row._id}
-                    sx={{
-                      "& .MuiTablePagination-displayedRows": {
-                        color: "black",
-                      },
-                      color: "black",
-                      [`& .${gridClasses.row}`]: {
-                        bgcolor: "white",
-                      },
-                    }}
-                    rows={items}
-                    columns={ItemColumns}
-                    pageSize={3}
-                    rowsPerPageOptions={[3]}
-                    checkboxSelection
-                  />
-                </Box>
-              </Paper>
-            </Box>
-          </div> */}
+
 
           <div
             class="tab-pane fade show "
@@ -845,7 +791,11 @@ const AdminDashboard = () => {
             tabindex="0"
           >
             <div className="container">
-              <h2 className="fw-bold">Popular Products</h2>
+             
+              <h3 className="my-3">
+                
+                <span className="py-2 px-4 rounded bg-primary text-white ">Seller Products </span>
+              </h3>
               <table className="table table-bordered border-1 border border-black">
                 <thead>
                   <tr>

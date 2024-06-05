@@ -17,7 +17,7 @@ import { userLogoutAction } from "../../../redux/actions/userAction";
 import { useCart } from "../../../hooks";
 import { useAuth } from "../../../AuthContext";
 
-const Header = ({ totalServices, name }) => {
+const Header = ({ totalServices, name, searchQuery, setSearchQuery  }) => {
   // const { user, handleSignOut } = useAuth()
   const history = useNavigate();
 
@@ -104,16 +104,7 @@ const Header = ({ totalServices, name }) => {
               </ul>
             </div>
 
-            <div className="ps-5 ">
-              <form className="d-flex w-100" role="search">
-                <input
-                  className="form-control me-2 w-100"
-                  type="search"
-                  placeholder="Search for products"
-                  aria-label="Search"
-                />
-              </form>
-            </div>
+            
           </div>
 
           <div className="d-flex">
@@ -276,7 +267,7 @@ const Header = ({ totalServices, name }) => {
                       style={{ textDecoration: "none" }}
                       to="/admin-login"
                     >
-                      Admin Login
+                      Admin 
                     </Link>
                   </Typography>
                 </MenuItem>

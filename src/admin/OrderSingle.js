@@ -23,7 +23,7 @@ const OrderSingle = () => {
   return (
     <div>
       
-    <h3 className="my-5"><span className="py-4 px-4 rounded bg-primary text-white ">Total Orders: {orderItems.length}</span></h3>
+    <h3 className="my-5"><span className="py-2 px-4 rounded bg-primary text-white ">Total Orders: {orderItems.length}</span></h3>
     <h2>Reports</h2>
       <table className="order-table">
         <thead>

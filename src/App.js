@@ -60,7 +60,6 @@ const UserDashboardHOC = Layout(UserDashboard);
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   return (
     <>
       <ToastContainer />
