@@ -444,7 +444,7 @@ const TableHeader = ({ searchQuery, setSearchQuery }) => {
         </div>
 
         <div className="additional-info d-none d-lg-flex gap-4">
-          <div className="info-item text-black fw-bold">
+          <div className="info-item font-color fw-bold">
             <FontAwesomeIcon className="pe-1" icon={faShop} />
             SHOP
           </div>

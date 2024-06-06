@@ -35,3 +35,9 @@
         display: block;
     }
 }
+
+.navbar-nav .nav-link,
+.navbar-nav .btn-group .btn,
+.navbar-nav .dropdown-menu .d-flex {
+  text-align: left;
+}

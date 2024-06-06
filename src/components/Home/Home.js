@@ -9,7 +9,6 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   return (
     <div className="overflow-hidden">
-      {/* <TableHeader /> */}
       <TableHeader searchQuery={searchQuery} setSearchQuery={setSearchQuery}  />
       <ProductsLists searchQuery={searchQuery} />
       <SellerProductsShow />
