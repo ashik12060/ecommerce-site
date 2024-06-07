@@ -22,11 +22,12 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import initializeAuthentication from "../Firebase/firebase.init";
+// import initializeAuthentication from "../Firebase/firebase.init";
+import { CartProvider } from "../hooks";
 
 // google sign in
-initializeAuthentication();
-const provider = new GoogleAuthProvider();
+// initializeAuthentication();
+// const provider = new GoogleAuthProvider();
 
 const validationSchema = yup.object({
   email: yup
@@ -44,19 +45,19 @@ const AdminLogin = () => {
   const [logout, setLogout] = useState({});
 
   // google sign in
-  const handleGoogleSignIn = () => {
-    const auth = getAuth();
-    signInWithPopup(auth, provider).then((result) => {
-      const { displayName, email, photoURL } = result.user;
+  // const handleGoogleSignIn = () => {
+  //   const auth = getAuth();
+  //   signInWithPopup(auth, provider).then((result) => {
+  //     const { displayName, email, photoURL } = result.user;
 
-      const loggedInUser = {
-        name: displayName,
-        email: email,
-        photo: photoURL,
-      };
-      setUser(loggedInUser);
-    });
-  };
+  //     const loggedInUser = {
+  //       name: displayName,
+  //       email: email,
+  //       photo: photoURL,
+  //     };
+  //     setUser(loggedInUser);
+  //   });
+  // };
 
   // sign out google
   const handleSignOut = () => {
@@ -94,6 +95,9 @@ const AdminLogin = () => {
 
   return (
     <>
+      <CartProvider>
+        <Header />
+      </CartProvider>
       <Box
         sx={{
           height: "81vh",

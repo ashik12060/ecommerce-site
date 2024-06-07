@@ -39,6 +39,11 @@ export const AuthProvider = ({ children }) => {
     setLastPrivatePath(path);
   };
 
+  // Define setCurrentUser function
+  const setCurrentUser = (user) => {
+    // Do something with the user, if needed
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -47,6 +52,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         setRedirectPath,
         setPrivateRedirectPath,
+        setCurrentUser,
       }}
     >
       {children}

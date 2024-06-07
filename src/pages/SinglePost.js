@@ -21,6 +21,7 @@ import { io } from "socket.io-client";
 import axiosInstance from "./axiosInstance";
 import Header from "../components/Shared/Header/Header";
 import { CartProvider } from "../hooks";
+import Footer from "../components/Shared/Footer/Footer";
 
 const socket = io("/", {
   reconnection: true,
@@ -208,6 +209,8 @@ const SinglePost = () => {
         )}
       </Box>
     </div>
+
+    <Footer />
     </>
   );
 };

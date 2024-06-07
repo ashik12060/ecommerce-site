@@ -621,18 +621,7 @@ const AdminDashboard = () => {
           >
             Blog Posts
           </button>
-          {/* <button
-            class="nav-link border border-1 mt-3"
-            id="v-pills-settings-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#v-pills-settings"
-            type="button"
-            role="tab"
-            aria-controls="v-pills-settings"
-            aria-selected="false"
-          >
-            Seller Products
-          </button> */}
+         
           <button
             class="nav-link  border border-1 mt-3"
             id="v-pills-seller-tab"

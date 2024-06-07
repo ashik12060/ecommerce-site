@@ -125,14 +125,7 @@ const SinglePro = () => {
     }
   };
 
-  // const addToCart = () => {
-  //   // if (isAuthenticated) {
-  //     const checkoutUrl = `/checkout/${id}/${totalPrice}`;
-  //     history(checkoutUrl);
-  //   // } else {
-  //   //   history("/login");
-  //   // }
-  // };
+ 
   const addToCart = () => {
     addCartItem(product);
     // const checkoutUrl = `/checkout/${id}/${totalPrice}`;

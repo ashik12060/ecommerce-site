@@ -28,3 +28,25 @@
     border-bottom: none;
   }
   
+  /* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-btn {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  padding: 5px 15px;
+  margin: 0 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-btn.active {
+  background-color: #007bff;
+  color: #fff;
+}

@@ -117,24 +117,7 @@ const BlogPro = ({ searchQuery }) => {
             )}
           </Grid>
 
-          {/* pagination start */}
-
-          {/* <Box sx={{ mt: 2, textAlign: "center" }}>
-            <Button
-              variant="outlined"
-              disabled={currentPage === 1}
-              onClick={goToPrevPage}
-            >
-              Previous
-            </Button>
-            <Button
-              variant="outlined"
-              disabled={products.length < itemsPerPage}
-              onClick={goToNextPage}
-            >
-              Next
-            </Button>
-          </Box> */}
+          
           <Box sx={{ mt: 2, textAlign: "center" }}>
             <Button
               variant="outlined"

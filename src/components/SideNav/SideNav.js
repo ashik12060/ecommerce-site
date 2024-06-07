@@ -8,7 +8,7 @@ const SideNav = () => {
   return (
     <div className="side-bar">
       <div className="rounded sidebar border bg-white">
-        <h6 className="bg-sidebar py-4 text-center fs-5 rounded text-white bg-color fw-bold">
+        <h6 className="bg-sidebar py-4 text-center fs-5 rounded  font-color fw-bold">
           PRODUCT CATEGORIES
         </h6>
         <nav className="navbar navbar-expand-lg">

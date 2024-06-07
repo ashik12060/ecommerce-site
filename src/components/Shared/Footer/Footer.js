@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="text-black card2-bg">
-      <div className=" d-flex justify-content-around py-5">
+      <div className="d-flex justify-content-around flex-lg-row flex-md-row flex-sm-column flex-column py-5 px-sm-4 px-3 g-4 gap-4">
         <div>
           <h2 className="fs-1 fw-bold" aria-current="page">
           Helper<span className="font-color">Hub</span>
@@ -32,7 +32,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h6 className="fw-bold">Payment</h6>
+          <h6 className="fw-bold">PAYMENT</h6>
           <div className="d-flex w-100 gap-2 rounded">
             <img src={i1} className=" logo-sizing rounded " alt="im" />
             <img src={i2} className=" logo-sizing rounded " alt="im" />
@@ -57,7 +57,7 @@ const Footer = () => {
           <ul className="list-unstyled">
             <li>Information</li>
             <li>Terms & Conditions</li>
-            <li><Link className="text-black" to='/contact'>Contact Us</Link></li>
+            <li><Link className="text-black text-decoration-none" to='/contact'>Contact Us</Link></li>
           </ul>
         </div>
 

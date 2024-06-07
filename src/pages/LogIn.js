@@ -10,22 +10,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { userSignInAction } from "../redux/actions/userAction";
 import Header from "../components/Shared/Header/Header";
 import google from "../assets/google-photo.png";
-
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  setPersistence,
-  browserLocalPersistence,
-} from "firebase/auth";
-import initializeAuthentication from "../Firebase/firebase.init";
+import { auth, googleProvider } from '../Firebase/firebase.init';
+import { signInWithPopup } from "firebase/auth";
+// import {
+//   getAuth,
+//   GoogleAuthProvider,
+//   signInWithPopup,
+//   signOut,
+//   setPersistence,
+//   browserLocalPersistence,
+// } from "firebase/auth";
+// import initializeAuthentication from "../Firebase/firebase.init";
 import { useAuth } from "../AuthContext";
 import { CartProvider } from "../hooks";
+import axios from "axios";
 
 // google sign in
-initializeAuthentication();
-const provider = new GoogleAuthProvider();
+// initializeAuthentication();
+// const provider = new GoogleAuthProvider();
 
 const validationSchema = yup.object({
   email: yup
@@ -39,48 +41,94 @@ const validationSchema = yup.object({
 });
 
 const LogIn = (props) => {
-  const { isAuthenticated, login } = useAuth();
+  // const { isAuthenticated, login } = useAuth();
+  const [user, setUser] = useState({})
+  const { isAuthenticated, login, setCurrentUser } = useAuth();
   const dispatch = useDispatch();
+  
+  const [logout, setLogout] = useState({});
 
-  const handleGoogleSignIn = () => {
-    // const auth = getAuth();
-    // signInWithPopup(auth, provider)
-    //   .then((result) => {
-    //     const { displayName, email, photoURL } = result.user;
-    //     const loggedInUser = {
-    //       name: displayName,
-    //       email: email,
-    //       photo: photoURL,
-    //     };
-    //     setUser(loggedInUser);
-    //     setPersistence(auth, browserLocalPersistence)
-    //       .then(() => {
-    //         console.log("Google authentication session persisted");
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error setting persistence:", error.message);
-    //       });
-    //     if (loginFlow === "checkout") {
-    //       dispatch({ type: "SET_LOGIN_FLOW", payload: "checkout" });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Google sign-in error:", error.message);
-    //   });
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      const token = await user.getIdToken();
+      
+      console.log('Token:', token);
+  
+      // Send token to your backend
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/google-login`, { token });
+      console.log('Login successful', response);
+  
+      // Save JWT token to localStorage or context for authenticated requests
+      localStorage.setItem('authToken', response.data.token);
+  
+      // Check if login was successful based on the response from the backend
+      if (response.status === 200) {
+        // Login was successful
+        console.log('Login successful');
+        // Redirect to the same page after successful login
+        window.location.reload();
+      } else {
+        // Login failed
+        console.error('Login failed');
+        // Show appropriate error message to the user
+        // You can also update state to display an error message on the UI
+      }
+    } catch (error) {
+      console.error('Error during Google login', error);
+      // Show appropriate error message to the user
+      // You can also update state to display an error message on the UI
+    }
   };
+  
 
-  const handleSignOut = () => {
-    // console.log("Attempting sign out...");
-    // const auth = getAuth();
-    // signOut(auth)
-    //   .then(() => {
-    //     console.log("Sign out successful.");
-    //     setLogout({});
-    //   })
-    //   .catch((error) => {
-    //     console.error("Sign out error:", error);
-    //   });
-  };
+
+  // const handleGoogleLogin = async () => {
+  //   try {
+  //     const result = await signInWithPopup(auth, googleProvider);
+  //     const user = result.user;
+  //     const token = await user.getIdToken();
+      
+  //     console.log('Token:', token);
+  
+  //     // Send token to your backend
+  //     const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/google-login`, { token });
+  //     console.log('Login successful', response);
+  
+  //     // Save JWT token to localStorage or context for authenticated requests
+  //     localStorage.setItem('authToken', response.data.token);
+  
+  //     // Redirect to the same page after successful login
+  //     window.location.reload();
+  //   } catch (error) {
+  //     console.error('Error during Google login', error);
+  //   }
+  // };
+  
+
+  // const handleGoogleLogin = async () => {
+  //   try {
+  //     const result = await signInWithPopup(auth, googleProvider);
+  //     const user = result.user;
+  //     const token = await user.getIdToken()
+      
+  //     console.log('Token:', token);
+
+  //     // Send token to your backend
+  //     const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/google-login`, { token });
+  //     console.log('Login successful', response);
+
+  //     // Save JWT token to localStorage or context for authenticated requests
+  //     localStorage.setItem('authToken', response.data.token);
+
+  //     // Update the state to reflect the logged-in user
+  //     setCurrentUser(user);
+  //   } catch (error) {
+  //     console.error('Error during Google login', error);
+  //   }
+  // };
+
 
   const formik = useFormik({
     initialValues: {
@@ -184,12 +232,14 @@ const LogIn = (props) => {
               {!isAuthenticated ? (
                 <button
                   className="border-0 rounded bg-white"
-                  onClick={handleGoogleSignIn}
+                  onClick={handleGoogleLogin}
                 >
                   <img className="google-img" src={google} alt="google" />
                 </button>
               ) : (
-                <button type="button" onClick={handleSignOut}>
+                <button type="button" 
+                // onClick={handleSignOut}
+                >
                   Sign out
                 </button>
               )}
@@ -199,6 +249,7 @@ const LogIn = (props) => {
             </Link>
           </Box>
         </Box>
+       
       </Box>
     </>
   );
